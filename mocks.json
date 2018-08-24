@@ -1,0 +1,16 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Printer 1"
+    },
+    {
+      "name": "Printer 2 edition",
+      "id": 2
+    },
+    {
+      "id": 3,
+      "name": "Printer 3"
+    }
+  ]
+}
