@@ -12,5 +12,10 @@
       "id": 3,
       "name": "Printer 3"
     }
+  ],
+  "images_order": [
+    {"url": "/static/images/order-slider.jpg"},
+    {"url": "/static/images/carousel-1.jpg"},
+    {"url": "/static/images/materials.jpg"}
   ]
 }

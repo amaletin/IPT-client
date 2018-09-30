@@ -1,27 +1,68 @@
+@import './variables.less';
+
 .mainnav {
+  align-items: center;
   display: flex;
   list-style: none;
+  margin: 0;
+  padding: 0;
 
   &--parentli {
-
+    position: relative;
+    
     &--link {
-      padding: 10px;
+      border-radius: 5px;
+      display: inline-block;
+      font-size: 16px;
+      line-height: 29px;
+      padding: 0 10px;
+      color: @white;
       text-decoration: none;
       text-transform: uppercase;
 
-      &:visited {
-        color: #ffffff;
-      }
-
       &:hover,
       &:active,
-      &focus {
-        color: #515455;
+      &focus,
+      &:visited {
+        color: @white;
       }
+
+      &:hover {
+        background-color: @pink;
+      }      
+    }
+
+    &:hover .mainnav--inner {
+      display: block;
     }
   }
 
   &--inner {
+    background-color: fadeout(@grey, 24%);
+    border-radius: 5px;
     display: none;
+    left: 0;
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+    position: absolute;
+    top: 100%;
+
+    li {
+      padding: 0 29px;
+      text-align: left;
+
+      a {
+        color: @text-grey;
+        font-size: 14px;
+        line-height: 30px;
+        white-space: nowrap;
+      }
+
+      a:hover {
+        background: inherit;
+        color: @pink;
+      }
+    }
   }
 }

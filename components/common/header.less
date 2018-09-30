@@ -1,4 +1,90 @@
+@import './variables.less';
+
+.container {
+  max-width: 1366px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
 .header {
-  background-color: #7ACEFA;
+  background: @header-blue;
+  background: @gradient1;
   color: #FFFFFF;
+
+  &--inner {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &--logo {
+    align-items: center;
+    display: flex;
+    margin-left: 21.5px;
+    margin-right: 80px;
+
+    @media screen and (min-width: @lg) {
+      margin-left: 0;
+    }
+
+    img {
+      max-height: 60px;
+    }
+
+    span {
+      font-family: @font-circe;
+      font-size: 25px;
+      font-weight: 100;
+      line-height: 77px;
+      text-transform: uppercase;
+    }
+  }
+
+  &--right{
+    display: flex;
+  }
+
+  &--nav {
+    display: none;
+    flex: 1;
+    text-align: center;
+
+    @media screen and (min-width: @lg) {
+      display: flex;
+    }
+  }
+
+  &--search {
+    align-items: center;
+    cursor: pointer;
+    display: none;
+    justify-content: center;
+    height: 77px;
+    width: 77px;
+
+    @media screen and (min-width: @lg) {
+      display: flex;
+    }
+
+    img {
+      width: 18px;
+    }
+  }
+
+  &--burger {
+    align-items: center;
+    color: @white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    height: 77px;
+    width: 77px;
+
+    @media screen and (min-width: @lg) {
+      display: none;
+    }
+
+    img {
+      width: 34px;
+    }
+  }
 }

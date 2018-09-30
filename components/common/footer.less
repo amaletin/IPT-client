@@ -1,0 +1,64 @@
+@import './variables.less';
+
+.footer {
+  background: @gradient1;
+  color: @white;
+  // height: 216px;
+  margin-top: 30px;
+}
+
+.container {
+  box-sizing: border-box;
+  max-width: 1366px;
+  padding: 0 15px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 40px 0;
+}
+
+.socials {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 30px;
+  
+  a {
+    padding: 10px;
+  }
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+}
+
+.address,
+.phone,
+.email {
+  align-items: center;
+  font-family: @font-circe;
+  font-size: 12px;
+  display: flex;
+  padding: 20px 0;
+  text-transform: uppercase;
+
+  img {
+    height: 38px;
+    width: 38px;
+    margin-right: 10px;
+  }
+
+  div {
+    a, a:visited {
+      color: @white;
+      text-decoration: none;
+    }
+    p {
+      margin: 0;
+    }
+  }
+}

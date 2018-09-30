@@ -18,7 +18,7 @@ const NavItem = ({ item, parent }) => {
       </Link>
       {
         parent && (
-          <ul style={{ display: 'none' }}>
+          <ul className={style['mainnav--inner']}>
             { renderedChildren }
           </ul>)
       }
@@ -29,10 +29,13 @@ NavItem.propTypes = {
   item: PropTypes.shape({
     name: PropTypes.string,
     route: PropTypes.string,
-    children: PropTypes.shape({
-      name: PropTypes.string,
-      route: PropTypes.string,
-    }),
+    children: PropTypes.oneOfType([
+      PropTypes.shape({
+        name: PropTypes.string,
+        route: PropTypes.string,
+      }),
+      PropTypes.array,
+    ]),
   }),
   parent: PropTypes.bool,
 };

@@ -1,5 +1,6 @@
 import { PropTypes } from 'prop-types';
 import Header from './Header';
+import Footer from './Footer';
 
 const Page = (props) => {
   const { children } = props;
@@ -9,6 +10,7 @@ const Page = (props) => {
       <div className="content--main">
         { children }
       </div>
+      <Footer />
     </div>
   );
 };

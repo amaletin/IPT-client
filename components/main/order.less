@@ -1,0 +1,124 @@
+@import '../common/variables.less';
+
+.container {
+  max-width: 1366px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.order {
+  &Heading {
+    background: @gradient2;
+    
+    @media screen and (min-width: @md) {
+      background-image: url('/static/images/order_header_bg.png');
+      background-position: top center;
+      background-size: 150%;
+      background-repeat: no-repeat;
+      margin-bottom: 0;
+    }
+    
+    @media screen and (min-width: @lg) {
+      background-position: right;
+      background-size: initial;
+    }
+
+    &Inner {
+      align-items: center;
+      display: flex;
+      padding: 15px;
+
+      @media screen and (min-width: @md) {
+        padding: 15px 15px 67px 15px;
+      }
+
+      @media screen and (min-width: @lg) {
+        padding-bottom: 89px;
+        padding-left: 104px;
+        padding-top: 58px;
+      }
+  
+      img {
+        margin-right: 38px;
+      }
+  
+      span {
+        color: @white;
+        font-size: 20px;
+        text-transform: uppercase;
+
+        @media screen and (min-width: @md) {
+          font-size: 28px;
+        }
+
+        @media screen and (min-width: @lg) {
+          font-size: 38px;
+        }
+      }
+    }
+  }
+  &Content {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+
+    @media screen and (min-width: @md) {
+      flex-direction: row;
+    }
+
+    &Slider {
+      @media screen and (min-width: @md) {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    &Text {
+      color: @text-grey;
+      text-align: center;
+      padding-top: 10px;
+
+      @media screen and (min-width: @md) {
+        padding: 0;
+        text-align: initial;
+        width: 50%;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      h2 {
+        color: @pink;
+        font-family: @font-circe;
+        font-size: 22px;
+        text-transform: uppercase;
+
+        @media screen and (min-width: @lg) {
+          font-size: 38px;
+        }
+      }
+
+      p {
+        padding-bottom: 20px;
+      }
+    }
+  }
+}
+
+.carousel {
+  box-shadow: @box-shadow;
+  position: relative;
+  height: 290px;
+  width: 290px;
+  overflow: hidden;
+}
+
+.slide {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 60%;
+  display: inline-block;
+  width: 290px;
+  height: 100%;
+}

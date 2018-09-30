@@ -4,23 +4,29 @@
   "description": "Printers shop",
   "main": "index.js",
   "scripts": {
-    "start": "",
     "dev": "next",
+    "build": "next build",
+    "start": "next start",
     "mock": "json-server --watch mocks.json --port 3004",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Aleksandr Maletin",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
   "dependencies": {
     "@zeit/next-less": "^0.3.0",
     "less": "^3.8.1",
-    "next": "^6.1.1",
+    "next": "^6.0.0",
     "prop-types": "^15.6.2",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-slick": "^0.23.1"
   },
   "devDependencies": {
-    "eslint": "^5.4.0",
+    "eslint": "^5.6.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",

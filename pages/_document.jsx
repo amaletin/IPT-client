@@ -1,4 +1,5 @@
 import Document, { Head, Main, NextScript } from 'next/document';
+import style from './_document.less';
 
 export default class MyDocument extends Document {
   render() {
@@ -6,19 +7,12 @@ export default class MyDocument extends Document {
       <html lang="ru">
         <Head>
           <link rel="stylesheet" href="/_next/static/style.css" />
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         </Head>
-        <body>
+        <body className={style.body}>
           <Main />
           <NextScript />
         </body>
-        <style global jsx>
-          {`
-            body {
-              font-family: sans-serif;
-              margin: 0;
-            }
-          `}
-        </style>
       </html>
     );
   }
