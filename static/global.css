@@ -1,0 +1,12 @@
+body.locked {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+  position: fixed;
+}
+
+.container {
+  max-width: 1366px;
+  padding: 0 15px;
+  margin: 0 auto;
+}

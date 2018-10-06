@@ -1,7 +1,10 @@
+@import '../common/variables.less';
+
 .carousel {
   position: relative;
   height: 500px;
   width: 500px;
+  min-width: 500px;
   overflow: hidden;
 }
 
@@ -53,5 +56,33 @@
     .arrow();
     justify-content: flex-end;
     width: 70%;
+  }
+}
+
+.pagination {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+
+  .dot() {
+    background-color: @blue;
+    border-radius: 100%;
+    height: 6px;
+    width: 6px;
+    margin: 0 11px;
+  }
+
+  &Dot {
+    .dot();
+  }
+
+  &DotActive {
+    .dot();
+    background-color: @pink;
   }
 }

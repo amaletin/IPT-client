@@ -19,6 +19,7 @@
       color: @white;
       text-decoration: none;
       text-transform: uppercase;
+      outline: none;
 
       &:hover,
       &:active,
@@ -27,7 +28,7 @@
         color: @white;
       }
 
-      &:hover {
+      &:hover, &:focus {
         background-color: @pink;
       }      
     }
@@ -47,6 +48,7 @@
     padding: 10px 0;
     position: absolute;
     top: 100%;
+    z-index: 10;
 
     li {
       padding: 0 29px;

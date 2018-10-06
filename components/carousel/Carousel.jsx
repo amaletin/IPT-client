@@ -65,8 +65,25 @@ class Carousel extends Component {
     return this.carousel.current.clientWidth;
   }
 
+  renderPagination() {
+    const { images } = this.props;
+    const { currentIndex } = this.state;
+
+    return images.map((image, idx) => (
+      <div
+        className={idx === currentIndex ? styles.paginationDot : styles.paginationDotActive}
+        key={`pagination-dot-${image.url}`}
+      />
+    ));
+  }
+
   render() {
-    const { images, customStyles } = this.props;
+    const {
+      arrows,
+      customStyles,
+      images,
+      pagination,
+    } = this.props;
     const { translateValue } = this.state;
     const carouselClass = customStyles ? customStyles.carouselStyles : styles.carousel;
     return (
@@ -91,22 +108,30 @@ class Carousel extends Component {
             ))
           }
         </div>
-        <div className={styles.controls}>
-          <LeftArrow
-            goToPrevSlide={this.goToPrevSlide}
-            handleKeyDown={this.handleArrowKeys}
-          />
-          <RightArrow
-            goToNextSlide={this.goToNextSlide}
-            handleKeyDown={this.handleArrowKeys}
-          />
-        </div>
+        {arrows && (
+          <div className={styles.controls}>
+            <LeftArrow
+              goToPrevSlide={this.goToPrevSlide}
+              handleKeyDown={this.handleArrowKeys}
+            />
+            <RightArrow
+              goToNextSlide={this.goToNextSlide}
+              handleKeyDown={this.handleArrowKeys}
+            />
+          </div>
+        )}
+        {pagination && (
+          <div className={styles.pagination}>
+            {this.renderPagination()}
+          </div>
+        )}
       </div>
     );
   }
 }
 
 Carousel.propTypes = {
+  arrows: PropTypes.bool,
   customStyles: PropTypes.shape({
     carouselStyles: PropTypes.string,
     slideStyles: PropTypes.string,
@@ -114,10 +139,13 @@ Carousel.propTypes = {
   images: PropTypes.arrayOf(PropTypes.shape({
     url: PropTypes.string,
   })).isRequired,
+  pagination: PropTypes.bool,
 };
 
 Carousel.defaultProps = {
+  arrows: true,
   customStyles: null,
+  pagination: true,
 };
 
 export default Carousel;

@@ -67,10 +67,11 @@
     }
 
     &Slider {
+      display: flex;
+      justify-content: center;
+      
       @media screen and (min-width: @md) {
         width: 50%;
-        display: flex;
-        justify-content: center;
       }
     }
 
@@ -111,7 +112,20 @@
   position: relative;
   height: 290px;
   width: 290px;
+  min-width: 290px;
   overflow: hidden;
+
+  @media screen and (min-width: @lg) {
+    width: 500px;
+    min-width: 500px;
+    height: 395px;
+  }
+
+  @media screen and (min-width: @xl) {
+    width: 623px;
+    min-width: 623px;
+    height: 492px;
+  }
 }
 
 .slide {
@@ -121,4 +135,16 @@
   display: inline-block;
   width: 290px;
   height: 100%;
+
+  @media screen and (min-width: @lg) {
+    width: 500px;
+    min-width: 500px;
+    height: 395px;
+  }
+
+  @media screen and (min-width: @xl) {
+    width: 623px;
+    min-width: 623px;
+    height: 492px;
+  }
 }
