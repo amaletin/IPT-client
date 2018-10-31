@@ -1,0 +1,96 @@
+{
+  "./noop": [
+    {
+      "id": "../node_modules/next/dist/client/noop.js",
+      "name": "../node_modules/next/dist/client/noop.js",
+      "file": "static/chunks/0.js",
+      "publicPath": "static/chunks/0.js"
+    }
+  ],
+  "./mainNav.less": [
+    {
+      "id": "./components/common/mainNav.less",
+      "name": "./components/common/mainNav.less",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "undefined": [
+    {
+      "id": 4,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
+      "id": 5,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
+      "id": 6,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
+      "id": 7,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
+      "id": 8,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
+      "id": 9,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "./footer.less": [
+    {
+      "id": "./components/common/footer.less",
+      "name": "./components/common/footer.less",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "./page.less": [
+    {
+      "id": "./components/common/page.less",
+      "name": "./components/common/page.less",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "./header.less": [
+    {
+      "id": "./components/common/header.less",
+      "name": "./components/common/header.less",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "./productItem.less": [
+    {
+      "id": "./components/catalog/ProductItem/productItem.less",
+      "name": "./components/catalog/ProductItem/productItem.less",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "./mobileNav.less": [
+    {
+      "id": "./components/common/mobileNav.less",
+      "name": "./components/common/mobileNav.less",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ]
+}
