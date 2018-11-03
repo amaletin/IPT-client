@@ -34,7 +34,7 @@ class Printers extends React.Component<IProps, {}> {
   render() {
     const { products } = this.props;
     return (
-      <Page>
+      <Page title="3D Принтеры">
         <div className="catalogLayout">
           <ProductFilters />
           <ProductList products={products} />

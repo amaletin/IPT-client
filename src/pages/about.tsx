@@ -1,7 +1,7 @@
 import Page from '../components/common/Page';
 
 export default () => (
-  <Page>
+  <Page title="О НАС">
     <div className="container">
       THIS IS ABOUT PAGE
     </div>

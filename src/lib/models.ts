@@ -2,6 +2,7 @@ import { EState, EProductType } from './enums';
 
 export interface IAppState {
   brands: IBrandsState;
+  posts: IPostsState;
   products: IProductsState;
   ui: any;
 }
@@ -16,6 +17,10 @@ export interface IProductsState extends IStateChunk {
 
 export interface IBrandsState extends IStateChunk {
   data: IBrand[];
+}
+
+export interface IPostsState extends IStateChunk {
+  data: IPost[];
 }
 
 export interface IUIState {
@@ -45,6 +50,33 @@ export interface IServerResponse {
   data: any[] | {};
 }
 
+export interface IFileResponse extends IServerResponse {
+  data: IFileRaw;
+}
+
+export interface IFileRaw {
+  id: number;
+  status: number;
+  name: string;
+  title: string;
+  location?: string;
+  caption?: string;
+  type: string;
+  charset: string;
+  tags?: string;
+  width: number;
+  height: number;
+  size: number;
+  embed_id?: any;
+  user: number;
+  date_uploaded: string;
+  storage_adapter: string;
+  url: string;
+  thumbnail_url: string;
+  old_thumbnail_url: string;
+  html: string;
+}
+
 export interface IProductsResponse extends IServerResponse {
   data: IProductRaw[];
 }
@@ -60,7 +92,7 @@ export interface IProductRaw {
   id: number;
   layer_resolution?: string;
   name: string;
-  picture?: any;
+  picture?: IFileResponse;
   price?: number;
   type: any;
 }
@@ -91,3 +123,32 @@ export interface IPen extends IProductCommon {}
 export interface IConsumable extends IProductCommon {}
 
 export interface IProduct extends IPrinter, IScanner, IPen, IConsumable {}
+
+export interface IPostsResponse extends IServerResponse {
+  data: IPostRaw[];
+}
+
+export interface IPostRaw {
+  body: string;
+  cover: IFileResponse;
+  cover_caption: string;
+  excerpt: string;
+  id: number;
+  sort: number;
+  status: number;
+  subtitle: string;
+  title: string;
+}
+
+export interface IPost {
+  body: string;
+  cover: string;
+  coverCaption: string;
+  excerpt: string;
+  id: number;
+  sort: number;
+  status: number;
+  subtitle: string;
+  title: string;
+}
+

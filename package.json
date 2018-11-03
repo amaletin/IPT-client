@@ -28,16 +28,12 @@
     "lodash": "^4.17.11",
     "next": "^7.0.0",
     "next-redux-wrapper": "^2.0.0",
-    "prop-types": "^15.6.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-redux": "^5.1.0",
-    "react-slick": "^0.23.2",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.5",
-    "redux-thunk": "^2.3.0",
-    "resolve": "^1.8.1",
-    "typings-for-css-modules-loader": "^1.7.0"
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.9",

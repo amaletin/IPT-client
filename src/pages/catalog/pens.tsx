@@ -24,15 +24,16 @@ const mapStateToProps = (state: IAppState) => {
 };
 
 class Pens extends React.Component<IProps, {}> {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(loadProducts(EProductType.PEN));
+  static async getInitialProps ({ reduxStore }) {
+    const products = await reduxStore.dispatch(loadProducts(EProductType.PEN));
+
+    return { products }
   }
 
   render() {
     const { products } = this.props;
     return (
-      <Page>
+      <Page title="3D Ручки">
         <ProductList products={products} />
       </Page>
     );

@@ -23,23 +23,23 @@ export const nav = [
   },
   {
     name: '3D печать',
-    route: '3d',
+    route: '/3d',
   },
   {
     name: 'Статьи',
-    route: 'articles',
+    route: '/posts',
   },
   {
     name: 'Сервис-центр',
-    route: 'service',
+    route: '/service',
   },
   {
     name: 'Аренда',
-    route: 'rent',
+    route: '/rent',
   },
   {
     name: 'О нас',
-    route: 'about',
+    route: '/about',
   },
 ];
 

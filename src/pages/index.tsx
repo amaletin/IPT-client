@@ -5,7 +5,7 @@ import Order from '../components/main/Order';
 import Service from '../components/main/Service';
 
 const Index = () => (
-  <Page>
+  <Page header={false}>
     <Promo />
     <Catalog />
     <Order />

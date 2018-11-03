@@ -13,3 +13,7 @@ export const fetchProducts = (type: EProductType) => {
 export const fetchBrands = () => {
   return getFromAPI('brands');
 }
+
+export const fetchPosts = () => {
+  return getFromAPI('posts');
+}
