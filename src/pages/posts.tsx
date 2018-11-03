@@ -33,9 +33,7 @@ class Posts extends React.Component<IProps, {}> {
     const { posts } = this.props;
     return (
       <Page title='Статьи'>
-        <div className="blogLayout">
-          <PostList posts={posts} />
-        </div>
+        <PostList posts={posts} />
       </Page>
     );
   }
