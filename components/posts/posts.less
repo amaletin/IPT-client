@@ -1,0 +1,86 @@
+@import '../../static/variables.less';
+
+.posts--container {
+  max-width: 678px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.post-item--card {
+  border-width: 1px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: @box-shadow-lite;
+  margin-bottom: 30px;
+  padding: 15px;
+
+  img {
+    cursor: pointer;
+    max-width: 100%;
+    height: auto;
+  }
+
+  h2 {
+    cursor: pointer;
+    font-size: 30px;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-family: Circe;
+    font-weight: 200;
+  }
+
+  h5 {
+    cursor: pointer;
+    color: #9c9c9c;
+    font-size: 18px;
+    margin-top: 0;
+    text-transform: uppercase;
+    font-family: Circe;
+    line-height: 1;
+  }
+
+  &--excerpt {
+    cursor: pointer;
+    font-size: 14px;
+  }
+}
+
+.posts--details-cover {
+  position: relative;
+
+  &--caption {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    opacity: 0.4;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.posts--details-header {
+  font-family: @font-circe;
+  text-transform: uppercase;
+
+  h1 {
+    color: @pink;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  h2 {
+    color: @text-grey-light;
+    margin-top: 0;
+  }
+}
+
+.posts--content {
+  img {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+  }
+}

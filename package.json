@@ -4,9 +4,9 @@
   "description": "Printers shop",
   "main": "index.js",
   "scripts": {
-    "dev": "next src",
-    "build": "next build src",
-    "start": "next start src",
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js",
     "mock": "json-server --watch mocks.json --port 3004",
     "test": "jest"
   },
@@ -22,6 +22,7 @@
     "@zeit/next-less": "^1.0.0",
     "@zeit/next-typescript": "^1.1.1",
     "directus-sdk-javascript": "^2.15.0",
+    "express": "^4.16.4",
     "isomorphic-fetch": "^2.2.1",
     "isomorphic-unfetch": "^3.0.0",
     "less": "^3.8.1",
