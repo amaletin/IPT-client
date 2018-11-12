@@ -1,3 +1,4 @@
+import filter from 'lodash/filter';
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
@@ -17,9 +18,10 @@ export interface IProps {
 
 const mapStateToProps = (state: IAppState) => {
   const { products } = state.catalog;
+  const scanners = filter(products, (product) => product.type === EProductType.SCANER)
 
   return {
-    products,
+    products: scanners,
   };
 };
 

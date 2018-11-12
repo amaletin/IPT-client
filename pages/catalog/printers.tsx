@@ -1,3 +1,4 @@
+import filter from 'lodash/filter';
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
@@ -7,7 +8,7 @@ import Page from '../../components/common/Page';
 import { loadProducts } from '../../actions/catalogActions';
 import { IAppState } from '../../lib/models';
 
-import ProductFilters from '../../components/catalog/ProductFilters';
+// import ProductFilters from '../../components/catalog/ProductFilters';
 import ProductList from '../../components/catalog/ProductList';
 
 
@@ -18,9 +19,10 @@ export interface IProps {
 
 const mapStateToProps = (state: IAppState) => {
   const { products } = state.catalog;
+  const printers = filter(products, (product) => product.type === EProductType.PRINTER)
 
   return {
-    products,
+    products: printers,
   };
 };
 
@@ -36,7 +38,6 @@ class Printers extends React.Component<IProps, {}> {
     return (
       <Page title="3D Принтеры">
         <div className="catalogLayout">
-          <ProductFilters />
           <ProductList products={products} />
         </div>
       </Page>

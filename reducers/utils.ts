@@ -20,7 +20,6 @@ export const processProducts = (products: IProductsResponse): IProduct[]  => {
 }
 
 export const processProduct = (product: IProductRaw): IProduct => {
-  // console.log(product)
   return {
     ...product,
     category: product.category ? product.category.data.id : null,
@@ -46,6 +45,7 @@ export const processCategory = (category: ICategoryRaw): ICategory => {
     ...category,
     parent: !isEmpty(category.parent) ? category.parent.data.id : null,
     picture: !isEmpty(category.picture) && category.picture.data.name,
+    type: category.type.data.id,
   }
 }
 

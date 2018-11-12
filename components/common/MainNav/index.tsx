@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Fragment } from 'react';
-import { nav } from '../utils';
+import routes from '../../../lib/routes';
 import { colors } from '../../../lib/styleguide';
 
 export interface IProps {
@@ -103,7 +103,7 @@ NavItem.defaultProps = {
 export default () => (
   <Fragment>
     <ul className="mainnav">
-      {renderNav(nav)}
+      {renderNav(routes)}
     </ul>
     <style jsx>{`
       .mainnav {

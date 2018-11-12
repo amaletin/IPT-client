@@ -1,4 +1,4 @@
-export const nav = [
+export default [
   {
     name: 'Каталог',
     route: '',
@@ -9,7 +9,7 @@ export const nav = [
       },
       {
         name: '3D сканеры',
-        route: '/catalog/scaners',
+        route: '/catalog/scanners',
       },
       {
         name: 'расходные материалы',
@@ -23,7 +23,7 @@ export const nav = [
   },
   {
     name: '3D печать',
-    route: '/3d',
+    route: '/printing',
   },
   {
     name: 'Статьи',
@@ -42,10 +42,3 @@ export const nav = [
     route: '/about',
   },
 ];
-
-export const canUseDOM = !!(
-  (typeof window !== 'undefined'
-  && window.document && window.document.createElement)
-);
-
-export default {};

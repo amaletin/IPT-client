@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Component, Fragment } from 'react';
-import { nav, canUseDOM } from '../utils';
+import routes from '../../../lib/routes';
+import { canUseDOM } from '../../../lib/utils';
 import { colors } from '../../../lib/styleguide';
 
 export interface IProps {
@@ -80,7 +81,7 @@ class MobileNav extends Component<IMobileNavProps> {
         </div>
         <div className="mobile-nav">
           <ul className="mobile-nav--ul">
-            {renderNav(nav)}
+            {renderNav(routes)}
           </ul>
         </div>
         <style jsx>{`

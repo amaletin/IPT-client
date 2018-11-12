@@ -1,5 +1,5 @@
 import React from 'react';
-import { canUseDOM } from '../utils';
+import { canUseDOM } from '../../../lib/utils';
 import Header from '../Header';
 import Footer from '../Footer';
 import MobileNav from '../MobileNav';

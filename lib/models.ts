@@ -89,6 +89,7 @@ export interface ICategoryRaw {
   name: string;
   parent: any;
   picture: IFileResponse;
+  type: any;
 }
 
 export interface ICategory {
@@ -96,6 +97,7 @@ export interface ICategory {
   name: string;
   parent: number;
   picture: string;
+  type: EProductType;
 }
 
 export interface IProductsResponse extends IServerResponse {

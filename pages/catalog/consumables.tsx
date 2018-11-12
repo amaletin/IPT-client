@@ -1,8 +1,8 @@
+import filter from 'lodash/filter';
 import isEmpty from 'lodash/isEmpty';
 import React, { Fragment } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import filter from 'lodash/filter';
 import { IProduct, ICategory } from '../../lib/models';
 import { EProductType } from '../../lib/enums';
 import Page from '../../components/common/Page';
@@ -21,10 +21,12 @@ export interface IProps {
 
 const mapStateToProps = (state: IAppState) => {
   const { categories, products } = state.catalog;
+  const consumables = filter(products, (product) => product.type === EProductType.CONSUMABLE)
+  const filteredCategories = filter(categories, (category) => category.type === EProductType.CONSUMABLE)
 
   return {
-    categories,
-    products,
+    categories: filteredCategories,
+    products: consumables,
   };
 };
 
