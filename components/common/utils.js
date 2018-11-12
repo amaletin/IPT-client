@@ -13,7 +13,7 @@ export const nav = [
       },
       {
         name: 'расходные материалы',
-        route: '/catalog/materials',
+        route: '/catalog/consumables',
       },
       {
         name: '3D ручки',

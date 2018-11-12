@@ -2,7 +2,6 @@ import map from 'lodash/map';
 import React from 'react';
 import { IPost } from '../../../lib/models';
 import PostItem from '../PostItem';
-import '../posts.less';
 
 interface IProps {
   posts: IPost[];
@@ -13,6 +12,13 @@ const PostList: React.SFC<IProps> = ({ posts }) => {
   return (
     <div className="posts--container">
       {renderedPosts}
+      <style jsx>{`
+        .posts--container {
+          max-width: 678px;
+          padding: 0 15px;
+          margin: 0 auto;
+        }
+      `}</style>
     </div>
   );
 };

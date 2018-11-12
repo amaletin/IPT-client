@@ -4,7 +4,6 @@ import Header from '../Header';
 import Footer from '../Footer';
 import MobileNav from '../MobileNav';
 import PageHeader from '../PageHeader';
-import './page.less';
 
 export interface IProps {
   header?: boolean;
@@ -69,6 +68,14 @@ class Page extends React.Component<IProps, IState> {
           onToggleMobileNav={this.handleToggleMobileNav}
           show={showMenu}
         />
+        <style jsx>{`
+          .page {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+          }
+        `}</style>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React from 'react';
+import map from 'lodash/map';
 import { IProduct } from '../../../lib/models';
-
 import ProductItem from '../ProductItem';
 
 export interface IProps {
@@ -8,10 +8,9 @@ export interface IProps {
 }
 
 const ProductList: React.SFC<IProps> = ({ products }) => (
-  <div className="container">
-    This is a printers pages
+  <div className="catalog--container">
     {products
-      && products.map((product) => {
+      && map(products, (product) => {
         return (
           <ProductItem
             key={product.id}

@@ -1,7 +1,0 @@
-extends: airbnb
-plugins:
-  - react
-  - jsx-a11y
-  - import
-rules:
-  react/react-in-jsx-scope: off

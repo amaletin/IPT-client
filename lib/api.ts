@@ -6,4 +6,5 @@ export const client = new RemoteInstance({
   accessToken: [API_TOKEN]
 });
 
-export const getFromAPI = async (collection: any, options?: any) => await client.getItems(collection, options);
+export const getFromAPI = async (collection: string, options?: any) => await client.getItems(collection, options);
+export const getOneFromAPI = async (collection: string, id: number, options?: any) => await client.getItem(collection, id, options);

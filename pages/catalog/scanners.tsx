@@ -23,9 +23,9 @@ const mapStateToProps = (state: IAppState) => {
   };
 };
 
-class Pens extends React.Component<IProps, {}> {
+class Scanners extends React.Component<IProps, {}> {
   static async getInitialProps ({ reduxStore }) {
-    const products = await reduxStore.dispatch(loadProducts(EProductType.PEN));
+    const products = await reduxStore.dispatch(loadProducts(EProductType.SCANER));
 
     return { products }
   }
@@ -33,11 +33,11 @@ class Pens extends React.Component<IProps, {}> {
   render() {
     const { products } = this.props;
     return (
-      <Page title="3D Ручки">
+      <Page title="3D Сканнеры">
         <ProductList products={products} />
       </Page>
     );
   }
 }
 
-export default connect(mapStateToProps)(Pens);
+export default connect(mapStateToProps)(Scanners);

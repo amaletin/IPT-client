@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { IProduct } from '../../lib/models';
 import { EProductType } from '../../lib/enums';
 import Page from '../../components/common/Page';
-import { loadProducts } from '../../actions/productActions';
+import { loadProducts } from '../../actions/catalogActions';
 import { IAppState } from '../../lib/models';
 
 import ProductFilters from '../../components/catalog/ProductFilters';
@@ -17,10 +17,10 @@ export interface IProps {
 }
 
 const mapStateToProps = (state: IAppState) => {
-  const { products } = state;
+  const { products } = state.catalog;
 
   return {
-    products: products.data,
+    products,
   };
 };
 

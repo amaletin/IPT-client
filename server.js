@@ -15,6 +15,24 @@ app.prepare()
       app.render(req, res, actualPage, queryParams);
     });
 
+    server.get('/catalog/product/:id', (req, res) => {
+      const actualPage = '/catalog/product';
+      const queryParams = { id: req.params.id };
+      app.render(req, res, actualPage, queryParams);
+    });
+
+    server.get('/catalog/category/:id', (req, res) => {
+      const actualPage = '/catalog/category';
+      const queryParams = { id: req.params.id };
+      app.render(req, res, actualPage, queryParams);
+    });
+
+    server.get('/post/:id', (req, res) => {
+      const actualPage = '/post';
+      const queryParams = { id: req.params.id };
+      app.render(req, res, actualPage, queryParams);
+    });
+
     server.get('*', (req, res) => handle(req, res));
 
     server.listen(3000, (err) => {

@@ -3,7 +3,7 @@ import { EState, EProductType } from './enums';
 export interface IAppState {
   brands: IBrandsState;
   posts: IPostsState;
-  products: IProductsState;
+  catalog: ICatalogState;
   ui: any;
 }
 
@@ -11,8 +11,10 @@ export interface IStateChunk {
   state: EState;
 }
 
-export interface IProductsState extends IStateChunk {
-  data: IProduct[];
+export interface ICatalogState extends IStateChunk {
+  categories: ICategory[];
+  currentProductId: number;
+  products: IProduct[];
 }
 
 export interface IBrandsState extends IStateChunk {
@@ -78,6 +80,24 @@ export interface IFileRaw {
   html: string;
 }
 
+export interface ICategoriesResponse extends IServerResponse {
+  data: ICategoryRaw[];
+}
+
+export interface ICategoryRaw {
+  id: number;
+  name: string;
+  parent: any;
+  picture: IFileResponse;
+}
+
+export interface ICategory {
+  id: number;
+  name: string;
+  parent: number;
+  picture: string;
+}
+
 export interface IProductsResponse extends IServerResponse {
   data: IProductRaw[];
 }
@@ -93,6 +113,7 @@ export interface IProductRaw {
   id: number;
   layer_resolution?: string;
   name: string;
+  category?: any;
   picture?: IFileResponse;
   price?: number;
   type: any;
@@ -103,6 +124,7 @@ export interface IProductCommon {
   name: string;
   picture?: any;
   price?: number;
+  category?: number;
   type: EProductType;
 }
 
