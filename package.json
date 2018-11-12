@@ -13,7 +13,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://bitbucket.org/amaletin/3d"
   },
   "dependencies": {
     "directus-sdk-javascript": "^2.15.0",
