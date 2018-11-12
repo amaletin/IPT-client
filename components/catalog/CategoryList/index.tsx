@@ -10,7 +10,7 @@ export interface IProps {
 const CategoryList: React.SFC<IProps> = ({ categories }) => {  
   return (
     <Fragment>
-      <div className="container">
+      <div className="catalog--container">
         <h2>Категории</h2>
       </div>
       <div className="container catalog--container">

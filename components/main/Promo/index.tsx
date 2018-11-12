@@ -26,7 +26,7 @@ const Promo = () => (
       }
 
       .promo--carousel img {
-        min-width: 100%;
+        max-width: 100%;
       }
 
       .promo--text {
@@ -56,6 +56,10 @@ const Promo = () => (
       }
 
       @media screen and (min-width: ${ breakpoints.lg }px) {
+        .promo--carousel {
+          min-width: 50%;
+        }
+
         .promo {
           flex-direction: row;
         }

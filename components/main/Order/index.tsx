@@ -5,7 +5,6 @@ import {
   fonts,
   colors,
   gradients,
-  shadows,
 } from '../../../lib/styleguide';
 
 const images = [
@@ -28,10 +27,6 @@ const Order = () => (
       <div className="order--content">
         <div className="order--content--slider">
           <Carousel
-            customStyles={{
-              carouselStyles: "carousel",
-              slideStyles: "slide",
-            }}
             images={images}
           />
         </div>
@@ -96,24 +91,6 @@ const Order = () => (
         padding-bottom: 20px;
       }
 
-      .carousel {
-        box-shadow: ${ shadows.boxShadow };
-        position: relative;
-        height: 290px;
-        width: 290px;
-        min-width: 290px;
-        overflow: hidden;
-      }
-    
-      .slide {
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: 50% 60%;
-        display: inline-block;
-        width: 290px;
-        height: 100%;
-      }
-
       @media screen and (min-width: ${ breakpoints.md }px) {
         .order--heading {
           background-image: url('/static/images/order_header_bg.png');
@@ -167,32 +144,6 @@ const Order = () => (
 
         .order--content--text h2 {
           font-size: 38px;
-        }
-
-        .carousel {
-          width: 500px;
-          min-width: 500px;
-          height: 395px;
-        }
-
-        .slide {
-          width: 500px;
-          min-width: 500px;
-          height: 395px;
-        }
-      }
-
-      @media screen and (min-width: ${ breakpoints.xl }px) {
-        .carousel {
-          width: 623px;
-          min-width: 623px;
-          height: 492px;
-        }
-
-        .slide {
-          width: 623px;
-          min-width: 623px;
-          height: 492px;
         }
       }
     `}</style>

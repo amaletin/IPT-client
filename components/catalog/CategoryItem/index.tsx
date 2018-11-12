@@ -2,7 +2,7 @@ import isEmpty from 'lodash/isEmpty';
 import React from 'react';
 import { ICategory } from '../../../lib/models';
 import Link from 'next/link';
-import { shadows, breakpoints } from '../../../lib/styleguide';
+import { breakpoints } from '../../../lib/styleguide';
 
 export interface IProps {
   category: ICategory;
@@ -28,34 +28,47 @@ const CategoryItem: React.SFC<IProps> = ({ category }) => (
       </div>
     </Link>
     <style jsx>{`
-      category-item--container {
+      .category-item--container {
+        box-sizing: border-box;
         display: flex;
         flex-direction: column;
-        padding: 15px;
+        padding: 5px;
         width: 290px;
       }
 
-      category-item {
+      .category-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         cursor: pointer;
-        box-shadow: ${ shadows.boxShadow };
         padding: 15px;
       }
 
-      category-item--picture img {
+      .category-item--picture {
+        box-sizing: border-box;
         width: 100%;
       }
 
-      category-item--description {
+      .category-item--picture img {
+        background: #e8e8e8;
+        border-radius: 50%;
+        width: 100%;
+      }
+
+      .category-item--description {
         text-align: right;
       }
 
-      category-item--description--name {
-        font-size: 30px;
+      .category-item--description--name {
+        font-size: 18px;
+        margin-top: 6px;
+        text-transform: uppercase;
+        font-weight: bold;
       }
 
-      @media screen and (min-width: ${ breakpoints.md }) {
-        category-item--container {
-          width: 30%;
+      @media screen and (min-width: ${ breakpoints.md }px) {
+        .category-item--container {
+          width: 33.33333%;
         }
       }
     `}</style>

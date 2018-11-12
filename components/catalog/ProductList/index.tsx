@@ -4,11 +4,12 @@ import { IProduct } from '../../../lib/models';
 import ProductItem from '../ProductItem';
 
 export interface IProps {
+  className?: string;
   products: IProduct[];
 }
 
-const ProductList: React.SFC<IProps> = ({ products }) => (
-  <div className="catalog--container">
+const ProductList: React.SFC<IProps> = ({ className = 'catalog--container', products }) => (
+  <div className={className}>
     {products
       && map(products, (product) => {
         return (

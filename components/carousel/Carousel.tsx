@@ -1,11 +1,10 @@
 import React from 'react';
 import Slide from './Slide';
 import { LeftArrow, RightArrow } from './Arrows';
-import { colors } from '../../lib/styleguide';
+import { breakpoints, colors, shadows } from '../../lib/styleguide';
 
 export interface IProps {
   arrows?: boolean;
-  customStyles?: any;
   images: any[];
   pagination?: boolean;
 }
@@ -99,15 +98,13 @@ class Carousel extends React.Component<IProps, IState> {
   render() {
     const {
       arrows,
-      customStyles,
       images,
       pagination,
     } = this.props;
     const { translateValue } = this.state;
-    const carouselClass = customStyles ? customStyles.carouselStyles : 'carousel';
     return (
       <div
-        className={carouselClass}
+        className="carousel"
         ref={this.carousel}
       >
         <div
@@ -121,7 +118,6 @@ class Carousel extends React.Component<IProps, IState> {
             images.map(image => (
               <Slide
                 key={image.url}
-                customStyles={customStyles && customStyles.slideStyles}
                 image={image.url}
               />
             ))
@@ -146,20 +142,12 @@ class Carousel extends React.Component<IProps, IState> {
         )}
         <style jsx>{`
           .carousel {
+            box-shadow: ${ shadows.boxShadow };
             position: relative;
-            height: 500px;
-            width: 500px;
-            min-width: 500px;
+            height: 290px;
+            width: 290px;
+            min-width: 290px;
             overflow: hidden;
-          }
-
-          .slide {
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: 50% 60%;
-            display: inline-block;
-            width: 500px;
-            height: 100%;
           }
 
           .slider--wrapper {
@@ -186,6 +174,22 @@ class Carousel extends React.Component<IProps, IState> {
             justify-content: center;
             box-sizing: border-box;
             width: 100%;
+          }
+
+          @media screen and (min-width: ${ breakpoints.lg }px) {
+            .carousel {
+              width: 500px;
+              min-width: 500px;
+              height: 395px;
+            }
+          }
+
+          @media screen and (min-width: ${ breakpoints.xl }px) {
+            .carousel {
+              width: 623px;
+              min-width: 623px;
+              height: 492px;
+            }
           }
         `}</style>
       </div>

@@ -47,7 +47,7 @@ class Consumables extends React.Component<IProps, {}> {
         <CategoryList categories={rootCategories} />
         {!isEmpty(rootProducts) && (
           <Fragment>
-            <div className="container">
+            <div className="catalog--container">
               <h2>Товары без категории</h2>
             </div>
             <ProductList products={rootProducts} />

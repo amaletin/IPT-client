@@ -8,7 +8,7 @@ import Page from '../../components/common/Page';
 import { loadProducts } from '../../actions/catalogActions';
 import { IAppState } from '../../lib/models';
 
-// import ProductFilters from '../../components/catalog/ProductFilters';
+import ProductFilters from '../../components/catalog/ProductFilters';
 import ProductList from '../../components/catalog/ProductList';
 
 
@@ -37,9 +37,16 @@ class Printers extends React.Component<IProps, {}> {
     const { products } = this.props;
     return (
       <Page title="3D Принтеры">
-        <div className="catalogLayout">
-          <ProductList products={products} />
+        <div className="catalog--layout container">
+          <ProductFilters />
+          <ProductList className="catalog--container--right" products={products} />
         </div>
+				<style jsx>{`
+          .catalog--layout {
+            display: flex;
+            justify-content: center;
+          }
+				`}</style>
       </Page>
     );
   }

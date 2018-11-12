@@ -5,7 +5,7 @@ export interface IProps {
 }
 
 const ProductDetails: React.SFC<IProps> = ({ product }) => (
-  <div className="product-details--container">
+  <div className="catalog--container">
     <h1 className="product-details--title">
       {product.name}
     </h1>

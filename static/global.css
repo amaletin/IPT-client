@@ -45,19 +45,32 @@ body.locked {
 }
 
 .catalog--container {
+  margin: 0 auto
+}
+
+.catalog--container,
+.catalog--container--right{
   display: flex;
-  justify-content: center;
+  flex: 1;
+  justify-content: flex-start;
   flex-direction: column;
   align-items: center;
   max-width: 678px;
   padding: 0 15px;
-  margin: 0 auto;
 }
 
-@media screen and (min-width: @md) {
+@media screen and (min-width: 768px) {
   .catalog--container {
     align-items: initial;
     flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto
+  }
+
+  .catalog--container--right {
+    align-items: initial;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 }
 

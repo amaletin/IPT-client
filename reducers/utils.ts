@@ -44,7 +44,7 @@ export const processCategory = (category: ICategoryRaw): ICategory => {
   return {
     ...category,
     parent: !isEmpty(category.parent) ? category.parent.data.id : null,
-    picture: !isEmpty(category.picture) && category.picture.data.name,
+    picture: !isEmpty(category.picture) && category.picture.data.thumbnail_url,
     type: category.type.data.id,
   }
 }
