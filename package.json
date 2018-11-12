@@ -7,7 +7,6 @@
     "dev": "node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
-    "mock": "json-server --watch mocks.json --port 3004",
     "test": "jest"
   },
   "author": "Aleksandr Maletin",
