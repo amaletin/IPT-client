@@ -25,7 +25,7 @@ export const breakpoints = {
 
 // fonts
 export const fonts = {
-  fontBasic: '"OpenSans", sans-serif',
+  fontBasic: '"Open Sans", sans-serif',
   fontCirce: '"Circe", Arial, sans-serif',
   fontCirceLight: '"Circe Light", Arial, sans-serif',
 };

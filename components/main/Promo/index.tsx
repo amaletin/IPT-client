@@ -6,7 +6,11 @@ import {
 const Promo = () => (
   <div className="promo">
     <div className="promo--carousel">
-      <img src="/static/images/carousel-1.jpg" alt="printer-1" />
+      <picture>
+        <source type="image/webp" srcset="/static/images/carousel-1@1x.webp" />
+        <source srcset="/static/images/carousel-1.jpg" />
+        <img src="/static/images/carousel-1.jpg" alt="printer-1" />
+      </picture>
     </div>
     <div className="promo--text">
       <div className="promo--text--inner">
@@ -27,15 +31,17 @@ const Promo = () => (
 
       .promo--carousel img {
         max-width: 100%;
+        min-width: 100%;
       }
 
       .promo--text {
         background-color: #a9edf5;
         position: relative;
+        min-height: 50vw;
       }
 
       .promo--text--inner {
-        background-image: url("/static/images/hzbg-big.png");
+        background-image: url("/static/images/hzbg-big-opt.jpg");
         background-position: 23% 100%;
         box-sizing: border-box;
         color: ${ colors.white };
@@ -70,7 +76,7 @@ const Promo = () => (
         }
 
         .promo--text--inner {
-          background-image: url(/static/images/hzbg-big.png);
+          background-image: url(/static/images/hzbg-big-opt.jpg);
           background-position: left;
           box-sizing: border-box;
           color: #FFFFFF;

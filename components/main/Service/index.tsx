@@ -9,7 +9,7 @@ import {
 
 const images = [
   { url: '/static/images/order-slider.jpg' },
-  { url: '/static/images/carousel-1.jpg' },
+  { url: '/static/images/carousel-1@0,5x.jpg' },
   { url: '/static/images/materials.jpg' },
 ];
 

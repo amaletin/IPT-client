@@ -17,7 +17,7 @@ const Catalog = () => (
         <Link href="/catalog/printers">
           <div className="catalog--item">
             <div className="img-container">
-              <img src="/static/images/printers.jpg" alt="3d Принтеры" />
+              <img src="/static/images/carousel-1@0,5x.jpg" alt="3d Принтеры" />
             </div>
             <div className="catalog--item--name">
               <span>3d принтеры</span>

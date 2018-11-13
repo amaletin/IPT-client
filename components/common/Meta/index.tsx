@@ -11,6 +11,7 @@ export default () => (
       <link rel="mask-icon" href="/static/icons/safari-pinned-tab.svg" color="#5bbad5" />
       <meta name="msapplication-TileColor" content="#222222" />
       <meta name="theme-color" content="#ffffff" />
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans&amp;subset=cyrillic" rel="stylesheet"></link>
     </Head>
     <style jsx global>{`
       @font-face {
@@ -18,6 +19,7 @@ export default () => (
         src: url("/static/fonts/Circe/Circe_1.otf") format("opentype");
         font-weight: normal;
         font-style: normal;
+        font-display: fallback
       }
 
       @font-face {
@@ -25,6 +27,7 @@ export default () => (
         src: url("/static/fonts/Circe/CirceBold_1.otf") format("opentype");
         font-weight: bold;
         font-style: normal;
+        font-display: fallback
       }
 
       @font-face {
@@ -32,18 +35,12 @@ export default () => (
         src: url("/static/fonts/Circe/CIRCELIGHT_0.OTF") format("opentype");
         font-weight: lighter;
         font-style: normal;
-      }
-
-      @font-face {
-        font-family: 'OpenSans';
-        src: url("/static/fonts/OpenSans/OpenSans-Regular.ttf") format("truetype");
-        font-weight: normal;
-        font-style: normal;
+        font-display: fallback
       }
 
       body {
         margin: 0;
-        font-family: 'OpenSans', sans-serif;
+        font-family: 'Open Sans', sans-serif;
       }
 
       body.locked {
