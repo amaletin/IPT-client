@@ -11,7 +11,6 @@ export default () => (
       <link rel="mask-icon" href="/static/icons/safari-pinned-tab.svg" color="#5bbad5" />
       <meta name="msapplication-TileColor" content="#222222" />
       <meta name="theme-color" content="#ffffff" />
-      <link href="https://fonts.googleapis.com/css?family=Open+Sans&amp;subset=cyrillic" rel="stylesheet"></link>
     </Head>
     <style jsx global>{`
       @font-face {
@@ -38,9 +37,17 @@ export default () => (
         font-display: fallback
       }
 
+      @font-face {
+        font-family: 'Open Sans';
+        src: url("/static/fonts/OpenSans/OpenSans-Regular.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+        font-display: fallback
+      }
+
       body {
         margin: 0;
-        font-family: 'Open Sans', sans-serif;
+        font-family: 'OpenSans', sans-serif;
       }
 
       body.locked {
