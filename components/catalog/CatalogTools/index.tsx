@@ -1,20 +1,10 @@
 import React, { SFC } from 'react';
 import { colors } from '../../../lib/styleguide';
+import SortIcon from '../../icons/Sort';
 
 interface IProps {
   onChangeSorting: () => void;
   sortOrder: string | null;
-}
-
-const renderArrow = (order) => {
-  switch(order) {
-    case 'DESC':
-      return <i className="fas fa-sort-down"></i>;
-    case 'ASC':
-      return <i className="fas fa-sort-up"></i>;
-    default:
-      return <i className="fas fa-sort"></i>;
-  }
 }
 
 const CatalogTools: SFC<IProps> = ({ onChangeSorting, sortOrder }) => (
@@ -26,7 +16,7 @@ const CatalogTools: SFC<IProps> = ({ onChangeSorting, sortOrder }) => (
        >
         <span>ЦЕНА</span>
         <span className="sort--icon">
-          {renderArrow(sortOrder)}
+          <SortIcon direction={sortOrder} width="13px" />
         </span>
       </div>
     </div>
@@ -53,6 +43,7 @@ const CatalogTools: SFC<IProps> = ({ onChangeSorting, sortOrder }) => (
 
       .sort--icon {
         margin-left: 5px;
+        vertical-align: text-top;
       }
     `}</style>
   </div>
