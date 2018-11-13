@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Meta from '../Meta';
 import MainNav from '../MainNav';
 import {
   breakpoints,
@@ -14,7 +13,6 @@ export interface IProps {
 
 const Header: React.SFC<IProps> = ({ onToggleMobileNav }) => (
   <>
-    <Meta />
     <header className="header">
       <div className="container">
         <div className="header--inner">
@@ -130,6 +128,93 @@ const Header: React.SFC<IProps> = ({ onToggleMobileNav }) => (
           .header--burger {
             display: none;
           }
+        }
+      `}</style>
+      <style jsx global>{`
+        @font-face {
+          font-family: 'Circe';
+          src: url("/static/fonts/Circe/Circe_1.otf") format("opentype");
+          font-weight: normal;
+          font-style: normal;
+          font-display: fallback
+        }
+
+        @font-face {
+          font-family: 'Circe Bold';
+          src: url("/static/fonts/Circe/CirceBold_1.otf") format("opentype");
+          font-weight: bold;
+          font-style: normal;
+          font-display: fallback
+        }
+
+        @font-face {
+          font-family: 'Circe Light';
+          src: url("/static/fonts/Circe/CIRCELIGHT_0.OTF") format("opentype");
+          font-weight: lighter;
+          font-style: normal;
+          font-display: fallback
+        }
+
+        @font-face {
+          font-family: 'Open Sans';
+          src: url("/static/fonts/OpenSans/OpenSans-Regular.ttf") format("truetype");
+          font-weight: normal;
+          font-style: normal;
+          font-display: fallback
+        }
+
+        body {
+          margin: 0;
+          font-family: 'OpenSans', sans-serif;
+        }
+
+        body.locked {
+          height: 100%;
+          overflow: hidden;
+          width: 100%;
+          position: fixed;
+        }
+
+        .container {
+          max-width: 1366px;
+          padding: 0 15px;
+          margin: 0 auto;
+        }
+
+        .catalog--container {
+          margin: 0 auto
+        }
+
+        .catalog--container,
+        .catalog--container--right{
+          display: flex;
+          flex: 1;
+          justify-content: flex-start;
+          flex-direction: column;
+          align-items: center;
+          max-width: 678px;
+          padding: 0 15px;
+        }
+
+        @media screen and (min-width: 768px) {
+          .catalog--container {
+            align-items: initial;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin: 0 auto
+          }
+
+          .catalog--container--right {
+            align-items: initial;
+            flex-direction: row;
+            flex-wrap: wrap;
+          }
+        }
+
+        .posts--content img {
+          max-width: 100%;
+          height: auto;
+          margin: 20px 0;
         }
       `}</style>
     </header>
