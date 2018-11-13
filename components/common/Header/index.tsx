@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Head from 'next/head';
 import MainNav from '../MainNav';
 import {
   breakpoints,
@@ -13,6 +14,10 @@ export interface IProps {
 
 const Header: React.SFC<IProps> = ({ onToggleMobileNav }) => (
   <>
+    <Head>
+      <title>IPT Технологии печати</title>
+      <meta name="description" content="Магазин 3D принтеров." />
+    </Head>
     <header className="header">
       <div className="container">
         <div className="header--inner">

@@ -25,11 +25,12 @@ const Button: React.SFC<IProps> = ({ to, children }) => (
         color: ${ colors.white };
         cursor: pointer;
         display: inline-block;
-        font-size: 18px;
+        font-size: 20px;
         line-height: 1;
         padding: 14px 30px;
         text-transform: uppercase;
         outline: none;
+        margin-bottom: 20px;
       }
 
       .button:hover, .button:focus {
@@ -38,8 +39,8 @@ const Button: React.SFC<IProps> = ({ to, children }) => (
 
       @media screen and (min-width: ${ breakpoints.lg }px) {
         .button {
-          font-size: 18px;
-          padding: 28px 70px;
+          font-size: 22px;
+          padding: 18px 48px;
         }
       }
     `}</style>

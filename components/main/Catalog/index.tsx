@@ -109,7 +109,7 @@ const Catalog = () => (
       }
 
       .catalog--item--name {
-        color: #4BAEC2;
+        color: #33808F;
         font-size: 18px;
         padding: 39px 0;
         position: relative;
