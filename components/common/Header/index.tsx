@@ -24,7 +24,7 @@ const Header: React.SFC<IProps> = ({ onToggleMobileNav }) => (
           <div className="header--logo">
             <Link href="/">
               <a>
-                <img src="/static/images/images/logo_01.png" alt="logo" />
+                <img src="/static/images/logo_.png" alt="logo" />
               </a>
             </Link>
           </div>
@@ -49,8 +49,10 @@ const Header: React.SFC<IProps> = ({ onToggleMobileNav }) => (
       </div>
       <style jsx>{`
         .header {
-          background: ${ colors.headerBlue };
-          background: ${ gradients.gradient1 };
+          /*background: ${ colors.headerBlue };
+          background: ${ gradients.gradient1 };*/
+          background: url('/static/images/header-bg.jpg');
+          background-position: 26% top;
           color: #FFFFFF;
           z-index: 100;
         }
@@ -62,10 +64,26 @@ const Header: React.SFC<IProps> = ({ onToggleMobileNav }) => (
 
         .header--logo {
           align-items: center;
+          background: ${ colors.white };
+          box-sizing: border-box;
           display: flex;
           margin-left: 21.5px;
           margin-right: 80px;
+          /* min-width: 17%;
+          padding-left: 21.5px;
+          position: relative; */
         }
+
+        /* .header--logo:after {
+          border-left: solid 77px #FFFFFF;
+          border-top: solid 77px #FFFFFF;
+          border-bottom: solid 77px transparent;
+          border-right: solid 77px transparent;
+          content: "";
+          left: 100%;
+          position: absolute;
+          top: 0;
+        } */
 
         .header--logo img {
           max-height: 60px;

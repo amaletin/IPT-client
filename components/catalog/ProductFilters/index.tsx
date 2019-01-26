@@ -1,13 +1,25 @@
 import React from 'react';
+import InputRange from 'react-input-range';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { loadBrands } from '../../../actions/brandActions';
+// import { loadBrands } from '../../../actions/brandActions';
 import { IAppState, IBrand } from '../../../lib/models';
 import { shadows, breakpoints } from '../../../lib/styleguide';
 
 export interface IProps {
   dispatch: Dispatch;
   brands: IBrand[];
+  onUpdatePrice: (price) => void;
+  filters: {
+    price: {
+      value: {
+        min: number;
+        max: number;
+      }
+      minValue: number;
+      maxValue: number;
+    }
+  }
 }
 
 const mapStateToProps = (state: IAppState) => {
@@ -19,20 +31,31 @@ const mapStateToProps = (state: IAppState) => {
 };
 
 class ProductFilters extends React.Component<IProps, {}> {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(loadBrands());
+  handleUpdatePrice = (price) => {
+    this.props.onUpdatePrice(price);
   }
 
   render() {
-    const { brands } = this.props;
+    // const { brands } = this.props;
+    const { filters } = this.props;
+    const brands = [];
     return (
       <div className="filters--container">
 				<div className="filters--inner">
  	       Filters
 
+          Price:
+          <InputRange
+            maxValue={filters.price.maxValue}
+            minValue={filters.price.minValue}
+            value={filters.price.value}
+            onChange={this.handleUpdatePrice}
+            step={1000}
+          />
+
+
  	       Производители:
- 	       {brands && brands.map(brand => <p key={`brand-${brand.id}`}>{brand.name}</p>)}
+ 	       {false && brands.map(brand => <p key={`brand-${brand.id}`}>{brand.name}</p>)}
 				</div>
 				<style jsx>{`
 					.filters--container {

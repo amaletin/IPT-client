@@ -2,6 +2,7 @@ import { EState, EProductType } from './enums';
 
 export interface IAppState {
   brands: IBrandsState;
+  filters: IFilterState;
   posts: IPostsState;
   catalog: ICatalogState;
   ui: any;
@@ -15,6 +16,17 @@ export interface ICatalogState extends IStateChunk {
   categories: ICategory[];
   currentProductId: number;
   products: IProduct[];
+}
+
+export interface IFilterState {
+  price: {
+    value: {
+      min: number;
+      max: number;
+    },
+    minValue: number;
+    maxValue: number;
+  }
 }
 
 export interface IBrandsState extends IStateChunk {

@@ -13,6 +13,7 @@ export default class MyDocument extends Document {
           <link rel="mask-icon" href="/static/icons/safari-pinned-tab.svg" color="#5bbad5" />
           <meta name="msapplication-TileColor" content="#222222" />
           <meta name="theme-color" content="#ffffff" />
+          <link rel="stylesheet" type="text/css" href="/static/vendor/input_range.css" />
         </Head>
         <body>
           <Main />

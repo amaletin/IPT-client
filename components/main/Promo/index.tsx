@@ -7,7 +7,7 @@ const Promo = () => (
   <div className="promo">
     <div className="promo--carousel">
       <picture>
-        <source type="image/webp" srcSet="/static/images/carousel-1@1x.webp" />
+        <source type="image/webp" srcSet="/static/images/carousel-1.webp" />
         <source srcSet="/static/images/carousel-1.jpg" />
         <img src="/static/images/carousel-1.jpg" alt="printer-1" />
       </picture>
