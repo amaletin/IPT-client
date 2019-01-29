@@ -1,8 +1,15 @@
 import isEmpty from 'lodash/isEmpty';
 import replace from 'lodash/replace';
+import map from 'lodash/map';
+import filter from 'lodash/filter';
+import sortBy from 'lodash/sortBy';
 import {
   ICategoriesResponse,
   ICategory,
+  IFilterState,
+  IPriceFilter,
+  IPriceRange,
+  IPrinter,
   IProduct,
   IProductRaw,
   IProductsResponse,
@@ -62,4 +69,31 @@ export const processPost = (post: IPostRaw): IPost => {
     cover: !isEmpty(post.cover) && post.cover.data.name,
     cover_caption: post.cover_caption,
   }
+}
+
+export const filterPrinters = (filters: IFilterState, printers: IPrinter[]): IPrinter[] => {
+  const filteredPrinters = filter(printers, (prod) => {
+    return (prod.price <= filters.price.value.max
+    && prod.price >= filters.price.value.min)
+  })
+  return filteredPrinters;
+}
+
+export const updatePriceFilters = (oldPrice: IPriceFilter, printers: IPrinter[]): IPriceFilter => {
+  const prices = map(printers, prod => prod.price).sort((a, b) => a - b);
+  const newLimits: IPriceRange = {
+    max: prices[prices.length - 1],
+    min: prices[0],
+  };
+  const filterIsNull = oldPrice.value.max === null || oldPrice.value.max === null;
+  const result = {
+    range: newLimits,
+    value: filterIsNull ? newLimits : oldPrice.value,
+  }
+
+  return result;
+}
+
+export const updatePrintersSorting = (printers: IPrinter[], sorting: String): IPrinter[] => {
+  return sorting === 'DESC' ? sortBy(printers, ['price']).reverse() : sortBy(printers, ['price']);
 }

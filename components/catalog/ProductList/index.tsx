@@ -1,72 +1,51 @@
-import React from 'react';
-import orderBy from 'lodash/orderBy';
-import map from 'lodash/map';
-import { IProduct } from '../../../lib/models';
+import { SFC } from 'react';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { IAppState, IProduct } from '../../../lib/models';
+import { setSortOrder } from '../../../actions/printerActions';
 import CatalogTools from '../CatalogTools';
 import ProductItem from '../ProductItem';
 
 export interface IProps {
   className?: string;
   products: IProduct[];
+  sortOrder: string;
+  setSortOrder: () => void;
 }
 
-interface IState {
-  sortedProducts: IProduct[];
-  sortOrder: string | null;
+const mapStateToProps = (state: IAppState) => {
+  return { sortOrder: state.printers.sortOrder };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return ({
+    setSortOrder: () => dispatch(setSortOrder()),
+  })
 }
 
-class ProductList extends React.Component<IProps, IState> {
-  state = {
-    sortedProducts: this.props.products, 
-    sortOrder: null,
-  }
-
-  handleChangeSorting = () => {
-    const prevSorting = this.state.sortOrder;
-    const { products } = this.props;
-
-    switch(prevSorting) {
-      case 'DESC':
-        this.setState({
-          sortedProducts: orderBy(products, ['price']),
-          sortOrder: 'ASC',
-        })
-        break;
-      case 'ASC':
-        this.setState({
-          sortedProducts: products,
-          sortOrder: null,
-        })
-        break;
-      default:
-        this.setState({
-          sortedProducts: orderBy(products, ['price'], ['desc']),
-          sortOrder: 'DESC',
-        }) 
-    }
-  }
-
-  render() {
-    const { className = 'catalog--container' } = this.props;
-    const { sortedProducts, sortOrder } = this.state;
-    return (
-      <>
-        <div className={className}>
-          <CatalogTools sortOrder={sortOrder} onChangeSorting={this.handleChangeSorting} />
-          {sortedProducts
-            && map(sortedProducts, (product) => {
-              return (
-                <ProductItem
-                  key={product.id}
-                  product={product}
-                />
-              )
-            })
-          }
-        </div>
-      </>
-    )
-  }
+const ProductList: SFC<IProps> = ({ className = 'catalog--container', products, setSortOrder, sortOrder }) => {
+  return (
+    <div className={className}>
+      <CatalogTools sortOrder={sortOrder} onChangeSorting={setSortOrder} />
+      <div className="productList--grid">
+        {products
+          && products.map((product) => {
+            return (
+              <ProductItem
+                key={product.id}
+                product={product}
+              />
+            )
+          })
+        }
+      </div>
+      <style jsx>{`
+        .productList--grid {
+          display: flex;
+        }
+      `}</style>
+    </div>
+  )
 }
 
-export default ProductList;
+export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

@@ -4,6 +4,7 @@ export interface IAppState {
   brands: IBrandsState;
   filters: IFilterState;
   posts: IPostsState;
+  printers: IPrinterState;
   catalog: ICatalogState;
   ui: any;
 }
@@ -18,15 +19,26 @@ export interface ICatalogState extends IStateChunk {
   products: IProduct[];
 }
 
+export interface IPrinterState extends IStateChunk {
+  currentProductId: number;
+  filters: IFilterState;
+  filtered: IPrinter[];
+  list: IPrinter[];
+  sortOrder: string;
+}
+
+export interface IPriceRange {
+  max: number;
+  min: number;
+}
+
+export interface IPriceFilter {
+  range: IPriceRange;
+  value: IPriceRange;
+}
+
 export interface IFilterState {
-  price: {
-    value: {
-      min: number;
-      max: number;
-    },
-    minValue: number;
-    maxValue: number;
-  }
+  price: IPriceFilter;
 }
 
 export interface IBrandsState extends IStateChunk {
