@@ -28,6 +28,7 @@ const Printers: NextFunctionComponent<IProps> = ({ printers }) => {
     </Page>
   );
 }
+// @ts-ignore
 Printers.getInitialProps = async ({ reduxStore }) => {
   await reduxStore.dispatch(loadPrinters());
   const printers = reduxStore.getState().printers.filtered;

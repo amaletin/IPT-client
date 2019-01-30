@@ -22,6 +22,7 @@ export default (App) => {
     static async getInitialProps (appContext) {
       // Get or Create the store with `undefined` as initialState
       // This allows you to set a custom default initialState
+      // @ts-ignore
       const reduxStore = getOrCreateStore()
 
       // Provide the store to getInitialProps of pages
@@ -40,10 +41,12 @@ export default (App) => {
 
     constructor (props) {
       super(props)
+      // @ts-ignore
       this.reduxStore = getOrCreateStore(props.initialReduxState)
     }
 
     render () {
+      // @ts-ignore
       return <App {...this.props} reduxStore={this.reduxStore} />
     }
   }
