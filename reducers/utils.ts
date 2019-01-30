@@ -3,8 +3,11 @@ import replace from 'lodash/replace';
 import map from 'lodash/map';
 import filter from 'lodash/filter';
 import sortBy from 'lodash/sortBy';
+import unionBy from 'lodash/unionBy';
+import keyBy from 'lodash/keyBy';
+import { Dictionary } from 'lodash';
 import {
-  ICategoriesResponse,
+  IBrand,
   ICategory,
   IFilterState,
   IPriceFilter,
@@ -12,15 +15,14 @@ import {
   IPrinter,
   IProduct,
   IProductRaw,
-  IProductsResponse,
   IPost,
   IPostRaw,
-  IPostsResponse,
   ICategoryRaw,
+  IServerResponse,
 } from '../lib/models';
 import { API_HOST } from '../configuration/app.config';
 
-export const processProducts = (products: IProductsResponse): IProduct[]  => {
+export const processProducts = (products: IServerResponse<IProductRaw[]>): IProduct[]  => {
   return products.data.map((product: IProductRaw) => {
     return processProduct(product);
   })
@@ -29,6 +31,7 @@ export const processProducts = (products: IProductsResponse): IProduct[]  => {
 export const processProduct = (product: IProductRaw): IProduct => {
   return {
     ...product,
+    brand: product.brand ? product.brand.data : null,
     category: product.category ? product.category.data.id : null,
     chamberHeight: product.chamber_height,
     chamberLength: product.chamber_length,
@@ -41,7 +44,7 @@ export const processProduct = (product: IProductRaw): IProduct => {
   }
 }
 
-export const processCategories = (categories: ICategoriesResponse): ICategory[]  => {
+export const processCategories = (categories: IServerResponse<ICategoryRaw[]>): ICategory[]  => {
   return categories.data.map((category: ICategoryRaw) => {
     return processCategory(category);
   })
@@ -56,7 +59,7 @@ export const processCategory = (category: ICategoryRaw): ICategory => {
   }
 }
 
-export const processPosts = (posts: IPostsResponse): IPost[]  => {
+export const processPosts = (posts: IServerResponse<IPostRaw[]>): IPost[]  => {
   return posts.data.map((post: IPostRaw) => {
     return processPost(post);
   })
@@ -73,10 +76,23 @@ export const processPost = (post: IPostRaw): IPost => {
 
 export const filterPrinters = (filters: IFilterState, printers: IPrinter[]): IPrinter[] => {
   const filteredPrinters = filter(printers, (prod) => {
-    return (prod.price <= filters.price.value.max
-    && prod.price >= filters.price.value.min)
+    return (
+      (prod.price <= filters.price.value.max
+      && prod.price >= filters.price.value.min)
+      && filters.brands[prod.brand.id].selected
+    )
   })
   return filteredPrinters;
+}
+
+export const updateBrandFilters = (oldBrands: Dictionary<IBrand>, printers: IPrinter[]): Dictionary<IBrand> => {
+  const brands = keyBy(map(printers, (prod) => {
+    const brand = prod.brand;
+    brand.selected = true;
+    return brand;
+  }), 'id');
+  
+  return { ...oldBrands, ...brands };
 }
 
 export const updatePriceFilters = (oldPrice: IPriceFilter, printers: IPrinter[]): IPriceFilter => {
@@ -86,12 +102,10 @@ export const updatePriceFilters = (oldPrice: IPriceFilter, printers: IPrinter[])
     min: prices[0],
   };
   const filterIsNull = oldPrice.value.max === null || oldPrice.value.max === null;
-  const result = {
+  return {
     range: newLimits,
     value: filterIsNull ? newLimits : oldPrice.value,
   }
-
-  return result;
 }
 
 export const updatePrintersSorting = (printers: IPrinter[], sorting: String): IPrinter[] => {

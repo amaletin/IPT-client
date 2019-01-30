@@ -1,4 +1,5 @@
 import keyBy from 'lodash/keyBy';
+import map from 'lodash/map';
 import { Reducer } from 'redux';
 import {
   GET_PRINTERS_START,
@@ -6,12 +7,14 @@ import {
   GET_PRINTERS_FAIL,
   SET_PRICE_FILTER,
   SET_SORT_ORDER,
+  SET_BRAND_FILTER,
 } from '../actions/printerActions';
 import { EState } from '../lib/enums';
 import { IPrinterState } from '../lib/models';
 import {
   filterPrinters,
   processProducts,
+  updateBrandFilters,
   updatePriceFilters,
   updatePrintersSorting,
 } from './utils';
@@ -23,6 +26,7 @@ const initialState:IPrinterState = {
       value: { max: null, min: null },
       range: { max: null, min: null },
     },
+    brands: {},
   },
   filtered: [],
   list: [],
@@ -36,7 +40,11 @@ const printerReducer: Reducer<IPrinterState> = (state = initialState, action) =>
       return { ...state, state: EState.FETCHING };
     case GET_PRINTERS_SUCCESS:
       const processedPrinters = processProducts(action.data);
-      const updatedFilter = { ...state.filtered, price: updatePriceFilters(state.filters.price, processedPrinters) };
+      const updatedFilter = {
+        ...state.filtered,
+        brands: updateBrandFilters(state.filters.brands, processedPrinters),
+        price: updatePriceFilters(state.filters.price, processedPrinters)
+      };
       const filteredPrinters = filterPrinters(updatedFilter, processedPrinters);
       const printers = keyBy(updatePrintersSorting(processedPrinters, state.sortOrder), 'id');
 
@@ -64,6 +72,16 @@ const printerReducer: Reducer<IPrinterState> = (state = initialState, action) =>
       const filters = { ...state.filters, price };
       const filtered = updatePrintersSorting(filterPrinters(filters, state.list), state.sortOrder);
       return { ...state, filters, filtered };
+    case SET_BRAND_FILTER:
+      const brands = map(state.filters.brands, (b) => {
+        if(b.id === action.data) {
+          b.selected = !b.selected;
+        }
+        return b;
+      });
+      const updatedFilters = { ...state.filters, brands: keyBy(brands, 'id') };
+      const updatedFiltered = updatePrintersSorting(filterPrinters(updatedFilters, state.list), state.sortOrder);
+      return { ...state, filters: updatedFilters, filtered: updatedFiltered };
     case SET_SORT_ORDER:
     const prevOrder = state.sortOrder;
       const newOrder = prevOrder === 'ASC' ? 'DESC' : 'ASC'; 

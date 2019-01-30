@@ -7,6 +7,7 @@ import { EProductType } from '../lib/enums';
 export const GET_PRINTERS_START = 'GET_PRINTERS_START';
 export const GET_PRINTERS_SUCCESS = 'GET_PRINTERS_SUCCESS';
 export const GET_PRINTERS_FAIL = 'GET_PRINTERS_FAIL';
+export const SET_BRAND_FILTER = 'SET_BRAND_FILTER';
 export const SET_PRICE_FILTER = 'SET_PRICE_FILTER';
 export const SET_SORT_ORDER = 'SET_SORT_ORDER';
 
@@ -18,6 +19,9 @@ export const getPrintersSuccess = (data) => {
 }
 export const getPrintersFail = (error) => {
   return { type: GET_PRINTERS_FAIL, error };
+}
+export const setBrandFilter = (data) => {
+  return { type: SET_BRAND_FILTER, data };
 }
 export const setPriceFilter = (data) => {
   return { type: SET_PRICE_FILTER, data };

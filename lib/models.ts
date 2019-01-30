@@ -1,4 +1,18 @@
 import { EState, EProductType } from './enums';
+import { Dictionary } from 'lodash';
+
+export interface IServerResponse<T> {
+  meta?: {
+    table: string;
+    type: string;
+    total?: number;
+    Published?: number;
+    Deleted?: number;
+    Draft?: number;
+    total_entries?: number;
+  },
+  data: T
+}
 
 export interface IAppState {
   brands: IBrandsState;
@@ -39,6 +53,7 @@ export interface IPriceFilter {
 
 export interface IFilterState {
   price: IPriceFilter;
+  brands: Dictionary<IBrand>;
 }
 
 export interface IBrandsState extends IStateChunk {
@@ -57,6 +72,7 @@ export interface IUIState {
 export interface IBrand {
   name: string;
   id: number;
+  selected?: boolean;
 }
 
 export interface IFile {
@@ -64,22 +80,6 @@ export interface IFile {
   thumbnail_url: string;
 }
 
-export interface IServerResponse {
-  meta?: {
-    table: string;
-    type: string;
-    total?: number;
-    Published?: number;
-    Deleted?: number;
-    Draft?: number;
-    total_entries?: number;
-  }
-  data: any[] | {};
-}
-
-export interface IFileResponse extends IServerResponse {
-  data: IFileRaw;
-}
 
 export interface IFileRaw {
   id: number;
@@ -104,15 +104,11 @@ export interface IFileRaw {
   html: string;
 }
 
-export interface ICategoriesResponse extends IServerResponse {
-  data: ICategoryRaw[];
-}
-
 export interface ICategoryRaw {
   id: number;
   name: string;
   parent: any;
-  picture: IFileResponse;
+  picture: IServerResponse<IFileRaw>;
   type: any;
 }
 
@@ -124,11 +120,14 @@ export interface ICategory {
   type: EProductType;
 }
 
-export interface IProductsResponse extends IServerResponse {
-  data: IProductRaw[];
+export interface IBrandRaw {
+  id: number;
+  name: string;
+  sort: number;
 }
 
 export interface IProductRaw {
+  brand?: IServerResponse<IBrandRaw>;
   chamber_height?: number;
   chamber_length?: number;
   chamber_type?: string;
@@ -140,13 +139,14 @@ export interface IProductRaw {
   layer_resolution?: string;
   name: string;
   category?: any;
-  picture?: IFileResponse;
+  picture?: IServerResponse<IFileRaw>;
   price?: number;
   type: any;
 }
 
 export interface IProductCommon {
   id: number;
+  brand: IBrand;
   name: string;
   picture?: any;
   price?: number;
@@ -173,13 +173,9 @@ export interface IConsumable extends IProductCommon {}
 
 export interface IProduct extends IPrinter, IScanner, IPen, IConsumable {}
 
-export interface IPostsResponse extends IServerResponse {
-  data: IPostRaw[];
-}
-
 export interface IPostRaw {
   body: string;
-  cover: IFileResponse;
+  cover: IServerResponse<IFileRaw>;
   cover_caption: string;
   excerpt: string;
   id: number;

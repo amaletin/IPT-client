@@ -31,7 +31,7 @@ const ProductItem: React.FC<IProps> = ({ product }) => (
       .product-item--container {
         box-sizing: border-box;
         padding: 5px;
-        width: 290px;
+        min-width: 290px;
         -webkit-box-shadow: -1px 0 0 0 #e6e6e6 inset, 0 -1px 0 0 #e6e6e6 inset, -1px -1px 0 0 #e6e6e6 inset, -1px 0 0 0 #e6e6e6, 0 -1px 0 0 #e6e6e6;
         box-shadow: -1px 0 0 0 #e6e6e6 inset, 0 -1px 0 0 #e6e6e6 inset, -1px -1px 0 0 #e6e6e6, -1px 0 0 0 #e6e6e6, 0 -1px 0 0 #e6e6e6;
         -webkit-box-orient: vertical;
@@ -81,7 +81,7 @@ const ProductItem: React.FC<IProps> = ({ product }) => (
 
       @media screen and (min-width: ${ breakpoints.md }px) {
         .product-item--container {
-          width: 33.33333%;
+          min-width: 33.33333%;
         }
       }
     `}</style>
