@@ -11,7 +11,6 @@ import {IFilterState} from '../lib/models';
 
 const getPriceLimits = (products) => {
   const prices = map(products, prod => prod.price).sort((a, b) => a - b);
-  console.log(prices)
   return {
     value: {
       min: prices[0],
@@ -24,9 +23,14 @@ const getPriceLimits = (products) => {
 
 const initialState:IFilterState = {
   price: {
-    value: null,
-    minValue: null,
-    maxValue: null,
+    value: {
+      min: null,
+      max: null,
+    },
+    range: {
+      min: null,
+      max: null,
+    }
   },
 };
 

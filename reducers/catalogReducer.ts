@@ -38,7 +38,6 @@ const catalogReducer: Reducer<ICatalogState> = (state = initialState, action) =>
     case GET_PRODUCT_SUCCESS:
       const processedProduct = processProduct(action.data.data)
       const product = keyBy([processedProduct], 'id');
-      console.log(product)
       return {
         ...state,
         currentProductId: processedProduct.id,
