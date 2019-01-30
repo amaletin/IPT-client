@@ -1,16 +1,15 @@
-import { Fragment } from 'react';
 import { breakpoints } from '../../lib/styleguide';
 
 export interface IProps {
   image: string;
 }
 
-const Slide: React.SFC<IProps> = ({ image }) => {
+const Slide: React.FC<IProps> = ({ image }) => {
   const slideStyles = {
     backgroundImage: `url(${image})`,
   };
   return (
-    <Fragment>
+    <>
       <div className={'slide'} style={slideStyles} />
       <style jsx>{`
         .slide {
@@ -38,7 +37,7 @@ const Slide: React.SFC<IProps> = ({ image }) => {
           }
         }
       `}</style>
-    </Fragment>
+    </>
   );
 };
 

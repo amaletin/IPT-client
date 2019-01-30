@@ -1,13 +1,12 @@
 import Link from 'next/link';
-import { Fragment } from 'react';
 import { breakpoints, colors } from '../../../lib/styleguide';
 
 export interface IProps {
   to: string;
 }
 
-const Button: React.SFC<IProps> = ({ to, children }) => (
-  <Fragment> 
+const Button: React.FC<IProps> = ({ to, children }) => (
+  <> 
     <Link href={to}>
       <div
         className="button"
@@ -44,7 +43,7 @@ const Button: React.SFC<IProps> = ({ to, children }) => (
         }
       }
     `}</style>
-  </Fragment>
+  </>
 );
 
 export default Button;

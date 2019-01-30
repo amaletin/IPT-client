@@ -1,4 +1,3 @@
-import React, { Fragment } from 'react';
 import map from 'lodash/map';
 import { ICategory } from '../../../lib/models';
 import CategoryItem from '../CategoryItem';
@@ -7,9 +6,9 @@ export interface IProps {
   categories: ICategory[];
 }
 
-const CategoryList: React.SFC<IProps> = ({ categories }) => {  
+const CategoryList: React.FC<IProps> = ({ categories }) => {  
   return (
-    <Fragment>
+    <>
       <div className="catalog--container">
         <h2>Категории</h2>
       </div>
@@ -25,7 +24,7 @@ const CategoryList: React.SFC<IProps> = ({ categories }) => {
             })
           }
       </div>
-    </Fragment>
+    </>
   );
 }
 

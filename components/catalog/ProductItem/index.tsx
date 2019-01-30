@@ -1,6 +1,5 @@
 import isEmpty from 'lodash/isEmpty';
 import Link from 'next/link';
-import React from 'react';
 import { IProduct } from '../../../lib/models';
 import { breakpoints, colors } from '../../../lib/styleguide';
 
@@ -15,7 +14,7 @@ const pictureUrl = (product: IProduct) => {
   return `https://3dapi.amaletin.ru${product.picture}`
 };
 
-const ProductItem: React.SFC<IProps> = ({ product }) => (
+const ProductItem: React.FC<IProps> = ({ product }) => (
   <div className="product-item--container">
     <Link as={`/catalog/product/${product.id}`} href={`/catalog/product?id=${product.id}`}>
       <div className="product-item">

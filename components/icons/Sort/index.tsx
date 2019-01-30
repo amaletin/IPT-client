@@ -1,12 +1,10 @@
-import { SFC } from "react";
-
 interface IProps {
   color?: string;
   direction?: string;
   width?: string;
 }
 
-const SortIcon: SFC<IProps> = ({ color = '#000', direction, width }) => {
+const SortIcon: React.FC<IProps> = ({ color = '#000', direction, width }) => {
   return (
     <svg
       aria-hidden="true"

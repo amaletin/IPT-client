@@ -1,6 +1,6 @@
 import filter from 'lodash/filter';
 import isEmpty from 'lodash/isEmpty';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { IProduct, ICategory } from '../../lib/models';
@@ -46,12 +46,12 @@ class Consumables extends React.Component<IProps, {}> {
       <Page title="3D Ручки">
         <CategoryList categories={rootCategories} />
         {!isEmpty(rootProducts) && (
-          <Fragment>
+          <>
             <div className="catalog--container">
               <h2>Товары без категории</h2>
             </div>
             <ProductList products={rootProducts} />
-          </Fragment>
+          </>
         )}
       </Page>
     );

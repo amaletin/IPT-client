@@ -1,4 +1,3 @@
-import { SFC } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { IAppState, IProduct } from '../../../lib/models';
@@ -23,7 +22,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   })
 }
 
-const ProductList: SFC<IProps> = ({ className = 'catalog--container', products, setSortOrder, sortOrder }) => {
+const ProductList: React.FC<IProps> = ({ className = 'catalog--container', products, setSortOrder, sortOrder }) => {
   return (
     <div className={className}>
       <CatalogTools sortOrder={sortOrder} onChangeSorting={setSortOrder} />

@@ -1,5 +1,4 @@
 import isEmpty from 'lodash/isEmpty';
-import React from 'react';
 import { ICategory } from '../../../lib/models';
 import Link from 'next/link';
 import { breakpoints } from '../../../lib/styleguide';
@@ -15,7 +14,7 @@ const pictureUrl = (category: ICategory) => {
   return `https://3dapi.amaletin.ru${category.picture}`
 };
 
-const CategoryItem: React.SFC<IProps> = ({ category }) => (
+const CategoryItem: React.FC<IProps> = ({ category }) => (
   <div className="category-item--container">
     <Link as={`/catalog/category/${category.id}`} href={`/catalog/category?id=${category.id}`}>
       <div className="category-item">

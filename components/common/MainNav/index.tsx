@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Fragment } from 'react';
 import routes from '../../../lib/routes';
 import { colors } from '../../../lib/styleguide';
 
@@ -13,10 +12,10 @@ const renderNav = items => items && items.map((item) => {
     ? <NavItem key={item.name} item={item} parent /> : <NavItem key={item.name} item={item} />;
 });
 
-const NavItem: React.SFC<IProps> = ({ item, parent }) => {
+const NavItem: React.FC<IProps> = ({ item, parent }) => {
   const renderedChildren = renderNav(item.children);
   return (
-    <Fragment>
+    <>
       <li className="mainnav--parentli">
         <Link href={item.route}>
           <a className="mainnav--parentli--link">{ item.name }</a>
@@ -92,7 +91,7 @@ const NavItem: React.SFC<IProps> = ({ item, parent }) => {
           color: ${ colors.pink };
         }
       `}</style>
-    </Fragment>
+    </>
   );
 };
 NavItem.defaultProps = {
@@ -101,7 +100,7 @@ NavItem.defaultProps = {
 };
 
 export default () => (
-  <Fragment>
+  <>
     <ul className="mainnav">
       {renderNav(routes)}
     </ul>
@@ -114,5 +113,5 @@ export default () => (
         padding: 0;
       }
     `}</style>
-  </Fragment>
+  </>
 );

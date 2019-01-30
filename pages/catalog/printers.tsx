@@ -1,5 +1,5 @@
-import React from 'react';
 import { connect } from 'react-redux';
+import { NextFunctionComponent } from 'next'
 import { IProduct } from '../../lib/models';
 import Page from '../../components/common/Page';
 import { loadPrinters } from '../../actions/printerActions';
@@ -12,7 +12,7 @@ interface IProps {
   printers: IProduct[];
 }
 
-const Printers: React.SFC<IProps> = ({ printers }) => {
+const Printers: NextFunctionComponent<IProps> = ({ printers }) => {
   return (
     <Page title="3D Принтеры">
       <div className="catalog--layout container">

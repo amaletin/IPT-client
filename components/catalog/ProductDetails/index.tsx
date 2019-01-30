@@ -4,7 +4,7 @@ export interface IProps {
   product: IProduct
 }
 
-const ProductDetails: React.SFC<IProps> = ({ product }) => (
+const ProductDetails: React.FC<IProps> = ({ product }) => (
   <div className="catalog--container">
     <h1 className="product-details--title">
       {product.name}

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Component, Fragment } from 'react';
+import React from 'react';
 import routes from '../../../lib/routes';
 import { canUseDOM } from '../../../lib/utils';
 import { colors } from '../../../lib/styleguide';
@@ -14,10 +14,10 @@ const renderNav = items => items && items.map((item) => {
     ? <NavItem key={item.name} item={item} parent /> : <NavItem key={item.name} item={item} />;
 });
 
-const NavItem: React.SFC<IProps> = ({ item = {}, parent = false }) => {
+const NavItem: React.FC<IProps> = ({ item = {}, parent = false }) => {
   const renderedChildren = renderNav(item.children);
   return (
-    <Fragment>
+    <>
       <li>
         <Link href={item.route}>
           <a>{ item.name }</a>
@@ -45,7 +45,7 @@ const NavItem: React.SFC<IProps> = ({ item = {}, parent = false }) => {
           list-style: none;
         }
       `}</style>
-    </Fragment>
+    </>
   );
 };
 
@@ -54,7 +54,7 @@ export interface IMobileNavProps {
   show: boolean;
 }
 
-class MobileNav extends Component<IMobileNavProps> {
+class MobileNav extends React.Component<IMobileNavProps> {
   componentWillUnmount() {
     canUseDOM && document.body.classList.remove('locked');
   }

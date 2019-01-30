@@ -3,7 +3,7 @@ export interface IRightArrowProps {
   handleKeyDown: (e) => void;
 }
 
-export const RightArrow: React.SFC<IRightArrowProps> = ({ goToNextSlide, handleKeyDown }) => (
+export const RightArrow: React.FC<IRightArrowProps> = ({ goToNextSlide, handleKeyDown }) => (
   <div
     className="arrow-right"
     onClick={goToNextSlide}
@@ -37,7 +37,7 @@ export interface ILeftArrowProps {
   handleKeyDown: (e) => void;
 }
 
-export const LeftArrow: React.SFC<ILeftArrowProps> = ({ goToPrevSlide, handleKeyDown }) => (
+export const LeftArrow: React.FC<ILeftArrowProps> = ({ goToPrevSlide, handleKeyDown }) => (
   <div
     className="arrow-left"
     onClick={goToPrevSlide}

@@ -1,4 +1,3 @@
-import React, { SFC } from 'react';
 import { colors } from '../../../lib/styleguide';
 import SortIcon from '../../icons/Sort';
 
@@ -7,7 +6,7 @@ interface IProps {
   sortOrder: string | null;
 }
 
-const CatalogTools: SFC<IProps> = ({ onChangeSorting, sortOrder }) => (
+const CatalogTools: React.FC<IProps> = ({ onChangeSorting, sortOrder }) => (
   <div className="catalog-tools--container">
     <div className="catalog-tools--inner">
       <div

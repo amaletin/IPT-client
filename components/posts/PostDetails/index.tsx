@@ -1,14 +1,13 @@
 import { API_HOST } from '../../../configuration/app.config';
 import { IPost } from '../../../lib/models';
-import { Fragment } from 'react';
 import { colors, fonts } from '../../../lib/styleguide';
 
 export interface IProps {
   post: IPost;
 }
 
-const PostDetails: React.SFC<IProps> = ({ post }) => (
-  <Fragment>
+const PostDetails: React.FC<IProps> = ({ post }) => (
+  <>
     <div className="posts--details-cover">
       <img src={`${API_HOST}thumbnail/1600/480/crop/best/${post.cover}`} style={{ width: '100%' }} />
       <div
@@ -64,7 +63,7 @@ const PostDetails: React.SFC<IProps> = ({ post }) => (
         margin-top: 0;
       }
     `}</style>
-  </Fragment>
+  </>
 )
 
 export default PostDetails;

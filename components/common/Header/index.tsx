@@ -12,7 +12,7 @@ export interface IProps {
   onToggleMobileNav: () => void;
 }
 
-const Header: React.SFC<IProps> = ({ onToggleMobileNav }) => (
+const Header: React.FC<IProps> = ({ onToggleMobileNav }) => (
   <>
     <Head>
       <title>IPT Технологии печати</title>

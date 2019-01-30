@@ -7,7 +7,7 @@ interface IProps {
   post: IPost;
 }
 
-const PostItem: React.SFC<IProps> = ({ post }) => {
+const PostItem: React.FC<IProps> = ({ post }) => {
   return (
     <div className="post-item--card">
       <Link as={`post/${post.id}`} href={`/post?id=${post.id}`}>

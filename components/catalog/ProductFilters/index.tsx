@@ -1,4 +1,3 @@
-import React from 'react';
 import InputRange from 'react-input-range';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -13,7 +12,7 @@ interface IProps {
   filters: IFilterState;
 }
 
-const ProductFilters: React.SFC<IProps> = ({ filters, setPriceFilter }) => {
+const ProductFilters: React.FC<IProps> = ({ filters, setPriceFilter }) => {
   // const { brands } = this.props;
   // const brands = [];
   return (
