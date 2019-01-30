@@ -23,11 +23,6 @@ export const fetchCategories = (type: EProductType) => {
   );
 }
 
-
-export const fetchBrands = () => {
-  return getFromAPI('brands');
-}
-
 export const fetchPosts = () => {
   return getFromAPI('posts');
 }

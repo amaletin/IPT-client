@@ -15,7 +15,6 @@ export interface IServerResponse<T> {
 }
 
 export interface IAppState {
-  brands: IBrandsState;
   filters: IFilterState;
   posts: IPostsState;
   printers: IPrinterState;
@@ -54,10 +53,6 @@ export interface IPriceFilter {
 export interface IFilterState {
   price: IPriceFilter;
   brands: Dictionary<IBrand>;
-}
-
-export interface IBrandsState extends IStateChunk {
-  data: IBrand[];
 }
 
 export interface IPostsState extends IStateChunk {

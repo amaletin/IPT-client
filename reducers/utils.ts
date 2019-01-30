@@ -3,7 +3,6 @@ import replace from 'lodash/replace';
 import map from 'lodash/map';
 import filter from 'lodash/filter';
 import sortBy from 'lodash/sortBy';
-import unionBy from 'lodash/unionBy';
 import keyBy from 'lodash/keyBy';
 import { Dictionary } from 'lodash';
 import {
