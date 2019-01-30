@@ -15,18 +15,16 @@ const renderNav = items => items && items.map((item) => {
 const NavItem: React.FC<IProps> = ({ item, parent }) => {
   const renderedChildren = renderNav(item.children);
   return (
-    <>
-      <li className="mainnav--parentli">
-        <Link href={item.route}>
-          <a className="mainnav--parentli--link">{ item.name }</a>
-        </Link>
-        {
-          parent && (
-            <ul className="mainnav--inner">
-              { renderedChildren }
-            </ul>)
-        }
-      </li>
+    <li className="mainnav--parentli">
+      <Link href={item.route}>
+        <a className="mainnav--parentli--link">{ item.name }</a>
+      </Link>
+      {
+        parent && (
+          <ul className="mainnav--inner">
+            { renderedChildren }
+          </ul>)
+      }
       <style jsx>{`
         .mainnav--parentli {
           position: relative;
@@ -91,7 +89,7 @@ const NavItem: React.FC<IProps> = ({ item, parent }) => {
           color: ${ colors.pink };
         }
       `}</style>
-    </>
+    </li>
   );
 };
 NavItem.defaultProps = {
@@ -100,10 +98,8 @@ NavItem.defaultProps = {
 };
 
 export default () => (
-  <>
-    <ul className="mainnav">
-      {renderNav(routes)}
-    </ul>
+  <ul className="mainnav">
+    {renderNav(routes)}
     <style jsx>{`
       .mainnav {
         align-items: center;
@@ -113,5 +109,5 @@ export default () => (
         padding: 0;
       }
     `}</style>
-  </>
+  </ul>
 );

@@ -17,18 +17,16 @@ const renderNav = items => items && items.map((item) => {
 const NavItem: React.FC<IProps> = ({ item = {}, parent = false }) => {
   const renderedChildren = renderNav(item.children);
   return (
-    <>
-      <li>
-        <Link href={item.route}>
-          <a>{ item.name }</a>
-        </Link>
-        {
-          parent && (
-            <ul className="mobile-nav--inner">
-              { renderedChildren }
-            </ul>)
-        }
-      </li>
+    <li>
+      <Link href={item.route}>
+        <a>{ item.name }</a>
+      </Link>
+      {
+        parent && (
+          <ul className="mobile-nav--inner">
+            { renderedChildren }
+          </ul>)
+      }
       <style jsx>{`
         li {
           margin-bottom: 5px;
@@ -45,7 +43,7 @@ const NavItem: React.FC<IProps> = ({ item = {}, parent = false }) => {
           list-style: none;
         }
       `}</style>
-    </>
+    </li>
   );
 };
 

@@ -9,8 +9,7 @@ const Slide: React.FC<IProps> = ({ image }) => {
     backgroundImage: `url(${image})`,
   };
   return (
-    <>
-      <div className={'slide'} style={slideStyles} />
+    <div className={'slide'} style={slideStyles}>
       <style jsx>{`
         .slide {
           background-size: cover;
@@ -37,7 +36,7 @@ const Slide: React.FC<IProps> = ({ image }) => {
           }
         }
       `}</style>
-    </>
+    </div>
   );
 };
 
