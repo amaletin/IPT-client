@@ -15,7 +15,6 @@ export interface IServerResponse<T> {
 }
 
 export interface IAppState {
-  filters: IFilterState;
   posts: IPostsState;
   printers: IPrinterState;
   catalog: ICatalogState;
