@@ -113,7 +113,8 @@ export const updateFilters = (state: IFiltersState, products: Dictionary<IProduc
   }
 }
 
-export const setPriceFilter = (state: IFilterBlock<IPriceFilterBlock>, newData): IFilterBlock<IPriceFilterBlock> => {
+export const setPriceFilter = (state: IFilterBlock<IPriceFilterBlock>, newData: IPriceRange): IFilterBlock<IPriceFilterBlock> => {
+  // const validFilter = validateFilterValue(newData, state.filter.range);
   return { ...state, filter: { ...state.filter,  value: newData} };
 }
 

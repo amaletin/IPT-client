@@ -1,9 +1,10 @@
 import isEmpty from 'lodash/isEmpty';
 import map from 'lodash/map';
-import InputRange from 'react-input-range';
 import { IFiltersStateSlice, IPrintersFilters } from '../../../lib/models';
 import { shadows, breakpoints } from '../../../lib/styleguide';
 import { EProductType } from '../../../lib/enums';
+
+import PriceFilter from '../PriceFilter';
 
 interface IProps {
   filters: IFiltersStateSlice;
@@ -48,31 +49,14 @@ const ProductFilters: React.FC<IProps> = ({
   setPrintersBrandFilterOpen,
   type,
 }) => {
-  const { filter } = filters.price;
-  const priceFilterDisabled = filter.range.min === null || filter.range.max === null || filter.range.min === filter.range.max; 
   return (
     <div className="filters--container">
       <div className="filters--inner">
         <h3>Фильтры</h3>
-        <p>Цена:</p>
-        <div className="filters--price--inner">
-          {priceFilterDisabled ? (
-            <InputRange
-              disabled={priceFilterDisabled}
-              value={0}
-              onChange={setPriceFilter}
-            />
-          ) : (
-            <InputRange
-              disabled={priceFilterDisabled}
-              maxValue={filters.price.filter.range.max}
-              minValue={filters.price.filter.range.min}
-              value={filters.price.filter.value}
-              onChange={setPriceFilter}
-              step={1000}
-            />
-          )}
-        </div>
+        <PriceFilter
+          filters={filters.price}
+          setPriceFilter={setPriceFilter}
+        />
         {type === EProductType.PRINTER && (
           renderPrinterFilters(filters as IPrintersFilters, setBrandFilter, setPrintersBrandFilterOpen)
         )}
@@ -85,9 +69,6 @@ const ProductFilters: React.FC<IProps> = ({
         .filters--inner {
           box-shadow: ${ shadows.boxShadowLite };
           padding: 10px 15px;
-        }
-        .filters--price--inner {
-          padding: 20px;
         }
 
         @media screen and (min-width: ${ breakpoints.md }px) {

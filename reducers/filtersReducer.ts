@@ -10,7 +10,6 @@ import {
 } from '../actions/filterActions';
 import { GET_PRODUCTS_SUCCESS } from '../actions/productsActions';
 import { updateFilters, setPriceFilter, setBrandsFilter } from '../lib/filterUtils';
-import { processProducts } from '../lib/dataUtils';
 
 const initialPrice: IFilterBlock<IPriceFilterBlock> = {
   filter: {
