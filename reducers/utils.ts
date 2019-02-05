@@ -1,16 +1,9 @@
 import isEmpty from 'lodash/isEmpty';
 import replace from 'lodash/replace';
-import map from 'lodash/map';
-import filter from 'lodash/filter';
 import sortBy from 'lodash/sortBy';
-import keyBy from 'lodash/keyBy';
-import { Dictionary } from 'lodash';
+
 import {
-  IBrand,
   ICategory,
-  IFilterState,
-  IPriceFilter,
-  IPriceRange,
   IPrinter,
   IProduct,
   IProductRaw,
@@ -70,40 +63,6 @@ export const processPost = (post: IPostRaw): IPost => {
     body: replace(post.body, 'src="/storage', `src="${API_HOST}storage`),
     cover: !isEmpty(post.cover) && post.cover.data.name,
     cover_caption: post.cover_caption,
-  }
-}
-
-export const filterPrinters = (filters: IFilterState, printers: IPrinter[]): IPrinter[] => {
-  const filteredPrinters = filter(printers, (prod) => {
-    return (
-      (prod.price <= filters.price.value.max
-      && prod.price >= filters.price.value.min)
-      && filters.brands[prod.brand.id].selected
-    )
-  })
-  return filteredPrinters;
-}
-
-export const updateBrandFilters = (oldBrands: Dictionary<IBrand>, printers: IPrinter[]): Dictionary<IBrand> => {
-  const brands = keyBy(map(printers, (prod) => {
-    const brand = prod.brand;
-    brand.selected = true;
-    return brand;
-  }), 'id');
-  
-  return { ...oldBrands, ...brands };
-}
-
-export const updatePriceFilters = (oldPrice: IPriceFilter, printers: IPrinter[]): IPriceFilter => {
-  const prices = map(printers, prod => prod.price).sort((a, b) => a - b);
-  const newLimits: IPriceRange = {
-    max: prices[prices.length - 1],
-    min: prices[0],
-  };
-  const filterIsNull = oldPrice.value.max === null || oldPrice.value.max === null;
-  return {
-    range: newLimits,
-    value: filterIsNull ? newLimits : oldPrice.value,
   }
 }
 

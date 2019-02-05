@@ -1,9 +1,7 @@
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { IAppState, IProduct } from '../../../lib/models';
-import { setSortOrder } from '../../../actions/printerActions';
+import { IProduct } from '../../../lib/models';
 import CatalogTools from '../CatalogTools';
 import ProductItem from '../ProductItem';
+import { map, sortBy } from 'lodash';
 
 export interface IProps {
   className?: string;
@@ -12,23 +10,14 @@ export interface IProps {
   setSortOrder: () => void;
 }
 
-const mapStateToProps = (state: IAppState) => {
-  return { sortOrder: state.printers.sortOrder };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch) => {
-  return ({
-    setSortOrder: () => dispatch(setSortOrder()),
-  })
-}
-
 const ProductList: React.FC<IProps> = ({ className = 'catalog--container', products, setSortOrder, sortOrder }) => {
+  const sortedProducts = sortOrder === 'ASC' ? sortBy(products, ['price']) : sortBy(products, ['price']).reverse();
   return (
     <div className={className}>
       <CatalogTools sortOrder={sortOrder} onChangeSorting={setSortOrder} />
       <div className="productList--grid">
         {products
-          && products.map((product) => {
+          && map(sortedProducts, (product) => {
             return (
               <ProductItem
                 key={product.id}
@@ -47,4 +36,4 @@ const ProductList: React.FC<IProps> = ({ className = 'catalog--container', produ
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductList);
+export default ProductList;

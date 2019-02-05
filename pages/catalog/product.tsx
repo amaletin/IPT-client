@@ -1,7 +1,7 @@
 import isEmpty from 'lodash/isEmpty';
 import React from 'react';
 import { connect } from 'react-redux';
-import { loadProduct } from '../../actions/catalogActions';
+import { loadProduct } from '../../actions/categoriesActions';
 import { IAppState, IProduct } from '../../lib/models';
 import Page from '../../components/common/Page';
 import ProductDetails from '../../components/catalog/ProductDetails';
@@ -12,8 +12,8 @@ export interface IProps {
 }
 
 const mapStateToProps = (state: IAppState) => {
-  const { currentProductId, products } = state.catalog;
-  const product = products[currentProductId];
+  const { byId } = state.products;
+  const product = byId[1];
 
   return { product };
 };

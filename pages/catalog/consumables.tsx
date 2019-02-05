@@ -1,61 +1,88 @@
-import filter from 'lodash/filter';
 import isEmpty from 'lodash/isEmpty';
-import React from 'react';
+import { NextFunctionComponent } from 'next';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { IProduct, ICategory } from '../../lib/models';
+import { IAppState, IProduct, ICategory, IConsumablesFilters } from '../../lib/models';
 import { EProductType } from '../../lib/enums';
 import Page from '../../components/common/Page';
-import { loadProducts, loadCategories } from '../../actions/catalogActions';
-import { IAppState } from '../../lib/models';
+import { loadCategories } from '../../actions/categoriesActions';
+import { loadProducts } from '../../actions/productsActions';
+import { setConsumablesSorting } from '../../actions/sortingActions';
+import { setConsumablesPriceFilter } from '../../actions/filterActions';
+import { getFilteredRootConsumables, getRootCategories } from '../../selectors';
 
 import CategoryList from '../../components/catalog/CategoryList';
 import ProductList from '../../components/catalog/ProductList';
+import ProductFilters from '../../components/catalog/ProductFilters';
 
 
 export interface IProps {
-  dispatch: Dispatch;
-  products: IProduct[];
+  filters: IConsumablesFilters;
+  consumables: IProduct[];
   categories: ICategory[];
+  setConsumablesPriceFilter: (val) => void;
+  setSortOrder: () => void;
+  sortOrder: string;
 }
 
-const mapStateToProps = (state: IAppState) => {
-  const { categories, products } = state.catalog;
-  const consumables = filter(products, (product) => product.type === EProductType.CONSUMABLE)
-  const filteredCategories = filter(categories, (category) => category.type === EProductType.CONSUMABLE)
-
+const Consumables: NextFunctionComponent<IProps> = ({ categories, consumables, filters, setConsumablesPriceFilter, setSortOrder, sortOrder }) => {
+  return (
+    <Page title="3D Ручки">
+      <CategoryList categories={categories} />
+      {!isEmpty(consumables) && (
+        <>
+          <h2>Товары без категории</h2>
+          <div className="catalog--layout container">
+            <ProductFilters
+              filters={filters}
+              setPriceFilter={setConsumablesPriceFilter}
+              type={EProductType.CONSUMABLE}
+            />
+            <ProductList
+              products={consumables}
+              sortOrder={sortOrder}
+              setSortOrder={setSortOrder}
+            />
+          </div>
+        </>
+      )}
+      <style jsx>{`
+        .catalog--layout {
+          display: flex;
+          justify-content: center;
+        }
+      `}</style>
+    </Page>
+  );
+}
+// @ts-ignore
+Consumables.getInitialProps = async ({ reduxStore }) => {
+  await reduxStore.dispatch(loadCategories(EProductType.CONSUMABLE));
+  await reduxStore.dispatch(loadProducts(EProductType.CONSUMABLE));
+  const categories = getRootCategories(reduxStore.getState());
+  const filters = reduxStore.getState().filters.consumables;
+  const consumables = getFilteredRootConsumables(reduxStore.getState());
+  const sortOrder = reduxStore.getState().sorting.consumables;
   return {
-    categories: filteredCategories,
-    products: consumables,
+    categories,
+    filters,
+    consumables,
+    sortOrder,
+    setSortOrder: () => true,
+    setConsumablesPriceFilter,
   };
-};
-
-class Consumables extends React.Component<IProps, {}> {
-  static async getInitialProps ({ reduxStore }) {
-    const categories = await reduxStore.dispatch(loadCategories(EProductType.CONSUMABLE));
-    const products = await reduxStore.dispatch(loadProducts(EProductType.CONSUMABLE));
-
-    return { categories, products }
-  }
-
-  render() {
-    const { categories, products } = this.props;
-    const rootCategories = filter(categories, ['parent', null]);
-    const rootProducts = filter(products, ['category', null]);
-    return (
-      <Page title="3D Ручки">
-        <CategoryList categories={rootCategories} />
-        {!isEmpty(rootProducts) && (
-          <>
-            <div className="catalog--container">
-              <h2>Товары без категории</h2>
-            </div>
-            <ProductList products={rootProducts} />
-          </>
-        )}
-      </Page>
-    );
-  }
 }
 
-export default connect(mapStateToProps)(Consumables);
+const mapStateToProps = (state: IAppState) => ({
+  filters: state.filters.consumables,
+  categories: getRootCategories(state),
+  consumables: getFilteredRootConsumables(state),
+  sortOrder: state.sorting.consumables,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setConsumablesPriceFilter: (val) => dispatch(setConsumablesPriceFilter(val)),
+  setSortOrder: () => dispatch(setConsumablesSorting())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Consumables);

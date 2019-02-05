@@ -1,5 +1,5 @@
 import { generateProductMock } from '../utils';
-import catalogReducer from '../../reducers/catalogReducer';
+import categoriesReducer from '../../reducers/categoriesReducer';
 import { processProduct } from '../../reducers/utils';
 
 const initialState = {
@@ -16,17 +16,17 @@ const productsResponse = {
 
 describe('catalogReducer', () => {
   it('returns initial state', () => {
-    const result = catalogReducer(undefined, { type: 'ACTION' });
+    const result = categoriesReducer(undefined, { type: 'ACTION' });
     return expect(result).toEqual(initialState);
   });
 
   it('takes GET_PRODUCTS_START action', () => {
-    const result = catalogReducer(undefined, { type: 'GET_PRODUCTS_START' });
+    const result = categoriesReducer(undefined, { type: 'GET_PRODUCTS_START' });
     return expect(result).toEqual({ ...initialState, state: 'FETCHING' });
   })
 
   it('takes GET_PRODUCTS_SUCCESS action', () => {
-    const result = catalogReducer(undefined, { type: 'GET_PRODUCTS_SUCCESS', data: productsResponse });
+    const result = categoriesReducer(undefined, { type: 'GET_PRODUCTS_SUCCESS', data: productsResponse });
     return expect(result).toEqual({
       ...initialState,
       state: 'SUCCESS',
@@ -35,7 +35,7 @@ describe('catalogReducer', () => {
   })
 
   it('takes GET_PRODUCTS_FAIL action', () => {
-    const result = catalogReducer(undefined, { type: 'GET_PRODUCTS_FAIL' });
+    const result = categoriesReducer(undefined, { type: 'GET_PRODUCTS_FAIL' });
     return expect(result).toEqual({ ...initialState, state: 'FAIL' });
   })
 });

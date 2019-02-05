@@ -1,13 +1,18 @@
 import { combineReducers, Reducer } from 'redux';
 import { IAppState } from '../lib/models';
-import catalogReducer from './catalogReducer';
+import filtersReducer from './filtersReducer';
 import uiReducer from './uiReducer';
 import postsReducer from './postsReducer';
-import printerReducer from './printerReducer';
+import productsReducer from './productsReducer';
+import sortingReducer from './sortingReducer';
+import categoriesReducer from './categoriesReducer';
+
 
 export const reducers: Reducer<IAppState> = combineReducers<IAppState>({
+  filters: filtersReducer,
   posts: postsReducer,
-  printers: printerReducer,
-  catalog: catalogReducer,
+  products: productsReducer,
   ui: uiReducer,
+  sorting: sortingReducer,
+  categories: categoriesReducer,
 });

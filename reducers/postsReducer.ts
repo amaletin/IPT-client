@@ -16,7 +16,6 @@ import { processPosts, processPost } from './utils';
 const initialState:IPostsState = {
   current: {},
   data: [],
-  state: EState.IDLE,
 };
 
 const postsReducer: Reducer<IPostsState> = (state = initialState, action) => {

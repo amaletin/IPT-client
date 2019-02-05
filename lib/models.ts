@@ -1,4 +1,4 @@
-import { EState, EProductType } from './enums';
+import { EProductType } from './enums';
 import { Dictionary } from 'lodash';
 
 export interface IServerResponse<T> {
@@ -15,28 +15,53 @@ export interface IServerResponse<T> {
 }
 
 export interface IAppState {
+  filters: IFiltersState;
   posts: IPostsState;
-  printers: IPrinterState;
-  catalog: ICatalogState;
+  products: IProductsState;
+  categories: ICategoriesState;
+  sorting: ISortingState;
   ui: any;
 }
 
-export interface IStateChunk {
-  state: EState;
+export interface IProductsState{
+  allIds: number[];
+  byId: Dictionary<IProduct>;
 }
 
-export interface ICatalogState extends IStateChunk {
+export interface ICategoriesState{
   categories: ICategory[];
-  currentProductId: number;
-  products: IProduct[];
 }
 
-export interface IPrinterState extends IStateChunk {
-  currentProductId: number;
-  filters: IFilterState;
-  filtered: IPrinter[];
-  list: IPrinter[];
-  sortOrder: string;
+export interface IFiltersState {
+  printers: IPrintersFilters;
+  pens: IPensFilters;
+  scanners: IScannersFilters;
+  consumables: IConsumablesFilters;
+}
+
+export type IFiltersStateSlice = IPrintersFilters | IPensFilters | IScannersFilters | IConsumablesFilters;
+
+export interface ICommonFilter {
+  price: IFilterBlock<IPriceFilterBlock>;
+}
+
+export interface IFilterBlock<T> {
+  filter: T;
+  isOpen: boolean;
+}
+
+export interface IPrintersFilters extends ICommonFilter {
+  brands: IFilterBlock<Dictionary<IBrand>>;
+}
+
+export interface IPensFilters extends ICommonFilter {}
+export interface IScannersFilters extends ICommonFilter {}
+export interface IConsumablesFilters extends ICommonFilter {}
+
+
+export interface IPriceFilterBlock {
+  range: IPriceRange;
+  value: IPriceRange;
 }
 
 export interface IPriceRange {
@@ -44,17 +69,8 @@ export interface IPriceRange {
   min: number;
 }
 
-export interface IPriceFilter {
-  range: IPriceRange;
-  value: IPriceRange;
-}
 
-export interface IFilterState {
-  price: IPriceFilter;
-  brands: Dictionary<IBrand>;
-}
-
-export interface IPostsState extends IStateChunk {
+export interface IPostsState{
   current: IPost | {};
   data: IPost[];
 }
@@ -191,3 +207,9 @@ export interface IPost {
   title: string;
 }
 
+export interface ISortingState {
+  printers: string;
+  pens: string;
+  scanners: string;
+  consumables: string;
+}

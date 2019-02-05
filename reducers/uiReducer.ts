@@ -3,7 +3,7 @@ import {
   GET_PRODUCTS_START,
   GET_PRODUCTS_SUCCESS,
   GET_PRODUCTS_FAIL
-} from '../actions/catalogActions';
+} from '../actions/productsActions';
 import { IUIState } from '../lib/models';
 
 
