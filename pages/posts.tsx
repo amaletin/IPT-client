@@ -1,42 +1,33 @@
-import React from 'react';
-import { Dispatch } from 'redux';
+import { NextFunctionComponent } from 'next';
+import { values } from 'lodash';
 import { connect } from 'react-redux';
-import { IPost } from '../lib/models';
-import Page from '../components/common/Page';
+import { IAppState, IPost } from '../lib/models';
 import { loadPosts } from '../actions/postsActions';
-import { IAppState } from '../lib/models';
+import { getPosts } from '../selectors';
 
+import Page from '../components/common/Page';
 import PostList from '../components/posts/PostList';
 
 
 export interface IProps {
-  dispatch: Dispatch;
   posts: IPost[];
 }
 
-const mapStateToProps = (state: IAppState) => {
-  const { posts } = state;
-
-  return {
-    posts: posts.data,
-  };
-};
-
-class Posts extends React.Component<IProps, {}> {
-  static async getInitialProps ({ reduxStore }) {
-    const posts = await reduxStore.dispatch(loadPosts());
-
-    return { posts }
-  }
-
-  render() {
-    const { posts } = this.props;
-    return (
-      <Page title='Статьи'>
-        <PostList posts={posts} />
-      </Page>
-    );
-  }
+const Posts: NextFunctionComponent<IProps> = ({ posts }) => {
+  return (
+    <Page title='Статьи'>
+      <PostList posts={posts} />
+    </Page>
+  );
 }
+// @ts-ignore
+Posts.getInitialProps = async ({ reduxStore }) => {
+  await reduxStore.dispatch(loadPosts());
+  return { posts: values(getPosts(reduxStore.getState())) }
+}
+
+const mapStateToProps = (state: IAppState) => ({
+  posts: values(getPosts(state)),
+});
 
 export default connect(mapStateToProps)(Posts);

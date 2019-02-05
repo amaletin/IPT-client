@@ -7,7 +7,7 @@ import {
 } from '../actions/categoriesActions';
 import { EState } from '../lib/enums';
 import { ICategoriesState } from '../lib/models';
-import { processCategories } from './utils';
+import { processCategories } from '../lib/dataUtils';
 
 const initialState:ICategoriesState = {
   categories: [],

@@ -1,17 +1,17 @@
-import isEmpty from 'lodash/isEmpty';
-import replace from 'lodash/replace';
-import sortBy from 'lodash/sortBy';
+import { isEmpty, keyBy, replace } from 'lodash';
 
 import {
   ICategory,
-  IPrinter,
   IProduct,
-  IProductRaw,
   IPost,
+  IPostsState,
+} from '../lib/models';
+import {
+  IProductRaw,
   IPostRaw,
   ICategoryRaw,
   IServerResponse,
-} from '../lib/models';
+} from '../lib/modelsAPI';
 import { API_HOST } from '../configuration/app.config';
 
 export const processProducts = (products: IServerResponse<IProductRaw[]>): IProduct[]  => {
@@ -51,21 +51,16 @@ export const processCategory = (category: ICategoryRaw): ICategory => {
   }
 }
 
-export const processPosts = (posts: IServerResponse<IPostRaw[]>): IPost[]  => {
-  return posts.data.map((post: IPostRaw) => {
-    return processPost(post);
-  })
-}
+export const processPosts = (posts: IPostRaw[]): IPostsState  => ({
+  byId: keyBy(posts.map((post: IPostRaw) => processPost(post)), 'id'),
+  allIds: posts.map(p => p.id)
+})
 
 export const processPost = (post: IPostRaw): IPost => {
   return {
     ...post,
     body: replace(post.body, 'src="/storage', `src="${API_HOST}storage`),
     cover: !isEmpty(post.cover) && post.cover.data.name,
-    cover_caption: post.cover_caption,
+    coverCaption: post.cover_caption,
   }
-}
-
-export const updatePrintersSorting = (printers: IPrinter[], sorting: String): IPrinter[] => {
-  return sorting === 'DESC' ? sortBy(printers, ['price']).reverse() : sortBy(printers, ['price']);
 }

@@ -1,5 +1,7 @@
 import { Dispatch } from 'redux';
 import { fetchPosts, fetchPost } from '../lib/services';
+import { processPosts } from '../lib/dataUtils';
+import { IPostsState } from '../lib/models';
 
 export const GET_POSTS_START = 'GET_POSTS_START';
 export const GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS';
@@ -31,7 +33,8 @@ export const loadPosts = () => (dispatch: Dispatch) => {
   dispatch(getPostsStart());
   return fetchPosts().then(
     (response) => {
-      dispatch(getPostsSuccess(response))
+      const data: IPostsState = processPosts(response.data);
+      dispatch(getPostsSuccess(data))
     },
     error => dispatch(getPostsFail(error)),
   );
@@ -41,7 +44,8 @@ export const loadPost = (id: number) => (dispatch: Dispatch) => {
   dispatch(getPostStart());
   return fetchPost(id).then(
     (response) => {
-      dispatch(getPostSuccess(response.data))
+      const data: IPostsState = processPosts([response.data]);
+      dispatch(getPostSuccess(data))
     },
     error => dispatch(getPostFail(error))
   );

@@ -3,6 +3,7 @@ import { Dictionary, filter } from 'lodash';
 import { EProductType } from '../lib/enums';
 import {
   IProduct,
+  IPost,
   IAppState,
   IConsumablesFilters,
   IPensFilters,
@@ -24,6 +25,12 @@ const getPrinterFilters = (state: IAppState): IPrintersFilters => state.filters.
 const getPenFilters = (state: IAppState): IPensFilters => state.filters.pens;
 const getScannerFilters = (state: IAppState): IScannersFilters => state.filters.scanners;
 const getConsumableFilters = (state: IAppState): IConsumablesFilters => state.filters.consumables;
+export const getPosts = (state: IAppState): Dictionary<IPost> => state.posts.byId;
+
+export const getPostById = createSelector(
+  [getPosts, (state, props) => props],
+  (posts: IPost[], props) => posts[props.id]
+)
 
 export const getPrinters = createSelector(
   [ getProducts ],

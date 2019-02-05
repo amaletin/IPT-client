@@ -7,7 +7,7 @@ import {
 } from '../actions/productsActions';
 import { EState } from '../lib/enums';
 import { IProductsState } from '../lib/models';
-import { processProducts } from './utils';
+import { processProducts } from '../lib/dataUtils';
 
 const initialState:IProductsState = {
   allIds: [],

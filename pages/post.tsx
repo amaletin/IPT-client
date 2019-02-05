@@ -4,35 +4,29 @@ import { IAppState, IPost } from '../lib/models';
 import { loadPost } from '../actions/postsActions';
 import Page from '../components/common/Page';
 import PostDetails from '../components/posts/PostDetails';
+import { NextFunctionComponent } from 'next';
+import { getPostById } from '../selectors';
 
 export interface IProps {
+  id: string | string[];
   post: IPost;
 }
 
-const mapStateToProps = (state: IAppState) => {
-  const { posts } = state;
-
+const Post: NextFunctionComponent<IProps> = ({ post }) => (
+  <Page header={false}>
+    <PostDetails post={post} />
+  </Page>
+)
+// @ts-ignore
+Post.getInitialProps = async ({ reduxStore, query }) => {
+  const { id } = query;
+  await reduxStore.dispatch(loadPost(parseInt(id as string)));
   return {
-    post: posts.current,
-  };
-};
-
-class Post extends React.Component<IProps> {
-  static getInitialProps = async function ({ reduxStore, query }) {
-    const { id } = query;
-    const post = await reduxStore.dispatch(loadPost(id));
-
-    return { post }
-  }
-
-  render() {
-    const { post } = this.props;
-    return (  
-      <Page header={false}>
-        <PostDetails post={post} />
-      </Page>
-    )
+    id,
+    post: getPostById(reduxStore.getState(), { id }),
   }
 }
-
+const mapStateToProps = (state: IAppState, ownProps: IProps) => ({
+  post: getPostById(state, { id: ownProps.id }),
+});
 export default connect(mapStateToProps)(Post);
