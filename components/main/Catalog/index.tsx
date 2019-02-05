@@ -34,7 +34,7 @@ const Catalog = () => (
             </div>
           </div>
         </Link>
-        <Link href="/catalog/materials">
+        <Link href="/catalog/consumables">
           <div className="catalog--item">
             <div className="img-container">
               <img src="/static/images/materials.jpg" alt="Расходные материалы" />
