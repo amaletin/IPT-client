@@ -106,6 +106,7 @@ export interface IPrinter extends IProductCommon {
   extruders?: number;
   heatedBed?: boolean;
   layerResolution?: string;
+  technology?: string;
 }
 
 export interface IScanner extends IProductCommon {}

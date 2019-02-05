@@ -48,6 +48,11 @@ export interface IBrandRaw {
   sort: number;
 }
 
+export interface ITechnologyRaw {
+  id: number;
+  name: string;
+}
+
 export interface IProductRaw {
   brand?: IServerResponse<IBrandRaw>;
   chamber_height?: number;
@@ -64,6 +69,7 @@ export interface IProductRaw {
   picture?: IServerResponse<IFileRaw>;
   price?: number;
   type: any;
+  technology?: IServerResponse<ITechnologyRaw>;
 }
 
 export interface IPostRaw {

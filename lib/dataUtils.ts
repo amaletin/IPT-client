@@ -33,6 +33,7 @@ export const processProduct = (product: IProductRaw): IProduct => {
     layerResolution: product.layer_resolution,
     picture: product.picture && product.picture.data.thumbnail_url,
     type: product.type.data.id,
+    technology: product.technology ? product.technology.data.name : null,
   }
 }
 
