@@ -122,3 +122,8 @@ export const getFilteredConsumablesByCategoryId = createSelector(
     return filter(consumables, c => c.category === parseInt(props.id));
   }
 )
+
+export const getProductById = createSelector(
+  [getProducts, (_, props) => props],
+  (products: Dictionary<IProduct>, props) => products[props.id]
+)

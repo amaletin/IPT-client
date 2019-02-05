@@ -1,39 +1,35 @@
 import isEmpty from 'lodash/isEmpty';
-import React from 'react';
+import { NextFC } from 'next';
 import { connect } from 'react-redux';
-import { loadProduct } from '../../actions/categoriesActions';
+import { loadProduct } from '../../actions/productsActions';
 import { IAppState, IProduct } from '../../lib/models';
 import Page from '../../components/common/Page';
 import ProductDetails from '../../components/catalog/ProductDetails';
+import { getProductById } from '../../selectors';
 
 export interface IProps {
-  id: number;
+  id: string | string[];
   product: IProduct;
 }
 
-const mapStateToProps = (state: IAppState) => {
-  const { byId } = state.products;
-  const product = byId[1];
-
-  return { product };
-};
-
-class Category extends React.Component<IProps> {
-  static getInitialProps = async function ({ reduxStore, query }) {
-    const { id } = query;
-    const product = await reduxStore.dispatch(loadProduct(id));
-
-    return { id, product }
-  }
-
-  render() {
-    const { product } = this.props;
-    return (
-      <Page header={false}>
-        {!isEmpty(product) && <ProductDetails product={product} />}
-      </Page>
-    )
+const Product: NextFC<IProps> = ({ id, product }) => (
+  <Page header={false}>
+    {!isEmpty(product) && <ProductDetails product={product} />}
+  </Page>
+)
+// @ts-ignore
+Product.getInitialProps = async ({ reduxStore, query }) => {
+  const { id } = query;
+  await reduxStore.dispatch(loadProduct(parseInt(id as string)));
+  return {
+    id,
+    product: getProductById(reduxStore.getState(), { id }),
   }
 }
 
-export default connect(mapStateToProps)(Category);
+const mapStateToProps = (state: IAppState, ownProps: IProps) => ({
+  id: ownProps.id,
+  product: getProductById(state, { id: ownProps.id })
+});
+
+export default connect(mapStateToProps)(Product);
