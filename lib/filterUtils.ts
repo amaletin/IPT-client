@@ -104,7 +104,7 @@ const updateCommonFilters = (state, products) => {
   }
 }
 
-export const updateFilters = (state: IFiltersState, products: IProduct[]): IFiltersState => {
+export const updateFilters = (state: IFiltersState, products: Dictionary<IProduct>): IFiltersState => {
   return {
     printers: updatePrintersFilters(state.printers, filter(products, p => p.type === EProductType.PRINTER)),
     pens: updateCommonFilters(state.pens, filter(products, p => p.type === EProductType.PEN)),

@@ -93,8 +93,7 @@ const filtersReducer: Reducer<IFiltersState> = (state = initialState, action) =>
         }
       }
     case GET_PRODUCTS_SUCCESS:
-      const products = processProducts(action.data);
-      return updateFilters(state, products);
+      return updateFilters(state, action.data.byId);
     default: return state;
   }
 };

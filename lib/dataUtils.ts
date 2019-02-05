@@ -1,4 +1,4 @@
-import { isEmpty, keyBy, replace } from 'lodash';
+import { isEmpty, keyBy, map, replace } from 'lodash';
 
 import {
   ICategory,
@@ -6,20 +6,19 @@ import {
   IPost,
   IPostsState,
   ICategoriesState,
+  IProductsState,
 } from '../lib/models';
 import {
   IProductRaw,
   IPostRaw,
   ICategoryRaw,
-  IServerResponse,
 } from '../lib/modelsAPI';
 import { API_HOST } from '../configuration/app.config';
 
-export const processProducts = (products: IServerResponse<IProductRaw[]>): IProduct[]  => {
-  return products.data.map((product: IProductRaw) => {
-    return processProduct(product);
-  })
-}
+export const processProducts = (products: IProductRaw[]): IProductsState  => ({
+  byId:  keyBy(products.map((p: IProductRaw) => processProduct(p)), 'id'),
+  allIds: products.map(p => p.id),
+})
 
 export const processProduct = (product: IProductRaw): IProduct => {
   return {
