@@ -15,7 +15,8 @@ export interface IProductsState{
 }
 
 export interface ICategoriesState{
-  categories: ICategory[];
+  allIds: number[];
+  byId: Dictionary<ICategory>;
 }
 
 export interface IFiltersState {

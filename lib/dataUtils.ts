@@ -5,6 +5,7 @@ import {
   IProduct,
   IPost,
   IPostsState,
+  ICategoriesState,
 } from '../lib/models';
 import {
   IProductRaw,
@@ -36,11 +37,10 @@ export const processProduct = (product: IProductRaw): IProduct => {
   }
 }
 
-export const processCategories = (categories: IServerResponse<ICategoryRaw[]>): ICategory[]  => {
-  return categories.data.map((category: ICategoryRaw) => {
-    return processCategory(category);
-  })
-}
+export const processCategories = (categories: ICategoryRaw[]): ICategoriesState  => ({
+  byId: keyBy(categories.map((c: ICategoryRaw) => processCategory(c)), 'id'),
+  allIds: categories.map(c => c.id)
+})
 
 export const processCategory = (category: ICategoryRaw): ICategory => {
   return {

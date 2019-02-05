@@ -20,7 +20,7 @@ import {
 } from '../lib/filterUtils';
 
 const getProducts = (state: IAppState): Dictionary<IProduct> => state.products.byId;
-const getCategories = (state: IAppState): ICategory[] => state.categories.categories;
+const getCategories = (state: IAppState): Dictionary<ICategory> => state.categories.byId;
 const getPrinterFilters = (state: IAppState): IPrintersFilters => state.filters.printers;
 const getPenFilters = (state: IAppState): IPensFilters => state.filters.pens;
 const getScannerFilters = (state: IAppState): IScannersFilters => state.filters.scanners;
@@ -104,20 +104,20 @@ export const getFilteredConsumables = createSelector(
 
 export const getRootCategories = createSelector(
   [ getCategories ],
-  (categories: ICategory[]) => {
+  (categories: Dictionary<ICategory>) => {
     return filter(categories, c => c.parent === null);
   }
 )
 
 export const getCategoriesByParentId = createSelector(
-  [getCategories, (state, props) => props],
+  [getCategories, (_, props) => props],
   (categories: ICategory[], props) => {
     return filter(categories, c => c.parent === parseInt(props.id));
   }
 )
 
 export const getFilteredConsumablesByCategoryId = createSelector(
-  [getConsumables, (state, props) => props],
+  [getConsumables, (_, props) => props],
   (consumables: IConsumable[], props) => {
     return filter(consumables, c => c.category === parseInt(props.id));
   }
