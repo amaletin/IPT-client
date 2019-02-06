@@ -1,32 +1,31 @@
 import { NextFunctionComponent } from 'next';
-import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { setFilter } from '../../actions/filterActions';
 import { loadProducts } from '../../actions/productsActions';
-import { setScannersPriceFilter } from '../../actions/filterActions';
 import { setScannersSorting } from '../../actions/sortingActions';
-import Page from '../../components/common/Page';
-import ProductList from '../../components/catalog/ProductList';
 import ProductFilters from '../../components/catalog/ProductFilters';
-import { EProductType } from '../../lib/enums';
-import { IAppState, IProduct, IScannersFilters } from '../../lib/models';
+import ProductList from '../../components/catalog/ProductList';
+import Page from '../../components/common/Page';
+import { EFilterType, EProductType, EProductTypeString } from '../../lib/enums';
+import { IAppState, IPriceRange, IProduct, IScannersFilters } from '../../lib/models';
 import { getFilteredScanners } from '../../selectors';
 
 export interface IProps {
   filters: IScannersFilters;
   scanners: IProduct[];
-  setScannersPriceFilter: (val) => void;
+  onSetFilter: (val: IPriceRange, state: IScannersFilters, filterType: EFilterType) => void;
   setSortOrder: () => void;
   sortOrder: string;
 }
 
-const Scanners: NextFunctionComponent<IProps> = ({ filters, scanners, setScannersPriceFilter, setSortOrder, sortOrder }) => {
-  const setPriceFilter = (val) => setScannersPriceFilter(val);
+const Scanners: NextFunctionComponent<IProps> = ({ filters, onSetFilter, scanners, setSortOrder, sortOrder }) => {
   return (
     <Page title="3D Сканеры">
       <div className="catalog--layout container">
         <ProductFilters
           filters={filters}
-          setPriceFilter={setPriceFilter}
+          setFilter={onSetFilter}
           type={EProductType.SCANER}
         />
         <ProductList
@@ -47,27 +46,26 @@ const Scanners: NextFunctionComponent<IProps> = ({ filters, scanners, setScanner
 // @ts-ignore
 Scanners.getInitialProps = async ({ reduxStore }) => {
   await reduxStore.dispatch(loadProducts(EProductType.SCANER));
-  const filters = reduxStore.getState().filters.scanners;
-  const scanners = getFilteredScanners(reduxStore.getState());
-  const sortOrder = reduxStore.getState().sorting.scanners;
   return {
-    filters,
-    scanners,
-    sortOrder,
-    setSortOrder: () => true,
-    setScannersPriceFilter,
+    filters: reduxStore.getState().filters.scanners,
+    onSetFilter: (val: IPriceRange, state: IScannersFilters, filterType: EFilterType) =>
+      reduxStore.dispatch(setFilter(val, state, filterType, EProductTypeString.SCANER)),
+    scanners: getFilteredScanners(reduxStore.getState()),
+    setSortOrder: () => reduxStore.dispatch(setScannersSorting()),
+    sortOrder: reduxStore.getState().sorting.scanners,
   };
-}
+};
 
 const mapStateToProps = (state: IAppState) => ({
   filters: state.filters.scanners,
   scanners: getFilteredScanners(state),
   sortOrder: state.sorting.scanners,
-})
+});
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setScannersPriceFilter: (val) => dispatch(setScannersPriceFilter(val)),
-  setSortOrder: () => dispatch(setScannersSorting())
+  onSetFilter: (val: IPriceRange, state: IScannersFilters, filterType: EFilterType) =>
+    dispatch(setFilter(val, state, filterType, EProductTypeString.SCANER)),
+  setSortOrder: () => dispatch(setScannersSorting()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Scanners);

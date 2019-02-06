@@ -1,30 +1,26 @@
-export const SET_PRINTERS_PRICE_FILTER = 'SET_PRINTERS_PRICE_FILTER';
-export const SET_PRINTERS_BRAND_FILTER = 'SET_PRINTERS_BRAND_FILTER';
-export const SET_PENS_PRICE_FILTER = 'SET_PENS_PRICE_FILTER';
-export const SET_SCANNERS_PRICE_FILTER = 'SET_SCANNERS_PRICE_FILTER';
-export const SET_CONSUMABLES_PRICE_FILTER = 'SET_CONSUMABLES_PRICE_FILTER';
+import { EFilterType, EProductTypeString } from '../lib/enums';
+import {
+  setBrandsFilter,
+  setPriceFilter,
+} from '../lib/filterUtils';
+
+export const SET_FILTER_SUCCESS = 'SET_FILTER_SUCCESS';
+export const SET_FILTER_FAILURE = 'SET_FILTER_FAILURE';
+
 export const SET_PRINTERS_BRAND_OPEN = 'SET_PRINTERS_BRAND_OPEN';
 
-export const setPrintersPriceFilter = (data) => {
-  return { type: SET_PRINTERS_PRICE_FILTER, data }
-}
-
-export const setPrintersBrandFilter = (data) => {
-  return { type: SET_PRINTERS_BRAND_FILTER, data }
-}
-
-export const setPensPriceFilter = (data) => {
-  return { type: SET_PENS_PRICE_FILTER, data }
-}
-
-export const setScannersPriceFilter = (data) => {
-  return { type: SET_SCANNERS_PRICE_FILTER, data }
-}
-
-export const setConsumablesPriceFilter = (data) => {
-  return { type: SET_CONSUMABLES_PRICE_FILTER, data }
-}
-
 export const setPrintersBrandFilterOpen = () => {
-  return { type: SET_PRINTERS_BRAND_OPEN }
-}
+  return { type: SET_PRINTERS_BRAND_OPEN };
+};
+
+export const setFilter = (value, state, filterType: EFilterType, productType: EProductTypeString) => {
+  const action = { type: SET_FILTER_SUCCESS, data: state, filterType, productType };
+  switch (filterType) {
+    case EFilterType.PRICE:
+      return { ...action, data: setPriceFilter(state, value) };
+    case EFilterType.BRAND:
+      return { ...action, data: setBrandsFilter(state, value) };
+    default:
+      return { ...action, type: SET_FILTER_FAILURE};
+  }
+};

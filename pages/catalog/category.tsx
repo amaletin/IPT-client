@@ -3,28 +3,29 @@ import { NextFunctionComponent } from 'next';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { loadCategories } from '../../actions/categoriesActions';
+import { setFilter } from '../../actions/filterActions';
 import { loadProducts } from '../../actions/productsActions';
-import { setConsumablesPriceFilter } from '../../actions/filterActions';
 import { setConsumablesSorting } from '../../actions/sortingActions';
-import { EProductType } from '../../lib/enums';
-import { IAppState, ICategory, IProduct, IConsumablesFilters } from '../../lib/models';
-import Page from '../../components/common/Page';
 import CategoryList from '../../components/catalog/CategoryList';
-import ProductList from '../../components/catalog/ProductList';
 import ProductFilters from '../../components/catalog/ProductFilters';
+import ProductList from '../../components/catalog/ProductList';
+import Page from '../../components/common/Page';
+import { EFilterType, EProductType, EProductTypeString } from '../../lib/enums';
+import { IAppState, ICategory, IConsumablesFilters, IPriceRange, IProduct } from '../../lib/models';
 import { getCategoriesByParentId, getFilteredConsumablesByCategoryId } from '../../selectors';
 
 export interface IProps {
-  filters: IConsumablesFilters
-  id: string | string[];
-  consumables: IProduct[];
   categories: ICategory[];
-  sortOrder: string;
+  consumables: IProduct[];
+  filters: IConsumablesFilters;
+  id: string | string[];
+  onSetFilter: (val: IPriceRange, state: IConsumablesFilters, filterType: EFilterType) => void;
   setSortOrder: () => void;
-  setConsumablesPriceFilter: (val) => void;
+  sortOrder: string;
 }
 
-const Category: NextFunctionComponent<IProps> = ({ categories, consumables, filters, setConsumablesPriceFilter, setSortOrder, sortOrder }) => {
+const Category: NextFunctionComponent<IProps> = ({ categories, consumables, filters,
+                                                  onSetFilter, setSortOrder, sortOrder }) => {
   return (
     <Page header={false}>
       <CategoryList categories={categories} />
@@ -32,7 +33,7 @@ const Category: NextFunctionComponent<IProps> = ({ categories, consumables, filt
         <div className="catalog--layout container">
           <ProductFilters
             filters={filters}
-            setPriceFilter={setConsumablesPriceFilter}
+            setFilter={onSetFilter}
             type={EProductType.CONSUMABLE}
           />
           <ProductList
@@ -49,37 +50,36 @@ const Category: NextFunctionComponent<IProps> = ({ categories, consumables, filt
         }
       `}</style>
     </Page>
-  )
-}
+  );
+};
 // @ts-ignore
 Category.getInitialProps = async ({ reduxStore, query }) => {
   const { id } = query;
   await reduxStore.dispatch(loadCategories(EProductType.CONSUMABLE));
   await reduxStore.dispatch(loadProducts(EProductType.CONSUMABLE));
-  const filters = reduxStore.getState().filters.consumables;
-  const state = reduxStore.getState();
-  const sortOrder = reduxStore.getState().sorting.consumables;
   return {
-    categories: getCategoriesByParentId(state, { id }),
-    consumables: getFilteredConsumablesByCategoryId(state, { id }),
-    filters,
+    categories: getCategoriesByParentId(reduxStore.getState(), { id }),
+    consumables: getFilteredConsumablesByCategoryId(reduxStore.getState(), { id }),
+    filters: reduxStore.getState().filters.consumables,
     id,
-    sortOrder,
-    setSortOrder: () => true,
-    setConsumablesPriceFilter,
-  }
-}
+    onSetFilter: (val: IPriceRange, state: IConsumablesFilters, filterType: EFilterType) =>
+      reduxStore.dispatch(setFilter(val, state, filterType, EProductTypeString.CONSUMABLE)),
+    setSortOrder: () => reduxStore.dispatch(setConsumablesSorting()),
+    sortOrder: reduxStore.getState().sorting.consumables,
+  };
+};
 
 const mapStateToProps = (state: IAppState, ownProps: IProps) => ({
-  filters: state.filters.consumables,
   categories: getCategoriesByParentId(state, ownProps),
   consumables: getFilteredConsumablesByCategoryId(state, ownProps),
+  filters: state.filters.consumables,
   sortOrder: state.sorting.consumables,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setConsumablesPriceFilter: (val) => dispatch(setConsumablesPriceFilter(val)),
-  setSortOrder: () => dispatch(setConsumablesSorting())
+  onSetFilter: (val: IPriceRange, state: IConsumablesFilters, filterType: EFilterType) =>
+    dispatch(setFilter(val, state, filterType, EProductTypeString.CONSUMABLE)),
+  setSortOrder: () => dispatch(setConsumablesSorting()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Category);

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import InputRange from 'react-input-range';
-import { IPriceFilterBlock, IFilterBlock, IPriceRange } from '../../../lib/models';
+import { EFilterType } from '../../../lib/enums';
+import { IFilterBlock, IPriceFilterBlock, IPriceRange } from '../../../lib/models';
 
 interface IProps {
   filters: IFilterBlock<IPriceFilterBlock>;
-  setPriceFilter: (val) => void;
+  setFilter: (val: IPriceRange, state: IFilterBlock<IPriceFilterBlock>, filterType: EFilterType.PRICE) => void;
 }
 
 interface IState {
@@ -13,79 +14,76 @@ interface IState {
 }
 
 class PriceFilter extends React.Component<IProps, IState> {
-  constructor(props) {
-    super(props);
+  public readonly state = {
+    max: this.props.filters.filter.value.max ? this.props.filters.filter.value.max.toString() : '',
+    min: this.props.filters.filter.value.min ? this.props.filters.filter.value.min.toString() : '',
+  };
 
-    this.state = {
-      min: this.props.filters.filter.value.min.toString(),
-      max: this.props.filters.filter.value.max.toString(),
-    }
+  private handleSetFilter = (val: IPriceRange) => this.props.setFilter(val, this.props.filters, EFilterType.PRICE);
+
+  private handleChangeMin = (e: SyntheticEvent) => {
+    this.setState({ ...this.state, min: e.currentTarget.nodeValue });
   }
 
-  handleChangeMin = (e) => {
-    this.setState({ ...this.state, min: e.target.value })
+  private handleChangeMax = (e: SyntheticEvent) => {
+    this.setState({ ...this.state, max: e.currentTarget.nodeValue });
   }
 
-  handleChangeMax = (e) => {
-    this.setState({ ...this.state, max: e.target.value })
-  }
-
-  handleUpdateMin = (e) => {
-    const { filters, setPriceFilter } = this.props;
-    const { filter } = filters;
-    const data = parseInt(e.target.value);
+  private handleUpdateMin = (e: SyntheticEvent) => {
+    const { filter } = this.props.filters;
+    const data = parseInt(e.currentTarget.nodeValue, 10);
     this.setState({
       ...this.state,
       min: this.validateMin(data, filter).toString(),
     }, () => {
-      setPriceFilter({
-        min: parseInt(this.state.min),
-        max: parseInt(this.state.max)
+      this.handleSetFilter({
+        max: parseInt(this.state.max, 10),
+        min: parseInt(this.state.min, 10),
       });
-    })
+    });
   }
 
-  handleUpdateMax = (e) => {
-    const { filters, setPriceFilter } = this.props;
-    const { filter } = filters;
-    const data = parseInt(e.target.value);
+  private handleUpdateMax = (e: SyntheticEvent) => {
+    const { filter } = this.props.filters;
+    const data = parseInt(e.currentTarget.nodeValue, 10);
     this.setState({
       ...this.state,
       max: this.validateMax(data, filter).toString(),
     }, () => {
-      setPriceFilter({
-        min: parseInt(this.state.min),
-        max: parseInt(this.state.max)
+      this.handleSetFilter({
+        max: parseInt(this.state.max, 10),
+        min: parseInt(this.state.min, 10),
       });
-    })
+    });
   }
 
-  validateMin = (min, filter) => {
+  private validateMin = (min: number, filter: IPriceFilterBlock) => {
     const { range, value: { max } } = filter;
     return (min >= range.min && min < max) ? min : range.min;
   }
 
-  validateMax = (max, filter) => {
+  private validateMax = (max: number, filter: IPriceFilterBlock) => {
     const { range, value: { min } } = filter;
     return (max > min && max <= range.max) ? max : range.max;
   }
 
-  handleSlide = (data: IPriceRange) => {
+  private handleSlide = (data: IPriceRange) => {
     this.setState({
-      min: data.min.toString(),
       max: data.max.toString(),
+      min: data.min.toString(),
     }, () => {
-      this.props.setPriceFilter({
-        min: parseInt(this.state.min),
-        max: parseInt(this.state.max)
+      this.handleSetFilter({
+        max: parseInt(this.state.max, 10),
+        min: parseInt(this.state.min, 10),
       });
-    })
+    });
   }
 
-  render() {
-    const { filters, setPriceFilter } = this.props;
-    const { filter } = filters;
-    const priceFilterDisabled = filter.range.min === null || filter.range.max === null || filter.range.min === filter.range.max; 
+  public render() {
+    const { filter } = this.props.filters;
+    const priceFilterDisabled = filter.range.min === null
+                              || filter.range.max === null
+                              || filter.range.min === filter.range.max;
     return (
       <div className="filters--block">
         <div className="filters--block--tilte">
@@ -109,13 +107,7 @@ class PriceFilter extends React.Component<IProps, IState> {
             />
           </div>
           <div className="price--block--slider">
-            {priceFilterDisabled ? (
-              <InputRange
-                disabled={priceFilterDisabled}
-                value={0}
-                onChange={setPriceFilter}
-              />
-            ) : (
+            {!priceFilterDisabled && (
               <InputRange
                 disabled={priceFilterDisabled}
                 maxValue={filter.range.max}
@@ -131,7 +123,7 @@ class PriceFilter extends React.Component<IProps, IState> {
           .filters--block--inner {
             padding: 20px;
           }
-  
+
           .price--block--inputs {
             box-sizing: border-box;
             display: flex;

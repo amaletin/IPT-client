@@ -1,32 +1,31 @@
 import { NextFunctionComponent } from 'next';
-import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { setFilter } from '../../actions/filterActions';
 import { loadProducts } from '../../actions/productsActions';
-import { setPensPriceFilter } from '../../actions/filterActions';
 import { setPensSorting } from '../../actions/sortingActions';
-import Page from '../../components/common/Page';
-import ProductList from '../../components/catalog/ProductList';
 import ProductFilters from '../../components/catalog/ProductFilters';
-import { EProductType } from '../../lib/enums';
-import { IAppState, IProduct, IPensFilters } from '../../lib/models';
+import ProductList from '../../components/catalog/ProductList';
+import Page from '../../components/common/Page';
+import { EFilterType, EProductType, EProductTypeString } from '../../lib/enums';
+import { IAppState, IPensFilters, IPriceFilterBlock, IPriceRange, IProduct } from '../../lib/models';
 import { getFilteredPens } from '../../selectors';
 
 export interface IProps {
   filters: IPensFilters;
   pens: IProduct[];
-  setPensPriceFilter: (val) => void;
+  onSetFilter: (val: IPriceRange, state: IPriceFilterBlock, filterType: EFilterType) => void;
   setSortOrder: () => void;
   sortOrder: string;
 }
 
-const Pens: NextFunctionComponent<IProps> = ({ filters, pens, setPensPriceFilter, setSortOrder, sortOrder }) => {
-  const setPriceFilter = (val) => setPensPriceFilter(val);
+const Pens: NextFunctionComponent<IProps> = ({ filters, onSetFilter, pens, setSortOrder, sortOrder }) => {
   return (
     <Page title="3D Ручки">
       <div className="catalog--layout container">
         <ProductFilters
           filters={filters}
-          setPriceFilter={setPriceFilter}
+          setFilter={onSetFilter}
           type={EProductType.PEN}
         />
         <ProductList
@@ -47,27 +46,26 @@ const Pens: NextFunctionComponent<IProps> = ({ filters, pens, setPensPriceFilter
 // @ts-ignore
 Pens.getInitialProps = async ({ reduxStore }) => {
   await reduxStore.dispatch(loadProducts(EProductType.PEN));
-  const filters = reduxStore.getState().filters.pens;
-  const pens = getFilteredPens(reduxStore.getState());
-  const sortOrder = reduxStore.getState().sorting.pens;
   return {
-    filters,
-    pens,
-    sortOrder,
-    setSortOrder: () => true,
-    setPensPriceFilter,
+    filters: reduxStore.getState().filters.pens,
+    onSetFilter: (val: IPriceRange, state: IPriceFilterBlock, filterType: EFilterType) =>
+      reduxStore.dispatch(setFilter(val, state, filterType, EProductTypeString.PEN)),
+    pens: getFilteredPens(reduxStore.getState()),
+    setSortOrder: () => reduxStore.dispatch(setPensSorting()),
+    sortOrder: reduxStore.getState().sorting.pens,
   };
-}
+};
 
 const mapStateToProps = (state: IAppState) => ({
   filters: state.filters.pens,
   pens: getFilteredPens(state),
   sortOrder: state.sorting.pens,
-})
+});
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setPensPriceFilter: (val) => dispatch(setPensPriceFilter(val)),
-  setSortOrder: () => dispatch(setPensSorting())
+  onSetFilter: (val: IPriceRange, state: IPriceFilterBlock, filterType: EFilterType) =>
+    dispatch(setFilter(val, state, filterType, EProductTypeString.PEN)),
+  setSortOrder: () => dispatch(setPensSorting()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pens);

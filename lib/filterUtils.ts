@@ -114,11 +114,10 @@ export const updateFilters = (state: IFiltersState, products: Dictionary<IProduc
 }
 
 export const setPriceFilter = (state: IFilterBlock<IPriceFilterBlock>, newData: IPriceRange): IFilterBlock<IPriceFilterBlock> => {
-  // const validFilter = validateFilterValue(newData, state.filter.range);
   return { ...state, filter: { ...state.filter,  value: newData} };
 }
 
-export const setBrandsFilter = (state: IFilterBlock<Dictionary<IBrand>>, newData): IFilterBlock<Dictionary<IBrand>> => {
+export const setBrandsFilter = (state: IFilterBlock<Dictionary<IBrand>>, newData: number): IFilterBlock<Dictionary<IBrand>> => {
   const brands = map(state.filter, (b) => {
     if(b.id === newData) {
       b.selected = !b.selected;

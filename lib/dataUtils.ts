@@ -1,4 +1,4 @@
-import { isEmpty, keyBy, map, replace } from 'lodash';
+import { isEmpty, keyBy, replace } from 'lodash';
 
 import {
   ICategory,
