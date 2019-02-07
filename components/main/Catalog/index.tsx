@@ -1,6 +1,5 @@
 import Link from 'next/link';
-
-import { colors, gradients, shadows, breakpoints } from '../../../lib/styleguide';
+import { breakpoints, colors, gradients, shadows } from '../../../lib/styleguide';
 
 const Catalog = () => (
   <div className="catalog">
@@ -116,7 +115,7 @@ const Catalog = () => (
         text-align: center;
         text-transform: uppercase;
       }
-                
+
       @media screen and (min-width: ${ breakpoints.md }px) {
         .catalog--heading {
           background-image: url('/static/images/catalog_header_bg.png');

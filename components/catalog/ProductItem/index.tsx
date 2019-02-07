@@ -8,10 +8,10 @@ export interface IProps {
 }
 
 const pictureUrl = (product: IProduct) => {
-  if(isEmpty(product.picture)) {
-    return '/static/images/image-placeholder.png'
+  if (isEmpty(product.picture)) {
+    return '/static/images/image-placeholder.png';
   }
-  return `https://3dapi.amaletin.ru${product.picture}`
+  return `https://3dapi.amaletin.ru${product.picture}`;
 };
 
 const ProductItem: React.FC<IProps> = ({ product }) => (
@@ -32,8 +32,11 @@ const ProductItem: React.FC<IProps> = ({ product }) => (
         box-sizing: border-box;
         padding: 5px;
         min-width: 290px;
-        -webkit-box-shadow: -1px 0 0 0 #e6e6e6 inset, 0 -1px 0 0 #e6e6e6 inset, -1px -1px 0 0 #e6e6e6 inset, -1px 0 0 0 #e6e6e6, 0 -1px 0 0 #e6e6e6;
-        box-shadow: -1px 0 0 0 #e6e6e6 inset, 0 -1px 0 0 #e6e6e6 inset, -1px -1px 0 0 #e6e6e6, -1px 0 0 0 #e6e6e6, 0 -1px 0 0 #e6e6e6;
+        box-shadow: -1px 0 0 0 #e6e6e6 inset,
+                    0 -1px 0 0 #e6e6e6 inset,
+                    -1px -1px 0 0 #e6e6e6,
+                    -1px 0 0 0 #e6e6e6,
+                    0 -1px 0 0 #e6e6e6;
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         overflow: hidden;

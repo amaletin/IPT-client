@@ -1,15 +1,16 @@
+import { noop } from 'lodash';
 import Link from 'next/link';
 import React from 'react';
 import routes from '../../../lib/routes';
-import { canUseDOM } from '../../../lib/utils';
 import { colors } from '../../../lib/styleguide';
+import { canUseDOM } from '../../../lib/utils';
 
 export interface IProps {
   item?: any;
   parent?: any;
 }
 
-const renderNav = items => items && items.map((item) => {
+const renderNav = (items) => items && items.map((item) => {
   return item.children
     ? <NavItem key={item.name} item={item} parent /> : <NavItem key={item.name} item={item} />;
 });
@@ -19,19 +20,19 @@ const NavItem: React.FC<IProps> = ({ item = {}, parent = false }) => {
   return (
     <li>
       <Link href={item.route}>
-        <a>{ item.name }</a>
+        <a>{item.name}</a>
       </Link>
       {
         parent && (
           <ul className="mobile-nav--inner">
-            { renderedChildren }
+            {renderedChildren}
           </ul>)
       }
       <style jsx>{`
         li {
           margin-bottom: 5px;
         }
-    
+
         li a {
           color: ${ colors.white };
           font-size: 20px;
@@ -53,12 +54,13 @@ export interface IMobileNavProps {
 }
 
 class MobileNav extends React.Component<IMobileNavProps> {
-  componentWillUnmount() {
-    canUseDOM && document.body.classList.remove('locked');
+  public componentWillUnmount() {
+    if (canUseDOM) {
+      document.body.classList.remove('locked');
+    }
   }
 
-  
-  render() {
+  public render() {
     const { onToggleMobileNav } = this.props;
     const dynamicStyle = {
       top: this.props.show ? '0' : '-100vh',
@@ -67,14 +69,14 @@ class MobileNav extends React.Component<IMobileNavProps> {
       <div
         className="mobile-nav--container"
         style={dynamicStyle}
-        onScroll={() => undefined}
-        >
+        onScroll={noop}
+      >
         <div
           className="close"
           onClick={onToggleMobileNav}
           role="button"
           tabIndex={0}
-          >
+        >
           <img src="/static/images/icons/close.svg" alt="Закрыть меню" />
         </div>
         <div className="mobile-nav">
@@ -115,6 +117,6 @@ class MobileNav extends React.Component<IMobileNavProps> {
       </div>
     );
   }
-};
+}
 
 export default MobileNav;

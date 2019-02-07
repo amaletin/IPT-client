@@ -6,7 +6,7 @@ export interface IProps {
   categories: ICategory[];
 }
 
-const CategoryList: React.FC<IProps> = ({ categories }) => {  
+const CategoryList: React.FC<IProps> = ({ categories }) => {
   return (
     <>
       <div className="catalog--container">
@@ -17,15 +17,15 @@ const CategoryList: React.FC<IProps> = ({ categories }) => {
           && map(categories, (category: ICategory) => {
             return (
               <CategoryItem
-              category={category}
-              key={category.id}
+                category={category}
+                key={category.id}
               />
-              )
+              );
             })
           }
       </div>
     </>
   );
-}
+};
 
 export default CategoryList;

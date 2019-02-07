@@ -7,7 +7,7 @@ interface IProps {
 }
 
 const PostList: React.FC<IProps> = ({ posts }) => {
-  const renderedPosts = map(posts, post => <PostItem key={post.id} post={post} />);
+  const renderedPosts = map(posts, (post) => <PostItem key={post.id} post={post} />);
   return (
     <div className="posts--container">
       {renderedPosts}

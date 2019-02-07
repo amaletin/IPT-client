@@ -12,7 +12,7 @@ const CatalogTools: React.FC<IProps> = ({ onChangeSorting, sortOrder }) => (
       <div
         className="catalog-tools--sorting"
         onClick={onChangeSorting}
-       >
+      >
         <span>ЦЕНА</span>
         <span className="sort--icon">
           <SortIcon direction={sortOrder} width="13px" />

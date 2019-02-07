@@ -1,12 +1,12 @@
 import isEmpty from 'lodash/isEmpty';
 import map from 'lodash/map';
 import { EFilterType, EProductType } from '../../../lib/enums';
-import { IFiltersStateSlice, IPrintersFilters } from '../../../lib/models';
+import { ICommonFilter, IPrintersFilters } from '../../../lib/models';
 import { breakpoints, shadows } from '../../../lib/styleguide';
 import PriceFilter from '../PriceFilter';
 
 interface IProps {
-  filters: IFiltersStateSlice;
+  filters: IPrintersFilters | ICommonFilter;
   setFilter: (val, state, filterType) => void;
   setPrintersBrandFilterOpen?: () => void;
   type: EProductType;

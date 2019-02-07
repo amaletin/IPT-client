@@ -1,11 +1,11 @@
-import Carousel from '../../carousel/Carousel';
-import Button from '../../common/Button';
 import {
   breakpoints,
   colors,
   fonts,
   gradients,
 } from '../../../lib/styleguide';
+import Carousel from '../../carousel/Carousel';
+import Button from '../../common/Button';
 
 const images = [
   { url: '/static/images/order-slider.jpg' },
@@ -28,10 +28,10 @@ const Service = () => (
         <div className="service--content--text">
           <h2>Lorem Ipsum Dolor sit amet</h2>
           <p>
-            На основании 3D-модели можно создать любой прототип здания, автомобиля, 
-            жилого комплекса или самой маленькой шестеренки. 
-            Прототип может как повторять лишь общие очертания, 
-            так и детализированную сборную модель.
+            На основании 3D-модели можно создать любой прототип здания, автомобиля,
+             жилого комплекса или самой маленькой шестеренки.
+             Прототип может как повторять лишь общие очертания,
+             так и детализированную сборную модель.
           </p>
           <Button to="/">Мы поможем</Button>
         </div>

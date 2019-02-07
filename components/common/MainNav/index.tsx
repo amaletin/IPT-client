@@ -7,7 +7,7 @@ export interface IProps {
   parent?: any;
 }
 
-const renderNav = items => items && items.map((item) => {
+const renderNav = (items) => items && items.map((item) => {
   return item.children
     ? <NavItem key={item.name} item={item} parent /> : <NavItem key={item.name} item={item} />;
 });
@@ -17,19 +17,19 @@ const NavItem: React.FC<IProps> = ({ item, parent }) => {
   return (
     <li className="mainnav--parentli">
       <Link href={item.route}>
-        <a className="mainnav--parentli--link">{ item.name }</a>
+        <a className="mainnav--parentli--link">{item.name}</a>
       </Link>
       {
         parent && (
           <ul className="mainnav--inner">
-            { renderedChildren }
+            {renderedChildren}
           </ul>)
       }
       <style jsx>{`
         .mainnav--parentli {
           position: relative;
         }
-    
+
         .mainnav--parentli--link {
           border-radius: 5px;
           display: inline-block;

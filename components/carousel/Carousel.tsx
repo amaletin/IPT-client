@@ -1,7 +1,7 @@
 import React from 'react';
-import Slide from './Slide';
-import { LeftArrow, RightArrow } from './Arrows';
 import { breakpoints, colors, shadows } from '../../lib/styleguide';
+import { LeftArrow, RightArrow } from './Arrows';
+import Slide from './Slide';
 
 export interface IProps {
   arrows?: boolean;
@@ -15,20 +15,20 @@ export interface IState {
 }
 
 class Carousel extends React.Component<IProps, IState> {
-  state = {
+  public state = {
     currentIndex: 0,
     translateValue: 0,
   };
 
   private carousel = React.createRef<HTMLDivElement>();
 
-  static defaultProps = {
+  public static defaultProps = {
     arrows: true,
     customStyles: null,
     pagination: true,
   };
 
-  goToPrevSlide = () => {
+  private goToPrevSlide = () => {
     const { images } = this.props;
     const { currentIndex } = this.state;
 
@@ -39,13 +39,13 @@ class Carousel extends React.Component<IProps, IState> {
       });
     }
 
-    return this.setState(prevState => ({
+    return this.setState((prevState) => ({
       currentIndex: prevState.currentIndex - 1,
       translateValue: prevState.translateValue + (this.slideWidth()),
     }));
   }
 
-  goToNextSlide = () => {
+  private goToNextSlide = () => {
     const { images } = this.props;
     const { currentIndex } = this.state;
 
@@ -56,13 +56,13 @@ class Carousel extends React.Component<IProps, IState> {
       });
     }
 
-    return this.setState(prevState => ({
+    return this.setState((prevState) => ({
       currentIndex: prevState.currentIndex + 1,
       translateValue: prevState.translateValue + -(this.slideWidth()),
     }));
   }
 
-  handleArrowKeys = (event) => {
+  private handleArrowKeys = (event) => {
     if (event.key === 'ArrowLeft') {
       this.goToPrevSlide();
     }
@@ -71,11 +71,11 @@ class Carousel extends React.Component<IProps, IState> {
     }
   }
 
-  slideWidth = () => {
+  private slideWidth = () => {
     return this.carousel.current.clientWidth;
   }
 
-  renderPagination = () => {
+  private renderPagination = () => {
     const { images } = this.props;
     const { currentIndex } = this.state;
 
@@ -86,16 +86,16 @@ class Carousel extends React.Component<IProps, IState> {
             backgroundColor: currentIndex === idx ? colors.pink :  colors.blue,
             borderRadius: '100%',
             height: '6px',
-            width: '6px',
             margin: '0 11px',
+            width: '6px',
           }}
           key={`pagination-dot-${image.url}`}
         />
-      )
+      );
     });
   }
 
-  render() {
+  public render() {
     const {
       arrows,
       images,
@@ -115,7 +115,7 @@ class Carousel extends React.Component<IProps, IState> {
           }}
         >
           {
-            images.map(image => (
+            images.map((image) => (
               <Slide
                 key={image.url}
                 image={image.url}

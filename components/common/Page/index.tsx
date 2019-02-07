@@ -1,7 +1,7 @@
 import React from 'react';
 import { canUseDOM } from '../../../lib/utils';
-import Header from '../Header';
 import Footer from '../Footer';
+import Header from '../Header';
 import MobileNav from '../MobileNav';
 import PageHeader from '../PageHeader';
 
@@ -14,38 +14,38 @@ export interface IProps {
 
 export interface IState {
   showMenu: boolean;
-} 
+}
 
 class Page extends React.Component<IProps, IState> {
-  state = {
+  public state = {
     showMenu: false,
   };
 
-  static defaultProps = {
+  public static defaultProps = {
     header: true,
-  }
+  };
 
-  handleToggleMobileNav = () => {
+  private handleToggleMobileNav = () => {
     const { showMenu } = this.state;
 
     this.setState({
       showMenu: !showMenu,
     }, () => {
-      if(showMenu) {
-        canUseDOM && document.body.classList.remove('locked');
+      if (showMenu) {
+        if (canUseDOM) {document.body.classList.remove('locked'); }
       } else {
-        canUseDOM && document.body.classList.add('locked');
+        if (canUseDOM) {document.body.classList.add('locked'); }
       }
     });
   }
 
-  render() {
+  public render() {
     const {
       children,
       customStyles,
       header,
+      subtitle,
       title,
-      subtitle
     } = this.props;
     const { showMenu } = this.state;
 
@@ -61,7 +61,7 @@ class Page extends React.Component<IProps, IState> {
               subtitle={subtitle}
             />
           )}
-          { children }
+          {children}
         </div>
         <Footer />
         <MobileNav

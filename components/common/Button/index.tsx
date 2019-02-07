@@ -11,7 +11,7 @@ const Button: React.FC<IProps> = ({ to, children }) => (
       className="button"
       role="button"
       tabIndex={0}
-      >
+    >
       {children}
       <style jsx>{`
         .button {

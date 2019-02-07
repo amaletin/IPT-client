@@ -6,8 +6,7 @@ export enum EState {
   FETCHING = 'FETCHING',
   SUCCESS = 'SUCCESS',
   FAIL = 'FAIL',
-};
-
+}
 
 export enum EProductType {
   PRINTER = 1,

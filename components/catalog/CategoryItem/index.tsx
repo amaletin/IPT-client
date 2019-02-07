@@ -1,6 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
-import { ICategory } from '../../../lib/models';
 import Link from 'next/link';
+import { ICategory } from '../../../lib/models';
 import { breakpoints } from '../../../lib/styleguide';
 
 export interface IProps {
@@ -8,10 +8,10 @@ export interface IProps {
 }
 
 const pictureUrl = (category: ICategory) => {
-  if(isEmpty(category.picture)) {
-    return '/static/images/image-placeholder.png'
+  if (isEmpty(category.picture)) {
+    return '/static/images/image-placeholder.png';
   }
-  return `https://3dapi.amaletin.ru${category.picture}`
+  return `https://3dapi.amaletin.ru${category.picture}`;
 };
 
 const CategoryItem: React.FC<IProps> = ({ category }) => (

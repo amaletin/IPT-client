@@ -1,12 +1,12 @@
 import { Reducer } from 'redux';
 import {
-  GET_PRODUCTS_SUCCESS,
   GET_PRODUCTS_FAIL,
+  GET_PRODUCTS_SUCCESS,
 } from '../actions/productsActions';
 import { EState } from '../lib/enums';
 import { IProductsState } from '../lib/models';
 
-const initialState:IProductsState = {
+const initialState: IProductsState = {
   allIds: [],
   byId: {},
 };
@@ -19,7 +19,7 @@ const productsReducer: Reducer<IProductsState> = (state = initialState, action) 
         byId: { ...state.byId,  ...action.data.byId },
       };
     case GET_PRODUCTS_FAIL:
-      console.log(action.error);
+      console.log(action.error); // tslint:disable-line no-console
       return { ...state, state: EState.FAIL };
     default: return state;
   }

@@ -8,11 +8,11 @@ import ProductFilters from '../../components/catalog/ProductFilters';
 import ProductList from '../../components/catalog/ProductList';
 import Page from '../../components/common/Page';
 import { EFilterType, EProductType, EProductTypeString } from '../../lib/enums';
-import { IAppState, IPensFilters, IPriceFilterBlock, IPriceRange, IProduct } from '../../lib/models';
+import { IAppState, ICommonFilter, IPriceFilterBlock, IPriceRange, IProduct } from '../../lib/models';
 import { getFilteredPens } from '../../selectors';
 
 export interface IProps {
-  filters: IPensFilters;
+  filters: ICommonFilter;
   pens: IProduct[];
   onSetFilter: (val: IPriceRange, state: IPriceFilterBlock, filterType: EFilterType) => void;
   setSortOrder: () => void;

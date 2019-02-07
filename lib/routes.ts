@@ -1,7 +1,5 @@
 export default [
   {
-    name: 'Каталог',
-    route: '',
     children: [
       {
         name: '3D принтеры',
@@ -20,6 +18,8 @@ export default [
         route: '/catalog/pens',
       },
     ],
+    name: 'Каталог',
+    route: '',
   },
   {
     name: '3D печать',

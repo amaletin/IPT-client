@@ -1,5 +1,5 @@
-import { EProductType } from './enums';
 import { Dictionary } from 'lodash';
+import { EProductType } from './enums';
 
 export interface IAppState {
   filters: IFiltersState;
@@ -9,24 +9,24 @@ export interface IAppState {
   sorting: ISortingState;
 }
 
-export interface IProductsState{
+export interface IProductsState {
   allIds: number[];
   byId: Dictionary<IProduct>;
 }
 
-export interface ICategoriesState{
+export interface ICategoriesState {
   allIds: number[];
   byId: Dictionary<ICategory>;
 }
 
 export interface IFiltersState {
   printers: IPrintersFilters;
-  pens: IPensFilters;
-  scanners: IScannersFilters;
-  consumables: IConsumablesFilters;
+  pens: ICommonFilter;
+  scanners: ICommonFilter;
+  consumables: ICommonFilter;
 }
 
-export interface IPostsState{
+export interface IPostsState {
   allIds: number[];
   byId: Dictionary<IPost>;
 }
@@ -37,8 +37,6 @@ export interface ISortingState {
   scanners: string;
   consumables: string;
 }
-
-export type IFiltersStateSlice = IPrintersFilters | IPensFilters | IScannersFilters | IConsumablesFilters;
 
 export interface ICommonFilter {
   price: IFilterBlock<IPriceFilterBlock>;
@@ -52,11 +50,6 @@ export interface IFilterBlock<T> {
 export interface IPrintersFilters extends ICommonFilter {
   brands: IFilterBlock<Dictionary<IBrand>>;
 }
-
-export interface IPensFilters extends ICommonFilter {}
-export interface IScannersFilters extends ICommonFilter {}
-export interface IConsumablesFilters extends ICommonFilter {}
-
 
 export interface IPriceFilterBlock {
   range: IPriceRange;
@@ -74,11 +67,6 @@ export interface IBrand {
   selected?: boolean;
 }
 
-export interface IFile {
-  id: number;
-  thumbnail_url: string;
-}
-
 export interface ICategory {
   id: number;
   name: string;
@@ -87,7 +75,7 @@ export interface ICategory {
   type: EProductType;
 }
 
-export interface IProductCommon {
+export interface IProduct {
   id: number;
   brand: IBrand;
   name: string;
@@ -96,26 +84,6 @@ export interface IProductCommon {
   category?: number;
   type: EProductType;
 }
-
-export interface IPrinter extends IProductCommon {
-  chamberHeight?: number;
-  chamberLength?: number;
-  chamberType?: string;
-  chamberWidth?: number;
-  description?: string;
-  extruders?: number;
-  heatedBed?: boolean;
-  layerResolution?: string;
-  technology?: string;
-}
-
-export interface IScanner extends IProductCommon {}
-
-export interface IPen extends IProductCommon {}
-
-export interface IConsumable extends IProductCommon {}
-
-export interface IProduct extends IPrinter, IScanner, IPen, IConsumable {}
 
 export interface IPost {
   body: string;

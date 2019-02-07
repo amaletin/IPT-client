@@ -1,8 +1,8 @@
-import { createStore, applyMiddleware } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
-import { IAppState } from './models';
 import { reducers } from '../reducers/index';
+import { IAppState } from './models';
 
 export default (initialStore?: IAppState) => createStore(
   reducers,

@@ -12,7 +12,7 @@ const PostDetails: React.FC<IProps> = ({ post }) => (
       <img src={`${API_HOST}thumbnail/1600/480/crop/best/${post.cover}`} style={{ width: '100%' }} />
       <div
         className="posts--details-cover--caption"
-        dangerouslySetInnerHTML={{__html: post.cover_caption}}
+        dangerouslySetInnerHTML={{__html: post.coverCaption}}
       />
     </div>
     <div className="posts--container">
@@ -30,11 +30,11 @@ const PostDetails: React.FC<IProps> = ({ post }) => (
           padding: 0 15px;
           margin: 0 auto;
         }
-        
+
         .posts--details-cover {
           position: relative;
         }
-        
+
         .posts--details-cover--caption {
           position: absolute;
           bottom: 15px;
@@ -64,6 +64,6 @@ const PostDetails: React.FC<IProps> = ({ post }) => (
       `}</style>
     </div>
   </>
-)
+);
 
 export default PostDetails;

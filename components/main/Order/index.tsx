@@ -1,11 +1,11 @@
+import {
+breakpoints,
+colors,
+fonts,
+gradients,
+} from '../../../lib/styleguide';
 import Carousel from '../../carousel/Carousel';
 import Button from '../../common/Button';
-import {
-  breakpoints,
-  fonts,
-  colors,
-  gradients,
-} from '../../../lib/styleguide';
 
 const images = [
   { url: '/static/images/order-slider.jpg' },
@@ -33,10 +33,10 @@ const Order = () => (
         <div className="order--content--text">
           <h2>3D печать из ABS-пластика</h2>
           <p>
-            На основании 3D-модели можно создать любой прототип здания, автомобиля, 
-            жилого комплекса или самой маленькой шестеренки. 
-            Прототип может как повторять лишь общие очертания, 
-            так и детализированную сборную модель.
+            На основании 3D-модели можно создать любой прототип здания, автомобиля,
+             жилого комплекса или самой маленькой шестеренки.
+             Прототип может как повторять лишь общие очертания,
+             так и детализированную сборную модель.
           </p>
           <Button to="/">Заказать</Button>
         </div>

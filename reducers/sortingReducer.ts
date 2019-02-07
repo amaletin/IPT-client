@@ -1,17 +1,17 @@
 import { Reducer } from 'redux';
 import {
-  SET_PRINTERS_SORTING,
+  SET_CONSUMABLES_SORTING,
   SET_PENS_SORTING,
+  SET_PRINTERS_SORTING,
   SET_SCANNERS_SORTING,
-  SET_CONSUMABLES_SORTING
 } from '../actions/sortingActions';
 import { ISortingState } from '../lib/models';
 
-const initialState:ISortingState = {
-  printers: null,
-  pens: null,
-  scanners: null,
+const initialState: ISortingState = {
   consumables: null,
+  pens: null,
+  printers: null,
+  scanners: null,
 };
 
 const newOrder = (curOrder: string): string => curOrder === 'ASC' ? 'DESC' : 'ASC';

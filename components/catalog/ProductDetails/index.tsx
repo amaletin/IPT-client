@@ -1,15 +1,15 @@
+import { IProduct } from 'lib/models';
 import { isEmpty } from 'lodash';
-import { IProduct } from  'lib/models';
 
 export interface IProps {
-  product: IProduct
+  product: IProduct;
 }
 
 const pictureUrl = (product: IProduct) => {
-  if(isEmpty(product.picture)) {
-    return '/static/images/image-placeholder.png'
+  if (isEmpty(product.picture)) {
+    return '/static/images/image-placeholder.png';
   }
-  return `https://3dapi.amaletin.ru${product.picture}`
+  return `https://3dapi.amaletin.ru${product.picture}`;
 };
 
 const ProductDetails: React.FC<IProps> = ({ product }) => (
@@ -25,7 +25,12 @@ const ProductDetails: React.FC<IProps> = ({ product }) => (
         <ul className="product-details--spec--list">
           {product.brand && <li><span>Производитель</span><span>{product.brand.name}</span></li>}
           {product.technology && <li><span>Технология печати</span><span>{product.technology}</span></li>}
-          {product.chamberType && <li><span>Камера печати</span><span>{product.chamberType === 'open' ? 'Открытая' : 'Закрытая'}</span></li>}
+          {product.chamberType && (
+            <li>
+              <span>Камера печати</span>
+              <span>{product.chamberType === 'open' ? 'Открытая' : 'Закрытая'}</span>
+            </li>
+          )}
           {(product.chamberLength && product.chamberWidth && product.chamberHeight) && (
             <li>
               <span>Рабочая камера</span>

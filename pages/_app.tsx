@@ -9,7 +9,7 @@ export interface IProps {
 }
 
 class MyApp extends App<IProps> {
-  render() {
+  public render() {
     const { Component, pageProps, reduxStore } = this.props;
     return (
       <Container>

@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { IPost } from '../../../lib/models';
 import {API_HOST} from '../../../configuration/app.config';
-import { shadows, fonts } from '../../../lib/styleguide';
+import { IPost } from '../../../lib/models';
+import { fonts, shadows } from '../../../lib/styleguide';
 
 interface IProps {
   post: IPost;

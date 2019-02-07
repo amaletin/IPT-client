@@ -11,14 +11,14 @@ import ProductFilters from '../../components/catalog/ProductFilters';
 import ProductList from '../../components/catalog/ProductList';
 import Page from '../../components/common/Page';
 import { EFilterType, EProductType, EProductTypeString } from '../../lib/enums';
-import { IAppState, ICategory, IConsumablesFilters, IPriceRange, IProduct } from '../../lib/models';
+import { IAppState, ICategory, ICommonFilter, IPriceRange, IProduct } from '../../lib/models';
 import { getFilteredRootConsumables, getRootCategories } from '../../selectors';
 
 export interface IProps {
-  filters: IConsumablesFilters;
+  filters: ICommonFilter;
   consumables: IProduct[];
   categories: ICategory[];
-  onSetFilter: (val: IPriceRange, state: IConsumablesFilters, filterType: EFilterType) => void;
+  onSetFilter: (val: IPriceRange, state: ICommonFilter, filterType: EFilterType) => void;
   setSortOrder: () => void;
   sortOrder: string;
 }
@@ -62,7 +62,7 @@ Consumables.getInitialProps = async ({ reduxStore }) => {
     categories: getRootCategories(reduxStore.getState()),
     consumables: getFilteredRootConsumables(reduxStore.getState()),
     filters: reduxStore.getState().filters.consumables,
-    onSetFilter: (val: IPriceRange, state: IConsumablesFilters, filterType: EFilterType) =>
+    onSetFilter: (val: IPriceRange, state: ICommonFilter, filterType: EFilterType) =>
       reduxStore.dispatch(setFilter(val, state, filterType, EProductTypeString.CONSUMABLE)),
     setSortOrder: () => reduxStore.dispatch(setConsumablesSorting()),
     sortOrder: reduxStore.getState().sorting.consumables,
@@ -77,7 +77,7 @@ const mapStateToProps = (state: IAppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onSetFilter: (val: IPriceRange, state: IConsumablesFilters, filterType: EFilterType) =>
+  onSetFilter: (val: IPriceRange, state: ICommonFilter, filterType: EFilterType) =>
     dispatch(setFilter(val, state, filterType, EProductTypeString.CONSUMABLE)),
   setSortOrder: () => dispatch(setConsumablesSorting()),
 });

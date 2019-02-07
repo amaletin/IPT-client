@@ -1,7 +1,7 @@
+import { map, sortBy } from 'lodash';
 import { IProduct } from '../../../lib/models';
 import CatalogTools from '../CatalogTools';
 import ProductItem from '../ProductItem';
-import { map, sortBy } from 'lodash';
 
 export interface IProps {
   className?: string;
@@ -23,7 +23,7 @@ const ProductList: React.FC<IProps> = ({ className = 'catalog--container', produ
                 key={product.id}
                 product={product}
               />
-            )
+            );
           })
         }
       </div>
@@ -33,7 +33,7 @@ const ProductList: React.FC<IProps> = ({ className = 'catalog--container', produ
         }
       `}</style>
     </div>
-  )
-}
+  );
+};
 
 export default ProductList;

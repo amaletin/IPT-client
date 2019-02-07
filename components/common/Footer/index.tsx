@@ -1,4 +1,4 @@
-import { colors, gradients, breakpoints } from '../../../lib/styleguide';
+import { breakpoints, colors, gradients } from '../../../lib/styleguide';
 
 const Footer = () => (
   <footer className="footer">

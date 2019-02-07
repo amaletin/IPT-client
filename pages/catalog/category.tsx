@@ -11,15 +11,15 @@ import ProductFilters from '../../components/catalog/ProductFilters';
 import ProductList from '../../components/catalog/ProductList';
 import Page from '../../components/common/Page';
 import { EFilterType, EProductType, EProductTypeString } from '../../lib/enums';
-import { IAppState, ICategory, IConsumablesFilters, IPriceRange, IProduct } from '../../lib/models';
+import { IAppState, ICategory, ICommonFilter, IPriceRange, IProduct } from '../../lib/models';
 import { getCategoriesByParentId, getFilteredConsumablesByCategoryId } from '../../selectors';
 
 export interface IProps {
   categories: ICategory[];
   consumables: IProduct[];
-  filters: IConsumablesFilters;
+  filters: ICommonFilter;
   id: string | string[];
-  onSetFilter: (val: IPriceRange, state: IConsumablesFilters, filterType: EFilterType) => void;
+  onSetFilter: (val: IPriceRange, state: ICommonFilter, filterType: EFilterType) => void;
   setSortOrder: () => void;
   sortOrder: string;
 }
@@ -62,7 +62,7 @@ Category.getInitialProps = async ({ reduxStore, query }) => {
     consumables: getFilteredConsumablesByCategoryId(reduxStore.getState(), { id }),
     filters: reduxStore.getState().filters.consumables,
     id,
-    onSetFilter: (val: IPriceRange, state: IConsumablesFilters, filterType: EFilterType) =>
+    onSetFilter: (val: IPriceRange, state: ICommonFilter, filterType: EFilterType) =>
       reduxStore.dispatch(setFilter(val, state, filterType, EProductTypeString.CONSUMABLE)),
     setSortOrder: () => reduxStore.dispatch(setConsumablesSorting()),
     sortOrder: reduxStore.getState().sorting.consumables,
@@ -77,7 +77,7 @@ const mapStateToProps = (state: IAppState, ownProps: IProps) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onSetFilter: (val: IPriceRange, state: IConsumablesFilters, filterType: EFilterType) =>
+  onSetFilter: (val: IPriceRange, state: ICommonFilter, filterType: EFilterType) =>
     dispatch(setFilter(val, state, filterType, EProductTypeString.CONSUMABLE)),
   setSortOrder: () => dispatch(setConsumablesSorting()),
 });

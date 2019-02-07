@@ -1,12 +1,12 @@
-import Link from 'next/link';
 import Head from 'next/head';
-import MainNav from '../MainNav';
+import Link from 'next/link';
 import {
   breakpoints,
   colors,
   fonts,
   gradients,
 } from '../../../lib/styleguide';
+import MainNav from '../MainNav';
 
 export interface IProps {
   onToggleMobileNav: () => void;

@@ -1,4 +1,5 @@
 export interface IServerResponse<T> {
+  data: T;
   meta?: {
     table: string;
     type: string;
@@ -7,8 +8,7 @@ export interface IServerResponse<T> {
     Deleted?: number;
     Draft?: number;
     total_entries?: number;
-  },
-  data: T
+  };
 }
 
 export interface IFileRaw {
