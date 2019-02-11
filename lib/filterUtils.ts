@@ -2,74 +2,64 @@ import {
   Dictionary,
   filter,
   isEmpty,
-  keyBy,
   map,
+  uniq,
 } from 'lodash';
 import { EProductType } from './enums';
 import {
-  IBrand,
+  IArrayFilterBlock,
+  IChamberSizeFilterBlock,
   ICommonFilter,
   IFilterBlock,
   IFiltersState,
   IPriceFilterBlock,
-  IPriceRange,
   IPrintersFilters,
   IProduct,
+  IRange,
 } from './models';
 
 export const filterPrinters = (filters: IPrintersFilters, printers: IProduct[]): IProduct[] => {
   const price = filters.price.filter;
-  const brands = filters.brands.filter;
-  const filteredPrinters = filter(printers, (prod) => {
+  return filter(printers, (prod) => {
     return (
       (prod.price <= price.value.max
       && prod.price >= price.value.min)
-      && brands[prod.brand.id].selected
+      && (isEmpty(filters.brands.filter.selected)
+        || filters.brands.filter.selected.includes(prod.brand))
+      && (isEmpty(filters.technology.filter.selected)
+        || filters.technology.filter.selected.includes(prod.technology))
+      && (isEmpty(filters.chamberType.filter.selected)
+        || filters.chamberType.filter.selected.includes(prod.chamberType))
+      && (isEmpty(filters.extruders.filter.selected)
+        || filters.extruders.filter.selected.includes(prod.extruders.toString()))
+      && (isEmpty(filters.layerResolution.filter.selected)
+        || filters.layerResolution.filter.selected.includes(prod.layerResolution.toString()))
+      && (!filters.heatedBed.filter || filters.heatedBed.filter === prod.heatedBed)
+      && filterBySize(prod.chamberHeight, filters.chamberSize.filter.height)
+      && filterBySize(prod.chamberLength, filters.chamberSize.filter.length)
+      && filterBySize(prod.chamberWidth, filters.chamberSize.filter.width)
     );
   });
-  return filteredPrinters;
 };
 
-export const filterPens = (filters: ICommonFilter, pens: IProduct[]): IProduct[] => {
-  const price = filters.price.filter;
-  const filteredPens = filter(pens, (prod) => {
-    return (
-      prod.price <= price.value.max
-      && prod.price >= price.value.min
-    );
-  });
-  return filteredPens;
+const filterBySize = (size: number, value: IRange): boolean => {
+  const { min, max } = value;
+  return (min === null && max === null)
+  || (
+    size !== null
+    && (min === null && size <= max || max === null && size >= min || (size >= min && size <= max))
+  );
 };
 
-export const filterScanners = (filters: ICommonFilter, scanners: IProduct[]): IProduct[] => {
-  const price = filters.price.filter;
-  const filteredScanners = filter(scanners, (prod) => {
-    return (
-      prod.price <= price.value.max
-      && prod.price >= price.value.min
-    );
-  });
-  return filteredScanners;
+export const filterProducts = (filters: ICommonFilter, products: IProduct[]): IProduct[] => {
+  const { max, min } = filters.price.filter.value;
+  return filter(products, (prod) => prod.price <= max && prod.price >= min);
 };
 
-export const filterConsumables = (filters: ICommonFilter, consumables: IProduct[]): IProduct[] => {
-  const price = filters.price.filter;
-  const filteredConsumables = filter(consumables, (prod) => {
-    return (
-      prod.price <= price.value.max
-      && prod.price >= price.value.min
-    );
-  });
-  return filteredConsumables;
-};
-
-const updateBrandFilters = (oldBrands: Dictionary<IBrand>, products: IProduct[]): Dictionary<IBrand> => {
-  const brands = keyBy(map(products, (prod) => {
-    const brand = prod.brand;
-    brand.selected = true;
-    return brand;
-  }), 'id');
-  return { ...oldBrands, ...brands };
+const updateArrayFilter = (oldItems: IArrayFilterBlock,
+                           products: IProduct[], field: string): IArrayFilterBlock => {
+  const items = uniq(map(filter(products, (prod) => prod[field] !== null), (prod) => prod[field].toString()));
+  return { ...oldItems, ...{ all: items, selected: []} };
 };
 
 const updatePriceFilters = (oldPrice: IPriceFilterBlock, products: IProduct[]): IPriceFilterBlock => {
@@ -77,7 +67,7 @@ const updatePriceFilters = (oldPrice: IPriceFilterBlock, products: IProduct[]): 
     return oldPrice;
   }
   const prices = map(products, (prod) => prod.price).sort((a, b) => a - b);
-  const newLimits: IPriceRange = {
+  const newLimits: IRange = {
     max: prices[prices.length - 1],
     min: prices[0],
   };
@@ -91,39 +81,51 @@ const updatePriceFilters = (oldPrice: IPriceFilterBlock, products: IProduct[]): 
 const updatePrintersFilters = (state: IPrintersFilters, products: IProduct[]): IPrintersFilters => {
   return {
     ...state,
-    brands: { ...state.brands, filter: updateBrandFilters(state.brands.filter, products)},
+    brands: { ...state.brands, filter: updateArrayFilter(state.brands.filter, products, 'brand') },
+    chamberType: { ...state.chamberType, filter: updateArrayFilter(state.chamberType.filter, products, 'chamberType') },
+    extruders: { ...state.extruders, filter: updateArrayFilter(state.extruders.filter, products, 'extruders') },
+    layerResolution: {
+      ...state.layerResolution,
+      filter: updateArrayFilter(state.layerResolution.filter, products, 'layerResolution'),
+    },
     price: { ...state.price, filter: updatePriceFilters(state.price.filter, products) },
+    technology: { ...state.technology, filter: updateArrayFilter(state.chamberType.filter, products, 'technology') },
   };
 };
 
-const updateCommonFilters = (state, products) => {
+const updateFilters = (state, products) => {
   return {
     ...state,
     price: { ...state.price, filter: updatePriceFilters(state.price.filter, products) },
   };
 };
 
-export const updateFilters = (state: IFiltersState, products: Dictionary<IProduct>): IFiltersState => {
+export const updateProductFilters = (state: IFiltersState, products: Dictionary<IProduct>): IFiltersState => {
   return {
-    consumables: updateCommonFilters(state.consumables, filter(products, (p) => p.type === EProductType.CONSUMABLE)),
-    pens: updateCommonFilters(state.pens, filter(products, (p) => p.type === EProductType.PEN)),
+    consumables: updateFilters(state.consumables, filter(products, (p) => p.type === EProductType.CONSUMABLE)),
+    pens: updateFilters(state.pens, filter(products, (p) => p.type === EProductType.PEN)),
     printers: updatePrintersFilters(state.printers, filter(products, (p) => p.type === EProductType.PRINTER)),
-    scanners: updateCommonFilters(state.scanners, filter(products, (p) => p.type === EProductType.SCANER)),
+    scanners: updateFilters(state.scanners, filter(products, (p) => p.type === EProductType.SCANER)),
   };
 };
 
 export const setPriceFilter = (state: IFilterBlock<IPriceFilterBlock>,
-                               newData: IPriceRange): IFilterBlock<IPriceFilterBlock> => {
+                               newData: IRange): IFilterBlock<IPriceFilterBlock> => {
   return { ...state, filter: { ...state.filter,  value: newData} };
 };
 
-export const setBrandsFilter = (state: IFilterBlock<Dictionary<IBrand>>,
-                                newData: number): IFilterBlock<Dictionary<IBrand>> => {
-  const brands = map(state.filter, (b) => {
-    if (b.id === newData) {
-      b.selected = !b.selected;
-    }
-    return b;
-  });
-  return { ...state, filter: { ...state.filter, ...keyBy(brands, 'id')} };
+export const setArrayFilter = (state: IFilterBlock<IArrayFilterBlock>,
+                               newData: string): IFilterBlock<IArrayFilterBlock> => {
+  let updatedSelected = [];
+  if (state.filter.selected.includes(newData)) {
+    updatedSelected = filter(state.filter.selected, (s) => s !== newData);
+  } else {
+    updatedSelected = [ ...state.filter.selected, newData];
+  }
+  return { ...state, filter: { ...state.filter, selected: updatedSelected}};
+};
+
+export const setSizeFilter = (state: IFilterBlock<IChamberSizeFilterBlock>,
+                              newData: IChamberSizeFilterBlock): IFilterBlock<IChamberSizeFilterBlock> => {
+return { ...state, filter: { ...state.filter, ...newData} };
 };

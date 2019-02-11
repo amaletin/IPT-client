@@ -47,24 +47,35 @@ export interface IFilterBlock<T> {
   isOpen: boolean;
 }
 
+export interface IArrayFilterBlock {
+  all: string[];
+  selected: string[];
+}
+
 export interface IPrintersFilters extends ICommonFilter {
-  brands: IFilterBlock<Dictionary<IBrand>>;
+  brands: IFilterBlock<IArrayFilterBlock>;
+  technology: IFilterBlock<IArrayFilterBlock>;
+  chamberSize: IFilterBlock<IChamberSizeFilterBlock>;
+  chamberType: IFilterBlock<IArrayFilterBlock>;
+  heatedBed: IFilterBlock<boolean>;
+  layerResolution: IFilterBlock<IArrayFilterBlock>;
+  extruders: IFilterBlock<IArrayFilterBlock>;
+}
+
+export interface IChamberSizeFilterBlock {
+  height: IRange;
+  length: IRange;
+  width: IRange;
 }
 
 export interface IPriceFilterBlock {
-  range: IPriceRange;
-  value: IPriceRange;
+  range: IRange;
+  value: IRange;
 }
 
-export interface IPriceRange {
+export interface IRange {
   max: number;
   min: number;
-}
-
-export interface IBrand {
-  name: string;
-  id: number;
-  selected?: boolean;
 }
 
 export interface ICategory {
@@ -77,12 +88,21 @@ export interface ICategory {
 
 export interface IProduct {
   id: number;
-  brand: IBrand;
+  brand?: string;
   name: string;
-  picture?: any;
+  picture?: string;
   price?: number;
   category?: number;
   type: EProductType;
+  technology?: string;
+  chamberHeight?: number;
+  chamberLength?: number;
+  chamberType?: string;
+  chamberWidth?: number;
+  heatedBed?: boolean;
+  layerResolution?: string;
+  extruders?: number;
+  description?: string;
 }
 
 export interface IPost {

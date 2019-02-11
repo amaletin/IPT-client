@@ -1,18 +1,42 @@
 import { Reducer } from 'redux';
 import {
   SET_FILTER_SUCCESS,
-  SET_PRINTERS_BRAND_OPEN,
+  TOGGLE_FILTER_OPEN,
 } from '../actions/filterActions';
 import { GET_PRODUCTS_SUCCESS } from '../actions/productsActions';
-import { updateFilters } from '../lib/filterUtils';
-import { IFilterBlock, IFiltersState, IPriceFilterBlock } from '../lib/models';
+import { updateProductFilters } from '../lib/filterUtils';
+import { IChamberSizeFilterBlock, IFilterBlock, IFiltersState, IPriceFilterBlock, IRange } from '../lib/models';
+
+const initialRange: IRange = { max: null, min: null };
 
 const initialPrice: IFilterBlock<IPriceFilterBlock> = {
   filter: {
-    range: { max: null, min: null },
-    value: { max: null, min: null },
+    range: initialRange,
+    value: initialRange,
   },
   isOpen: true,
+};
+
+const initialArray = {
+  filter: {
+    all: [],
+    selected: [],
+  },
+  isOpen: false,
+};
+
+const initialBoolean = {
+  filter: false,
+  isOpen: false,
+};
+
+const initialSize: IFilterBlock<IChamberSizeFilterBlock> = {
+  filter: {
+    height: initialRange,
+    length: initialRange,
+    width: initialRange,
+  },
+  isOpen: false,
 };
 
 const initialState: IFiltersState = {
@@ -23,11 +47,14 @@ const initialState: IFiltersState = {
     price: initialPrice,
   },
   printers: {
-    brands: {
-      filter: {},
-      isOpen: false,
-    },
+    brands: initialArray,
+    chamberSize: initialSize,
+    chamberType: initialArray,
+    extruders: initialArray,
+    heatedBed: initialBoolean,
+    layerResolution: initialArray,
     price: initialPrice,
+    technology: initialArray,
   },
   scanners: {
     price: initialPrice,
@@ -36,27 +63,27 @@ const initialState: IFiltersState = {
 
 const filtersReducer: Reducer<IFiltersState> = (state = initialState, action) => {
   switch (action.type) {
-    case SET_PRINTERS_BRAND_OPEN:
-      return {
-        ...state,
-        printers: {
-          ...state.printers,
-          brands: {
-            ...state.printers.brands,
-            isOpen: !state.printers.brands.isOpen,
-          },
-        },
-      };
     case SET_FILTER_SUCCESS:
       return {
         ...state,
         [action.productType]: {
-          ...state.printers,
+          ...state[action.productType],
           [action.filterType]: action.data,
         },
       };
     case GET_PRODUCTS_SUCCESS:
-      return updateFilters(state, action.data.byId);
+      return updateProductFilters(state, action.data.byId);
+    case TOGGLE_FILTER_OPEN:
+      return {
+        ...state,
+        [action.productType]: {
+          ...state[action.productType],
+          [action.filterType]: {
+            ...state[action.productType][action.filterType],
+            isOpen: !state[action.productType][action.filterType].isOpen,
+          },
+        },
+      };
     default: return state;
   }
 };

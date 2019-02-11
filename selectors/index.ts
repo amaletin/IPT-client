@@ -2,16 +2,13 @@ import { Dictionary, filter } from 'lodash';
 import { createSelector } from 'reselect';
 import { EProductType } from '../lib/enums';
 import {
-  filterConsumables,
-  filterPens,
   filterPrinters,
-  filterScanners,
+  filterProducts,
 } from '../lib/filterUtils';
 import {
   IAppState,
   ICategory,
   ICommonFilter,
-  IConsumable,
   IPost,
   IPrintersFilters,
   IProduct,
@@ -54,7 +51,7 @@ export const getPens = createSelector(
 export const getFilteredPens = createSelector(
   [getPens, getPenFilters],
   (pens: IProduct[], filters: ICommonFilter) => {
-    return filterPens(filters, pens);
+    return filterProducts(filters, pens);
   },
 );
 
@@ -68,7 +65,7 @@ export const getScanners = createSelector(
 export const getFilteredScanners = createSelector(
   [getScanners, getScannerFilters],
   (scanners: IProduct[], filters: ICommonFilter) => {
-    return filterScanners(filters, scanners);
+    return filterProducts(filters, scanners);
   },
 );
 
@@ -89,14 +86,14 @@ export const getRootConsumables = createSelector(
 export const getFilteredRootConsumables = createSelector(
   [getRootConsumables, getConsumableFilters],
   (consumables: IProduct[], filters: ICommonFilter) => {
-    return filterConsumables(filters, consumables);
+    return filterProducts(filters, consumables);
   },
 );
 
 export const getFilteredConsumables = createSelector(
   [getConsumables, getConsumableFilters],
   (consumables: IProduct[], filters: ICommonFilter) => {
-    return filterConsumables(filters, consumables);
+    return filterProducts(filters, consumables);
   },
 );
 
@@ -116,7 +113,7 @@ export const getCategoriesByParentId = createSelector(
 
 export const getFilteredConsumablesByCategoryId = createSelector(
   [getConsumables, (_, props) => props],
-  (consumables: IConsumable[], props) => {
+  (consumables: IProduct[], props) => {
     return filter(consumables, (c) => c.category === parseInt(props.id, 10));
   },
 );

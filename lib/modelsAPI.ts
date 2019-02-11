@@ -55,10 +55,10 @@ export interface ITechnologyRaw {
 
 export interface IProductRaw {
   brand?: IServerResponse<IBrandRaw>;
-  chamber_height?: number;
-  chamber_length?: number;
+  chamber_height?: string;
+  chamber_length?: string;
   chamber_type?: string;
-  chamber_width?: number;
+  chamber_width?: string;
   description?: string;
   extruders?: number;
   heated_bed?: boolean;

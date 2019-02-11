@@ -22,13 +22,13 @@ export const processProducts = (products: IProductRaw[]): IProductsState  => ({
 export const processProduct = (product: IProductRaw): IProduct => {
   return {
     ...product,
-    brand: product.brand ? product.brand.data : null,
+    brand: product.brand ? product.brand.data.name : null,
     category: product.category ? product.category.data.id : null,
-    chamberHeight: product.chamber_height,
-    chamberLength: product.chamber_length,
+    chamberHeight: product.chamber_height ? parseInt(product.chamber_height, 10) : null,
+    chamberLength: product.chamber_height ? parseInt(product.chamber_length, 10) : null,
     chamberType: product.chamber_type,
-    chamberWidth: product.chamber_width,
-    heatedBed: product.heated_bed,
+    chamberWidth: product.chamber_height ? parseInt(product.chamber_width, 10) : null,
+    heatedBed: !!product.heated_bed,
     layerResolution: product.layer_resolution,
     picture: product.picture && product.picture.data.thumbnail_url,
     technology: product.technology ? product.technology.data.name : null,

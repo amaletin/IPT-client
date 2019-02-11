@@ -3,7 +3,7 @@ import { NextFunctionComponent } from 'next';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { loadCategories } from '../../actions/categoriesActions';
-import { setFilter } from '../../actions/filterActions';
+import { setFilter, toggleFilterOpen } from '../../actions/filterActions';
 import { loadProducts } from '../../actions/productsActions';
 import { setConsumablesSorting } from '../../actions/sortingActions';
 import CategoryList from '../../components/catalog/CategoryList';
@@ -11,7 +11,7 @@ import ProductFilters from '../../components/catalog/ProductFilters';
 import ProductList from '../../components/catalog/ProductList';
 import Page from '../../components/common/Page';
 import { EFilterType, EProductType, EProductTypeString } from '../../lib/enums';
-import { IAppState, ICategory, ICommonFilter, IPriceRange, IProduct } from '../../lib/models';
+import { IAppState, ICategory, ICommonFilter, IProduct, IRange } from '../../lib/models';
 import { getCategoriesByParentId, getFilteredConsumablesByCategoryId } from '../../selectors';
 
 export interface IProps {
@@ -19,13 +19,14 @@ export interface IProps {
   consumables: IProduct[];
   filters: ICommonFilter;
   id: string | string[];
-  onSetFilter: (val: IPriceRange, state: ICommonFilter, filterType: EFilterType) => void;
+  onSetFilter: (val: IRange, state: ICommonFilter, filterType: EFilterType) => void;
+  onToggleFilterOpen: (filterType: EFilterType) => void;
   setSortOrder: () => void;
   sortOrder: string;
 }
 
 const Category: NextFunctionComponent<IProps> = ({ categories, consumables, filters,
-                                                  onSetFilter, setSortOrder, sortOrder }) => {
+                                                  onSetFilter, onToggleFilterOpen, setSortOrder, sortOrder }) => {
   return (
     <Page header={false}>
       <CategoryList categories={categories} />
@@ -33,6 +34,7 @@ const Category: NextFunctionComponent<IProps> = ({ categories, consumables, filt
         <div className="catalog--layout container">
           <ProductFilters
             filters={filters}
+            onToggleFilterOpen={onToggleFilterOpen}
             setFilter={onSetFilter}
             type={EProductType.CONSUMABLE}
           />
@@ -62,8 +64,10 @@ Category.getInitialProps = async ({ reduxStore, query }) => {
     consumables: getFilteredConsumablesByCategoryId(reduxStore.getState(), { id }),
     filters: reduxStore.getState().filters.consumables,
     id,
-    onSetFilter: (val: IPriceRange, state: ICommonFilter, filterType: EFilterType) =>
+    onSetFilter: (val: IRange, state: ICommonFilter, filterType: EFilterType) =>
       reduxStore.dispatch(setFilter(val, state, filterType, EProductTypeString.CONSUMABLE)),
+    onToggleFilterOpen: (filterType: EFilterType) =>
+      reduxStore.dispatch(toggleFilterOpen(filterType, EProductTypeString.CONSUMABLE)),
     setSortOrder: () => reduxStore.dispatch(setConsumablesSorting()),
     sortOrder: reduxStore.getState().sorting.consumables,
   };
@@ -77,8 +81,10 @@ const mapStateToProps = (state: IAppState, ownProps: IProps) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onSetFilter: (val: IPriceRange, state: ICommonFilter, filterType: EFilterType) =>
+  onSetFilter: (val: IRange, state: ICommonFilter, filterType: EFilterType) =>
     dispatch(setFilter(val, state, filterType, EProductTypeString.CONSUMABLE)),
+  onToggleFilterOpen: (filterType: EFilterType) =>
+    dispatch(toggleFilterOpen(filterType, EProductTypeString.CONSUMABLE)),
   setSortOrder: () => dispatch(setConsumablesSorting()),
 });
 

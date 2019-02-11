@@ -27,10 +27,15 @@ export enum EFilterType {
   BRAND = 'brands',
   TECHNNOLOGY = 'technology',
   CHAMBER_TYPE = 'chamberType',
-  CHAMBER_LENTH = 'chamberLength',
-  CHAMBER_WIDTH = 'chamberWidth',
-  CHAMBER_HEIGHT = 'chamberHeight',
+  CHAMBER_SIZE = 'chamberSize',
   EXTRUDERS = 'extruders',
   LAYER_RESOLUTION = 'layerResolution',
   HEATED_BED = 'heatedBed',
+}
+
+export enum EFilterBlockType {
+  ARRAY = 'array',
+  BOOLEAN = 'boolean',
+  PRICE = 'price',
+  SIZE = 'size',
 }

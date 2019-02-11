@@ -1,30 +1,33 @@
 import { NextFunctionComponent } from 'next';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { setFilter } from '../../actions/filterActions';
+import { setFilter, toggleFilterOpen } from '../../actions/filterActions';
 import { loadProducts } from '../../actions/productsActions';
 import { setScannersSorting } from '../../actions/sortingActions';
 import ProductFilters from '../../components/catalog/ProductFilters';
 import ProductList from '../../components/catalog/ProductList';
 import Page from '../../components/common/Page';
 import { EFilterType, EProductType, EProductTypeString } from '../../lib/enums';
-import { IAppState, ICommonFilter, IPriceRange, IProduct } from '../../lib/models';
+import { IAppState, ICommonFilter, IProduct, IRange } from '../../lib/models';
 import { getFilteredScanners } from '../../selectors';
 
 export interface IProps {
   filters: ICommonFilter;
   scanners: IProduct[];
-  onSetFilter: (val: IPriceRange, state: ICommonFilter, filterType: EFilterType) => void;
+  onSetFilter: (val: IRange, state: ICommonFilter, filterType: EFilterType) => void;
+  onToggleFilterOpen: (filterType: EFilterType) => void;
   setSortOrder: () => void;
   sortOrder: string;
 }
 
-const Scanners: NextFunctionComponent<IProps> = ({ filters, onSetFilter, scanners, setSortOrder, sortOrder }) => {
+const Scanners: NextFunctionComponent<IProps> = ({ filters, onSetFilter, onToggleFilterOpen,
+                                                   scanners, setSortOrder, sortOrder }) => {
   return (
     <Page title="3D Сканеры">
       <div className="catalog--layout container">
         <ProductFilters
           filters={filters}
+          onToggleFilterOpen={onToggleFilterOpen}
           setFilter={onSetFilter}
           type={EProductType.SCANER}
         />
@@ -48,8 +51,10 @@ Scanners.getInitialProps = async ({ reduxStore }) => {
   await reduxStore.dispatch(loadProducts(EProductType.SCANER));
   return {
     filters: reduxStore.getState().filters.scanners,
-    onSetFilter: (val: IPriceRange, state: ICommonFilter, filterType: EFilterType) =>
+    onSetFilter: (val: IRange, state: ICommonFilter, filterType: EFilterType) =>
       reduxStore.dispatch(setFilter(val, state, filterType, EProductTypeString.SCANER)),
+    onToggleFilterOpen: (filterType: EFilterType) =>
+      reduxStore.dispatch(toggleFilterOpen(filterType, EProductTypeString.SCANER)),
     scanners: getFilteredScanners(reduxStore.getState()),
     setSortOrder: () => reduxStore.dispatch(setScannersSorting()),
     sortOrder: reduxStore.getState().sorting.scanners,
@@ -63,8 +68,9 @@ const mapStateToProps = (state: IAppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onSetFilter: (val: IPriceRange, state: ICommonFilter, filterType: EFilterType) =>
+  onSetFilter: (val: IRange, state: ICommonFilter, filterType: EFilterType) =>
     dispatch(setFilter(val, state, filterType, EProductTypeString.SCANER)),
+  onToggleFilterOpen: (filterType: EFilterType) => dispatch(toggleFilterOpen(filterType, EProductTypeString.SCANER)),
   setSortOrder: () => dispatch(setScannersSorting()),
 });
 
