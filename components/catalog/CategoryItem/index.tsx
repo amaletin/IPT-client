@@ -11,7 +11,7 @@ const pictureUrl = (category: ICategory) => {
   if (isEmpty(category.picture)) {
     return '/static/images/image-placeholder.png';
   }
-  return `https://3dapi.amaletin.ru${category.picture}`;
+  return `https://3dapi.amaletin.ru/thumbnail/300/300/crop/best/${category.picture}`;
 };
 
 const CategoryItem: React.FC<IProps> = ({ category }) => (

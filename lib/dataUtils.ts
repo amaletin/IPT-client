@@ -30,7 +30,7 @@ export const processProduct = (product: IProductRaw): IProduct => {
     chamberWidth: product.chamber_height ? parseInt(product.chamber_width, 10) : null,
     heatedBed: !!product.heated_bed,
     layerResolution: product.layer_resolution,
-    picture: product.picture && product.picture.data.url,
+    picture: product.picture && product.picture.data.name,
     technology: product.technology ? product.technology.data.name : null,
     type: product.type.data.id,
   };
@@ -45,7 +45,7 @@ export const processCategory = (category: ICategoryRaw): ICategory => {
   return {
     ...category,
     parent: !isEmpty(category.parent) ? category.parent.data.id : null,
-    picture: !isEmpty(category.picture) && category.picture.data.thumbnail_url,
+    picture: !isEmpty(category.picture) && category.picture.data.name,
     type: category.type.data.id,
   };
 };

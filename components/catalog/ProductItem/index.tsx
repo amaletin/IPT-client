@@ -11,7 +11,7 @@ const pictureUrl = (product: IProduct) => {
   if (isEmpty(product.picture)) {
     return '/static/images/image-placeholder.png';
   }
-  return `https://3dapi.amaletin.ru${product.picture}`;
+  return `https://3dapi.amaletin.ru/thumbnail/500/500/contain/best/${product.picture}`;
 };
 
 const ProductItem: React.FC<IProps> = ({ product }) => (
