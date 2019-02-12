@@ -23,8 +23,8 @@ const ProductDetails: React.FC<IProps> = ({ product }) => (
       </div>
       <div className="product-details--spec">
         <ul className="product-details--spec--list">
-          {product.brand && <li><span>Производитель</span><span>{product.brand.name}</span></li>}
-          {product.technology && <li><span>Технология печати</span><span>{product.technology.name}</span></li>}
+          {product.brand && <li><span>Производитель</span><span>{product.brand}</span></li>}
+          {product.technology && <li><span>Технология печати</span><span>{product.technology}</span></li>}
           {product.chamberType && (
             <li>
               <span>Камера печати</span>

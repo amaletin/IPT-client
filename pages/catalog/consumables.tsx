@@ -6,6 +6,7 @@ import { loadCategories } from '../../actions/categoriesActions';
 import { setFilter, toggleFilterOpen } from '../../actions/filterActions';
 import { loadProducts } from '../../actions/productsActions';
 import { setConsumablesSorting } from '../../actions/sortingActions';
+import CatalogLayout from '../../components/catalog/CatalogLayout';
 import CategoryList from '../../components/catalog/CategoryList';
 import ProductFilters from '../../components/catalog/ProductFilters';
 import ProductList from '../../components/catalog/ProductList';
@@ -30,29 +31,21 @@ const Consumables: NextFunctionComponent<IProps> = ({ categories, consumables, f
     <Page title="Расходные материалы">
       <CategoryList categories={categories} />
       {!isEmpty(consumables) && (
-        <>
-          <div className="catalog--layout container">
-            <ProductFilters
-              filters={filters}
-              onToggleFilterOpen={onToggleFilterOpen}
-              setFilter={onSetFilter}
-              type={EProductType.CONSUMABLE}
-            />
-            <ProductList
-              className="catalog--container--main"
-              products={consumables}
-              sortOrder={sortOrder}
-              setSortOrder={setSortOrder}
-            />
-          </div>
-        </>
+        <CatalogLayout>
+          <ProductFilters
+            filters={filters}
+            onToggleFilterOpen={onToggleFilterOpen}
+            setFilter={onSetFilter}
+            type={EProductType.CONSUMABLE}
+          />
+          <ProductList
+            className="catalog--container--main"
+            products={consumables}
+            sortOrder={sortOrder}
+            setSortOrder={setSortOrder}
+          />
+        </CatalogLayout>
       )}
-      <style jsx>{`
-        .catalog--layout {
-          display: flex;
-          justify-content: center;
-        }
-      `}</style>
     </Page>
   );
 };

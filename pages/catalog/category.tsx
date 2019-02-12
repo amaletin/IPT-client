@@ -6,6 +6,7 @@ import { loadCategories } from '../../actions/categoriesActions';
 import { setFilter, toggleFilterOpen } from '../../actions/filterActions';
 import { loadProducts } from '../../actions/productsActions';
 import { setConsumablesSorting } from '../../actions/sortingActions';
+import CatalogLayout from '../../components/catalog/CatalogLayout';
 import CategoryList from '../../components/catalog/CategoryList';
 import ProductFilters from '../../components/catalog/ProductFilters';
 import ProductList from '../../components/catalog/ProductList';
@@ -32,7 +33,7 @@ const Category: NextFunctionComponent<IProps> = ({ categories, consumables, curr
     <Page title={currentCategorie.name}>
       <CategoryList categories={categories} />
       {!isEmpty(consumables) && (
-        <div className="catalog--layout container">
+        <CatalogLayout>
           <ProductFilters
             filters={filters}
             onToggleFilterOpen={onToggleFilterOpen}
@@ -45,7 +46,7 @@ const Category: NextFunctionComponent<IProps> = ({ categories, consumables, curr
             setSortOrder={setSortOrder}
             sortOrder={sortOrder}
           />
-        </div>
+        </CatalogLayout>
       )}
       <style jsx>{`
         .catalog--layout {

@@ -4,6 +4,7 @@ import { Dispatch } from 'redux';
 import { setFilter, toggleFilterOpen } from '../../actions/filterActions';
 import { loadProducts } from '../../actions/productsActions';
 import { setPrintersSorting } from '../../actions/sortingActions';
+import CatalogLayout from '../../components/catalog/CatalogLayout';
 import ProductFilters from '../../components/catalog/ProductFilters';
 import ProductList from '../../components/catalog/ProductList';
 import Page from '../../components/common/Page';
@@ -25,7 +26,7 @@ const Printers: NextFunctionComponent<IProps> = ({
   const handleSetSortOrder = () => setSortOrder();
   return (
     <Page title="3D Принтеры">
-      <div className="catalog--layout container">
+      <CatalogLayout>
         <ProductFilters
           filters={filters}
           setFilter={onSetFilter}
@@ -38,13 +39,7 @@ const Printers: NextFunctionComponent<IProps> = ({
           sortOrder={sortOrder}
           setSortOrder={handleSetSortOrder}
         />
-      </div>
-      <style jsx>{`
-        .catalog--layout {
-          display: flex;
-          justify-content: center;
-        }
-      `}</style>
+      </CatalogLayout>
     </Page>
   );
 };

@@ -4,6 +4,7 @@ import { Dispatch } from 'redux';
 import { setFilter, toggleFilterOpen } from '../../actions/filterActions';
 import { loadProducts } from '../../actions/productsActions';
 import { setScannersSorting } from '../../actions/sortingActions';
+import CatalogLayout from '../../components/catalog/CatalogLayout';
 import ProductFilters from '../../components/catalog/ProductFilters';
 import ProductList from '../../components/catalog/ProductList';
 import Page from '../../components/common/Page';
@@ -24,7 +25,7 @@ const Scanners: NextFunctionComponent<IProps> = ({ filters, onSetFilter, onToggl
                                                    scanners, setSortOrder, sortOrder }) => {
   return (
     <Page title="3D Сканеры">
-      <div className="catalog--layout container">
+      <CatalogLayout>
         <ProductFilters
           filters={filters}
           onToggleFilterOpen={onToggleFilterOpen}
@@ -37,13 +38,7 @@ const Scanners: NextFunctionComponent<IProps> = ({ filters, onSetFilter, onToggl
           setSortOrder={setSortOrder}
           sortOrder={sortOrder}
         />
-      </div>
-      <style jsx>{`
-        .catalog--layout {
-          display: flex;
-          justify-content: center;
-        }
-      `}</style>
+      </CatalogLayout>
     </Page>
   );
 };

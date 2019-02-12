@@ -120,8 +120,6 @@ const ProductFilters: React.FC<IProps> = ({
       </div>
       <style jsx>{`
         .filters--container {
-          display: none;
-          width: 25%;
         }
         .filters--inner {
           box-shadow: ${ shadows.boxShadowLite };
