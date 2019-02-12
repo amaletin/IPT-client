@@ -1,5 +1,6 @@
 import React from 'react';
 import { IRange } from '../../../lib/models';
+import { colors } from '../../../lib/styleguide';
 
 interface IProps {
   filter: IRange;
@@ -51,7 +52,8 @@ const SizeFilterChunk: React.FC<IProps> = ({ filter, onSetFilter, title, type })
 
         .size-input {
           box-sizing: border-box;
-          font-size: 14px;
+          color: ${ colors.greyDark };
+          font-size: 16px;
           margin: 5px;
           outline: none;
           padding: 5px;

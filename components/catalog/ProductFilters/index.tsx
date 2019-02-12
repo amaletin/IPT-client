@@ -1,7 +1,9 @@
 import { isEmpty } from 'lodash';
+import { useState } from 'react';
 import { EFilterBlockType, EFilterType, EProductType } from '../../../lib/enums';
 import { ICommonFilter, IPrintersFilters } from '../../../lib/models';
-import { breakpoints, shadows } from '../../../lib/styleguide';
+import { breakpoints, colors } from '../../../lib/styleguide';
+import FilterIcon from '../../icons/Filter';
 import FilterBlock from '../FilterBlock';
 import PriceFilter from '../PriceFilter';
 
@@ -99,10 +101,15 @@ const ProductFilters: React.FC<IProps> = ({
   onToggleFilterOpen,
   type,
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleToggle = () => setIsOpen(!isOpen);
   return (
     <div className="filters--container">
+      <div className="filters--header" onClick={handleToggle}>
+        <FilterIcon color={colors.greyDark} size="30px" />
+        <span>Фильтры</span>
+      </div>
       <div className="filters--inner">
-        <h3>Фильтры</h3>
         <FilterBlock
           block={filters.price}
           filterType={EFilterType.PRICE}
@@ -120,18 +127,40 @@ const ProductFilters: React.FC<IProps> = ({
       </div>
       <style jsx>{`
         .filters--container {
+          margin-bottom: 10px;
         }
+
+        .filters--header {
+          margin: 0;
+          font-size: 30;
+          font-weight: normal;
+          line-height: 30px;
+          background: ${ colors.greyTransparent };
+          color: ${ colors.greyDark };
+          font-weight: bold;
+          cursor: pointer;
+          text-transform: uppercase;
+          padding: 0px 5px;
+          user-select: none;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+
         .filters--inner {
-          box-shadow: ${ shadows.boxShadowLite };
+          display: ${isOpen ? 'block' : 'none'};
           padding: 10px 15px;
         }
 
         @media screen and (min-width: ${ breakpoints.md }px) {
           .filters--container {
-            display: block;
             margin-right: 10px;
             min-width: 290px;
             width: 290px;
+          }
+
+          .filters--inner {
+            display: ${isOpen ? 'block' : 'block'};
           }
         }
       `}</style>

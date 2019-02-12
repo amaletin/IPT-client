@@ -28,12 +28,10 @@ const CatalogTools: React.FC<IProps> = ({ onChangeSorting, sortOrder }) => (
       .catalog-tools--sorting {
         background: ${ colors.greyTransparent };
         height: 30px;
-        background: rgba(238, 239, 240, 0.76);
-        height: 30px;
         text-align: right;
         padding: 0px 5px;
         line-height: 30px;
-        color: rgb(136, 136, 136);
+        color: ${ colors.greyDark };
         font-weight: bold;
         cursor: pointer;
         user-select: none;

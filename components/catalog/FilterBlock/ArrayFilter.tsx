@@ -1,5 +1,6 @@
 import { map } from 'lodash';
 import { EFilterType } from '../../../lib/enums';
+import { breakpoints } from '../../../lib/styleguide';
 
 interface IProps {
   block: any;
@@ -25,8 +26,20 @@ const ArrayFilter: React.FC<IProps> = ({ block, filterType, setFilter }) => {
         );
       })}
       <style jsx>{`
+        .filters--checkbox--item {
+          font-size: 3;
+          line-height: 2;
+        }
+
         .filters--checkbox--item input {
           margin-right: 10px;
+        }
+
+        @media screen and (min-width: ${ breakpoints.md }px) {
+          .filters--checkbox--item {
+            font-size: initial;
+            line-height: initial;
+          }
         }
       `}</style>
     </div>

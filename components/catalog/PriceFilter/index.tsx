@@ -2,6 +2,7 @@ import React from 'react';
 import InputRange from 'react-input-range';
 import { EFilterType } from '../../../lib/enums';
 import { IFilterBlock, IPriceFilterBlock, IRange } from '../../../lib/models';
+import { colors } from '../../../lib/styleguide';
 
 interface IProps {
   filters: IFilterBlock<IPriceFilterBlock>;
@@ -123,7 +124,8 @@ class PriceFilter extends React.Component<IProps, IState> {
 
           .price--block--inputs input {
             box-sizing: border-box;
-            font-size: 14px;
+            color: ${ colors.greyDark };
+            font-size: 16px;
             outline: none;
             padding: 5px;
             width: 48%;

@@ -1,4 +1,5 @@
 import { EFilterBlockType, EFilterType } from '../../../lib/enums';
+import { colors } from '../../../lib/styleguide';
 import ArrayFilter from './ArrayFilter';
 import BooleanFilter from './BooleanFilter';
 import SizeFilter from './SizeFilter';
@@ -42,17 +43,27 @@ const FilterBlock: React.SFC<IProps> = ({block, children, filterType, onToggleFi
         .filters--block {
           margin: 5px 0;
           user-select: none;
+          box-shadow: -1px 0 0 0 #e6e6e6 inset,
+                    0 -1px 0 0 #e6e6e6 inset,
+                    -1px -1px 0 0 #e6e6e6,
+                    -1px 0 0 0 #e6e6e6,
+                    0 -1px 0 0 #e6e6e6;
         }
 
         .filters--block--header {
-          background: #f2f3f3;
+          background: ${ colors.greyTransparent };
+          color: ${ colors.greyDark };
           cursor: pointer;
-          padding: 8px;
+          padding: 0 8px;
+          font-size: 18px;
+          font-weight: 300;
+          line-height: 34px;
         }
 
         .filters--block--inner {
-          border: 1px solid #f2f3f3;
+          border: 1px solid ${ colors.greyTransparent };
           padding: 8px;
+          color: ${ colors.greyDark };
         }
       `}</style>
     </div>
