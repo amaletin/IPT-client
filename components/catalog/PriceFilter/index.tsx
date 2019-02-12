@@ -115,14 +115,34 @@ class PriceFilter extends React.Component<IProps, IState> {
           )}
         </div>
         <style jsx>{`
-          .filters--block--inner {
-            padding: 20px;
-          }
-
           .price--block--inputs {
             box-sizing: border-box;
             display: flex;
-            padding: 30px 0;
+            justify-content: space-between;
+          }
+
+          .price--block--inputs input {
+            box-sizing: border-box;
+            font-size: 14px;
+            outline: none;
+            padding: 5px;
+            width: 48%;
+          }
+
+          .price--block--slider {
+            padding: 12px 8px 23px;
+          }
+
+          .price--block--slider :global(.input-range__label.input-range__label--value) {
+            display: none;
+          }
+
+          .price--block--slider :global(.input-range__label-container) {
+            left: 0;
+          }
+
+          .price--block--slider :global().input-range__label--max .input-range__label-container) {
+            left: 0;
           }
         `}</style>
       </div>

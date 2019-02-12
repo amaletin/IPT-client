@@ -8,7 +8,7 @@ interface IProps {
 }
 const ArrayFilter: React.FC<IProps> = ({ block, filterType, setFilter }) => {
   return (
-    <>
+    <div>
       {map(block.filter.all, (option) => {
         const handleCheckboxClick = () => setFilter( option, block, filterType);
         return (
@@ -24,7 +24,12 @@ const ArrayFilter: React.FC<IProps> = ({ block, filterType, setFilter }) => {
           </div>
         );
       })}
-    </>
+      <style jsx>{`
+        .filters--checkbox--item input {
+          margin-right: 10px;
+        }
+      `}</style>
+    </div>
   );
 };
 

@@ -25,7 +25,7 @@ const SizeFilterChunk: React.FC<IProps> = ({ filter, onSetFilter, title, type })
 
   return (
     <label className="size-label">
-      {title} от
+      <span className="size-filter--title">{title}</span> от
       <input
         type="text"
         className="size-input"
@@ -44,8 +44,18 @@ const SizeFilterChunk: React.FC<IProps> = ({ filter, onSetFilter, title, type })
           display: block;
         }
 
+        .size-filter--title {
+          display: inline-block;
+          width: 80px;
+        }
+
         .size-input {
-          width: 30px;
+          box-sizing: border-box;
+          font-size: 14px;
+          margin: 5px;
+          outline: none;
+          padding: 5px;
+          width: 50px;
         };
       `}</style>
     </label>

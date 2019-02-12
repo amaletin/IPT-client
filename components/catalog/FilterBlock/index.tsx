@@ -27,12 +27,34 @@ const FilterBlock: React.SFC<IProps> = ({block, children, filterType, onToggleFi
   const handleToggleFilterOpen = () => onToggleFilterOpen(filterType);
   return (
     <div className="filters--block">
-      <p onClick={handleToggleFilterOpen}>{title}:</p>
+      <div
+        className="filters--block--header"
+        onClick={handleToggleFilterOpen}
+      >
+        <span>{title}</span>
+      </div>
       {block.isOpen && (
         <div className="filters--block--inner">
           {renderedFilter()}
         </div>
       )}
+      <style jsx>{`
+        .filters--block {
+          margin: 5px 0;
+          user-select: none;
+        }
+
+        .filters--block--header {
+          background: #f2f3f3;
+          cursor: pointer;
+          padding: 8px;
+        }
+
+        .filters--block--inner {
+          border: 1px solid #f2f3f3;
+          padding: 8px;
+        }
+      `}</style>
     </div>
   );
 };
