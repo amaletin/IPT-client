@@ -18,9 +18,7 @@ const ProductItem: React.FC<IProps> = ({ product }) => (
   <div className="product-item--container">
     <Link as={`/catalog/product/${product.id}`} href={`/catalog/product?id=${product.id}`}>
       <div className="product-item">
-        <div className="product-item--picture">
-          <img src={pictureUrl(product)} />
-        </div>
+        <div className="product-item--picture" />
         <div className="product-item--description">
           <p className="product-item--description--name">{product.name}</p>
           <p className="product-item--description--price">{product.price.toLocaleString('ru-RU')}<span> ₽</span></p>
@@ -31,7 +29,6 @@ const ProductItem: React.FC<IProps> = ({ product }) => (
       .product-item--container {
         box-sizing: border-box;
         padding: 5px;
-        min-width: 290px;
         box-shadow: -1px 0 0 0 #e6e6e6 inset,
                     0 -1px 0 0 #e6e6e6 inset,
                     -1px -1px 0 0 #e6e6e6,
@@ -39,6 +36,8 @@ const ProductItem: React.FC<IProps> = ({ product }) => (
                     0 -1px 0 0 #e6e6e6;
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
+        min-width: 100%;
+        width: 100%;
         overflow: hidden;
       }
 
@@ -52,7 +51,19 @@ const ProductItem: React.FC<IProps> = ({ product }) => (
         width: 100%;
       }
 
-      .product-item--picture img {
+      .product-item--picture {
+        background-image: url(${pictureUrl(product)});
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: relative;
+        width: 100%;
+      }
+
+      .product-item--picture:before{
+        content: "";
+        display: block;
+        padding-top: 100%; 	/* initial ratio of 1:1*/
       }
 
       .product-item--description {
@@ -82,9 +93,17 @@ const ProductItem: React.FC<IProps> = ({ product }) => (
         font-size: 16px;
       }
 
-      @media screen and (min-width: ${ breakpoints.md }px) {
+      @media screen and (min-width: ${ breakpoints.sm }px) {
+        .product-item--container {
+          min-width: 50%;
+          width: 50%;
+        }
+      }
+
+      @media screen and (min-width: ${ breakpoints.lg }px) {
         .product-item--container {
           min-width: 33.33333%;
+          width: 33.33333%;
         }
       }
     `}</style>

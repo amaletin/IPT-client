@@ -33,7 +33,7 @@ const Printers: NextFunctionComponent<IProps> = ({
           type={EProductType.PRINTER}
         />
         <ProductList
-          className="catalog--container--right"
+          className="catalog--container--main"
           products={printers}
           sortOrder={sortOrder}
           setSortOrder={handleSetSortOrder}

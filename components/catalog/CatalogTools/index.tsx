@@ -22,7 +22,7 @@ const CatalogTools: React.FC<IProps> = ({ onChangeSorting, sortOrder }) => (
     <style jsx>{`
       .catalog-tools--container {
         width: 100%;
-        padding-bottom: 20px;
+        padding-bottom: 10px;
       }
 
       .catalog-tools--sorting {
@@ -33,7 +33,6 @@ const CatalogTools: React.FC<IProps> = ({ onChangeSorting, sortOrder }) => (
         text-align: right;
         padding: 0px 5px;
         line-height: 30px;
-        margin-left: 5px;
         color: rgb(136, 136, 136);
         font-weight: bold;
         cursor: pointer;

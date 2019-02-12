@@ -131,6 +131,8 @@ const ProductFilters: React.FC<IProps> = ({
         @media screen and (min-width: ${ breakpoints.md }px) {
           .filters--container {
             display: block;
+            margin-right: 10px;
+            min-width: 290px;
             width: 290px;
           }
         }

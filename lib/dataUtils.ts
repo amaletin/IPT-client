@@ -30,7 +30,7 @@ export const processProduct = (product: IProductRaw): IProduct => {
     chamberWidth: product.chamber_height ? parseInt(product.chamber_width, 10) : null,
     heatedBed: !!product.heated_bed,
     layerResolution: product.layer_resolution,
-    picture: product.picture && product.picture.data.thumbnail_url,
+    picture: product.picture && product.picture.data.url,
     technology: product.technology ? product.technology.data.name : null,
     type: product.type.data.id,
   };

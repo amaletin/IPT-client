@@ -104,6 +104,13 @@ export const getRootCategories = createSelector(
   },
 );
 
+export const getCategorieById = createSelector(
+  [getCategories, (_, props) => props],
+  (categories: ICategory[], props) => {
+    return categories[props.id];
+  },
+);
+
 export const getCategoriesByParentId = createSelector(
   [getCategories, (_, props) => props],
   (categories: ICategory[], props) => {

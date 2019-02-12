@@ -27,11 +27,10 @@ export interface IProps {
 const Consumables: NextFunctionComponent<IProps> = ({ categories, consumables, filters,
                                                       onSetFilter, onToggleFilterOpen, setSortOrder, sortOrder }) => {
   return (
-    <Page title="3D Ручки">
+    <Page title="Расходные материалы">
       <CategoryList categories={categories} />
       {!isEmpty(consumables) && (
         <>
-          <h2>Товары без категории</h2>
           <div className="catalog--layout container">
             <ProductFilters
               filters={filters}
@@ -40,6 +39,7 @@ const Consumables: NextFunctionComponent<IProps> = ({ categories, consumables, f
               type={EProductType.CONSUMABLE}
             />
             <ProductList
+              className="catalog--container--main"
               products={consumables}
               sortOrder={sortOrder}
               setSortOrder={setSortOrder}

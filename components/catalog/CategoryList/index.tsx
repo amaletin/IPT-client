@@ -1,5 +1,6 @@
 import map from 'lodash/map';
 import { ICategory } from '../../../lib/models';
+import { breakpoints } from '../../../lib/styleguide';
 import CategoryItem from '../CategoryItem';
 
 export interface IProps {
@@ -8,11 +9,8 @@ export interface IProps {
 
 const CategoryList: React.FC<IProps> = ({ categories }) => {
   return (
-    <>
-      <div className="catalog--container">
-        <h2>Категории</h2>
-      </div>
-      <div className="container catalog--container">
+    <div>
+      <div className="container category-list">
         {categories
           && map(categories, (category: ICategory) => {
             return (
@@ -24,7 +22,21 @@ const CategoryList: React.FC<IProps> = ({ categories }) => {
             })
           }
       </div>
-    </>
+      <style jsx>{`
+        .category-list {
+          align-items: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-bottom: 40px;
+        }
+        @media screen and (min-width: ${ breakpoints.sm }px) {
+          .category-list {
+            flex-direction: row;
+          }
+        }
+      `}</style>
+    </div>
   );
 };
 

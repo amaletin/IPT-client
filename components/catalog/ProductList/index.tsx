@@ -30,6 +30,11 @@ const ProductList: React.FC<IProps> = ({ className = 'catalog--container', produ
       <style jsx>{`
         .productList--grid {
           display: flex;
+          flex-wrap: wrap;
+        }
+
+        .catalog--container--main {
+          flex-grow: 1;
         }
       `}</style>
     </div>

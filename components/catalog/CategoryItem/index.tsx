@@ -65,9 +65,9 @@ const CategoryItem: React.FC<IProps> = ({ category }) => (
         font-weight: bold;
       }
 
-      @media screen and (min-width: ${ breakpoints.md }px) {
+      @media screen and (min-width: ${ breakpoints.sm }px) {
         .category-item--container {
-          width: 33.33333%;
+          width: 20%;
         }
       }
     `}</style>

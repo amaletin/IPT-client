@@ -12,11 +12,12 @@ import ProductList from '../../components/catalog/ProductList';
 import Page from '../../components/common/Page';
 import { EFilterType, EProductType, EProductTypeString } from '../../lib/enums';
 import { IAppState, ICategory, ICommonFilter, IProduct, IRange } from '../../lib/models';
-import { getCategoriesByParentId, getFilteredConsumablesByCategoryId } from '../../selectors';
+import { getCategorieById, getCategoriesByParentId, getFilteredConsumablesByCategoryId } from '../../selectors';
 
 export interface IProps {
   categories: ICategory[];
   consumables: IProduct[];
+  currentCategorie: ICategory;
   filters: ICommonFilter;
   id: string | string[];
   onSetFilter: (val: IRange, state: ICommonFilter, filterType: EFilterType) => void;
@@ -25,10 +26,10 @@ export interface IProps {
   sortOrder: string;
 }
 
-const Category: NextFunctionComponent<IProps> = ({ categories, consumables, filters,
+const Category: NextFunctionComponent<IProps> = ({ categories, consumables, currentCategorie, filters,
                                                   onSetFilter, onToggleFilterOpen, setSortOrder, sortOrder }) => {
   return (
-    <Page header={false}>
+    <Page title={currentCategorie.name}>
       <CategoryList categories={categories} />
       {!isEmpty(consumables) && (
         <div className="catalog--layout container">
@@ -39,6 +40,7 @@ const Category: NextFunctionComponent<IProps> = ({ categories, consumables, filt
             type={EProductType.CONSUMABLE}
           />
           <ProductList
+            className="catalog--container--main"
             products={consumables}
             setSortOrder={setSortOrder}
             sortOrder={sortOrder}
@@ -62,6 +64,7 @@ Category.getInitialProps = async ({ reduxStore, query }) => {
   return {
     categories: getCategoriesByParentId(reduxStore.getState(), { id }),
     consumables: getFilteredConsumablesByCategoryId(reduxStore.getState(), { id }),
+    currentCategorie: getCategorieById(reduxStore.getState(), { id }),
     filters: reduxStore.getState().filters.consumables,
     id,
     onSetFilter: (val: IRange, state: ICommonFilter, filterType: EFilterType) =>
@@ -76,6 +79,7 @@ Category.getInitialProps = async ({ reduxStore, query }) => {
 const mapStateToProps = (state: IAppState, ownProps: IProps) => ({
   categories: getCategoriesByParentId(state, ownProps),
   consumables: getFilteredConsumablesByCategoryId(state, ownProps),
+  currentCategorie: getCategorieById(state, ownProps),
   filters: state.filters.consumables,
   sortOrder: state.sorting.consumables,
 });

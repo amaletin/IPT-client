@@ -32,6 +32,7 @@ const Scanners: NextFunctionComponent<IProps> = ({ filters, onSetFilter, onToggl
           type={EProductType.SCANER}
         />
         <ProductList
+          className="catalog--container--main"
           products={scanners}
           setSortOrder={setSortOrder}
           sortOrder={sortOrder}
