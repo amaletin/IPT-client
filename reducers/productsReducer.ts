@@ -1,3 +1,4 @@
+import { uniq } from 'lodash';
 import { Reducer } from 'redux';
 import {
   GET_PRODUCTS_FAIL,
@@ -15,7 +16,7 @@ const productsReducer: Reducer<IProductsState> = (state = initialState, action) 
   switch (action.type) {
     case GET_PRODUCTS_SUCCESS:
       return {
-        allIds: [ ...state.allIds, ...action.data.allIds ],
+        allIds: uniq([ ...state.allIds, ...action.data.allIds ]),
         byId: { ...state.byId,  ...action.data.byId },
       };
     case GET_PRODUCTS_FAIL:

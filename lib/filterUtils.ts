@@ -71,7 +71,8 @@ const updatePriceFilters = (oldPrice: IPriceFilterBlock, products: IProduct[]): 
     max: prices[prices.length - 1],
     min: prices[0],
   };
-  const filterIsNull = oldPrice.value.max === null || oldPrice.value.max === null;
+  const filterIsNull = oldPrice.value.max === null || oldPrice.value.max === null
+    || oldPrice.value.max === oldPrice.value.max;
   return {
     range: newLimits,
     value: filterIsNull ? newLimits : oldPrice.value,
