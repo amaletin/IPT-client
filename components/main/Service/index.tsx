@@ -128,16 +128,17 @@ const Service = () => (
       @media screen and (min-width: ${ breakpoints.lg }px) {
         .service--heading {
           background-position: right;
+          background-size: contain;
         }
 
-        .catalog--heading--inner {
+        .service--heading--inner {
           padding-bottom: 89px;
           padding-left: 104px;
           padding-top: 58px;
         }
 
-        .catalog--heading--inner span {
-          font-size: 38px;
+        .service--heading--inner span {
+          font-size: 28px;
         }
 
         .service--content--text h2 {

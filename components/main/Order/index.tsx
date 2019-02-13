@@ -128,18 +128,18 @@ const Order = () => (
 
       @media screen and (min-width: ${ breakpoints.lg }px) {
         .order--heading {
-          background-position: right;
-          background-size: initial;
+          background-position: center;
+          background-size: contain;
         }
 
-        .catalog--heading--inner {
+        .order--heading--inner {
           padding-bottom: 89px;
           padding-left: 104px;
           padding-top: 58px;
         }
 
-        .catalog--heading--inner span {
-          font-size: 38px;
+        .order--heading--inner span {
+          font-size: 28px;
         }
 
         .order--content--text h2 {

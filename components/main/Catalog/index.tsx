@@ -166,7 +166,7 @@ const Catalog = () => (
         }
 
         .catalog--heading--inner span {
-          font-size: 38px;
+          font-size: 28px;
         }
 
         .img-container {

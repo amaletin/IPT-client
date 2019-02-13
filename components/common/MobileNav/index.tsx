@@ -36,6 +36,7 @@ const NavItem: React.FC<IProps> = ({ item = {}, parent = false }) => {
         li a {
           color: ${ colors.white };
           font-size: 20px;
+          line-height: 42px;
           text-decoration: none;
           text-transform: uppercase;
         }
@@ -95,11 +96,13 @@ class MobileNav extends React.Component<IMobileNavProps> {
             width: 100vw;
             background: rgba(0, 0, 0, 0.8);
             transition: all ease-in-out 0.5s;
+            z-index: 10;
           }
 
           .close {
             box-sizing: border-box;
             height: 77px;
+            outline: none;
             text-align: right;
             padding-right: 37px;
             padding-top: 22px;
