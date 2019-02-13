@@ -19,40 +19,36 @@ const Header: React.FC<IProps> = ({ onToggleMobileNav }) => (
       <meta name="description" content="Магазин 3D принтеров." />
     </Head>
     <header className="header">
-      <div className="container">
-        <div className="header--inner">
-          <div className="header--logo">
-            <Link href="/">
-              <a>
-                <img src="/static/images/logo_.png" alt="logo" />
-              </a>
-            </Link>
+      <div className="header--inner">
+        <div className="header--logo">
+          <Link href="/">
+            <a>
+              <img src="/static/images/logo_.png" alt="logo" />
+            </a>
+          </Link>
+        </div>
+        <div className="header--right">
+          <div className="header--nav">
+            <MainNav />
           </div>
-          <div className="header--right">
-            <div className="header--nav">
-              <MainNav />
-            </div>
-            <div className="header--search">
-              <img src="/static/images/icons/search.svg" alt="search" />
-            </div>
-            <div
-              className="header--burger"
-              onClick={onToggleMobileNav}
-              onKeyDown={onToggleMobileNav}
-              role="button"
-              tabIndex={0}
-            >
-              <img src="/static/images/icons/menu.svg" alt="menu" />
-            </div>
+          <div className="header--search">
+            <img src="/static/images/icons/search.svg" alt="search" />
+          </div>
+          <div
+            className="header--burger"
+            onClick={onToggleMobileNav}
+            onKeyDown={onToggleMobileNav}
+            role="button"
+            tabIndex={0}
+          >
+            <img src="/static/images/icons/menu.svg" alt="menu" />
           </div>
         </div>
       </div>
       <style jsx>{`
         .header {
-          /*background: ${ colors.headerBlue };
-          background: ${ gradients.gradient1 };*/
-          background: url('/static/images/header-bg.jpg');
-          background-position: 26% top;
+          /*background: url('/static/images/header-bg.jpg');
+          background-position: 26% top;*/
           color: #FFFFFF;
           z-index: 100;
         }
@@ -64,41 +60,63 @@ const Header: React.FC<IProps> = ({ onToggleMobileNav }) => (
 
         .header--logo {
           align-items: center;
-          background: ${ colors.white };
+          background: #FFFFFF;
           box-sizing: border-box;
           display: flex;
+          flex: 1;
           margin-left: 21.5px;
-          margin-right: 80px;
-          /* min-width: 17%;
+          min-width: 120px;
           padding-left: 21.5px;
-          position: relative; */
+          position: relative;
         }
-
-        /* .header--logo:after {
-          border-left: solid 77px #FFFFFF;
-          border-top: solid 77px #FFFFFF;
-          border-bottom: solid 77px transparent;
-          border-right: solid 77px transparent;
-          content: "";
-          left: 100%;
-          position: absolute;
-          top: 0;
-        } */
 
         .header--logo img {
           max-height: 60px;
         }
 
-        .header--logo span {
-          font-family: ${ fonts.fontCirce };
-          font-size: 25px;
-          font-weight: 100;
-          line-height: 77px;
-          text-transform: uppercase;
+        .header--logo:after {
+          border-bottom: solid 0px transparent;
+          border-left: solid 0px #FFFFFF;
+          border-right: solid 100px transparent;
+          border-top: solid 77px #FFFFFF;
+          box-sizing: border-box;
+          content: "";
+          left: 100%;
+          position: absolute;
+          top: 0;
+          z-index: 1;
         }
 
         .header--right {
+          background: ${ colors.headerBlue };
+          background: ${ gradients.gradient1 };
           display: flex;
+          justify-content: flex-end;
+          position: relative;
+          padding-left: 100px;
+          width: 70%;
+        }
+
+        .header--right:before {
+          content: "";
+          position: absolute;
+          top: -24px;
+          border-left: 2px solid white;
+          left: 125px;
+          height: 126px;
+          transform: rotate(52deg);
+          opacity: 0.3;
+        }
+
+        .header--right:after {
+          content: "";
+          position: absolute;
+          top: -14px;
+          border-left: 2px solid white;
+          left: 118px;
+          height: 104px;
+          transform: rotate(-26deg);
+          opacity: 0.3;
         }
 
         .header--nav {
@@ -142,6 +160,7 @@ const Header: React.FC<IProps> = ({ onToggleMobileNav }) => (
 
           .header--nav {
             display: flex;
+            justify-content: flex-end;
           }
 
           .header--search {
@@ -151,93 +170,6 @@ const Header: React.FC<IProps> = ({ onToggleMobileNav }) => (
           .header--burger {
             display: none;
           }
-        }
-      `}</style>
-      <style jsx global>{`
-        @font-face {
-          font-family: 'Circe';
-          src: url("/static/fonts/Circe/Circe_1.otf") format("opentype");
-          font-weight: normal;
-          font-style: normal;
-          font-display: fallback
-        }
-
-        @font-face {
-          font-family: 'Circe Bold';
-          src: url("/static/fonts/Circe/CirceBold_1.otf") format("opentype");
-          font-weight: bold;
-          font-style: normal;
-          font-display: fallback
-        }
-
-        @font-face {
-          font-family: 'Circe Light';
-          src: url("/static/fonts/Circe/CIRCELIGHT_0.OTF") format("opentype");
-          font-weight: lighter;
-          font-style: normal;
-          font-display: fallback
-        }
-
-        @font-face {
-          font-family: 'Open Sans';
-          src: url("/static/fonts/OpenSans/OpenSans-Regular.ttf") format("truetype");
-          font-weight: normal;
-          font-style: normal;
-          font-display: fallback
-        }
-
-        body {
-          margin: 0;
-          font-family: 'OpenSans', sans-serif;
-        }
-
-        body.locked {
-          height: 100%;
-          overflow: hidden;
-          width: 100%;
-          position: fixed;
-        }
-
-        .container {
-          max-width: 1366px;
-          padding: 0 15px;
-          margin: 0 auto;
-        }
-
-        .catalog--container {
-          margin: 0 auto
-        }
-
-        .catalog--container,
-        .catalog--container--right{
-          display: flex;
-          flex: 1;
-          justify-content: flex-start;
-          flex-direction: column;
-          align-items: center;
-          max-width: 678px;
-          padding: 0 15px;
-        }
-
-        @media screen and (min-width: 768px) {
-          .catalog--container {
-            align-items: initial;
-            flex-direction: row;
-            flex-wrap: wrap;
-            margin: 0 auto
-          }
-
-          .catalog--container--right {
-            align-items: initial;
-            flex-direction: row;
-            flex-wrap: wrap;
-          }
-        }
-
-        .posts--content img {
-          max-width: 100%;
-          height: auto;
-          margin: 20px 0;
         }
       `}</style>
     </header>

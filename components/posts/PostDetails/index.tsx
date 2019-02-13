@@ -61,6 +61,14 @@ const PostDetails: React.FC<IProps> = ({ post }) => (
           color: ${ colors.textGreyLight };
           margin-top: 0;
         }
+
+        @media screen and (min-width: 768px) {
+          .posts--content img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+          }
+        }
       `}</style>
     </div>
   </>

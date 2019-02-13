@@ -12,7 +12,7 @@ export const colors = {
 };
 
 export const gradients = {
-  gradient1: 'linear-gradient(to right, #0dc5db 0%,#00a8b8 60%)',
+  gradient1: 'linear-gradient(to right, #0dc5db 0%,#00a8b8 100%)',
   gradient2: 'linear-gradient(to right, #00baab 0%,#00c0cd 53%,#00c3da 100%)',
 };
 
