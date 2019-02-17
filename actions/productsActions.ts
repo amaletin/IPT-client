@@ -29,9 +29,9 @@ export const loadProduct = (id: number) => (dispatch: Dispatch) => {
   );
 };
 
-export const loadProducts = (type: EProductType) => (dispatch: Dispatch) => {
+export const loadProducts = (types: EProductType) => (dispatch: Dispatch) => {
   dispatch(getProductsStart());
-  return fetchProducts(type).then(
+  return fetchProducts(types).then(
     (response) => {
       const data: IProductsState = processProducts(response.data);
       dispatch(getProductsSuccess(data));

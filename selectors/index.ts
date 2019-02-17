@@ -21,6 +21,7 @@ const getPenFilters = (state: IAppState): ICommonFilter => state.filters.pens;
 const getScannerFilters = (state: IAppState): ICommonFilter => state.filters.scanners;
 const getConsumableFilters = (state: IAppState): ICommonFilter => state.filters.consumables;
 export const getPosts = (state: IAppState): Dictionary<IPost> => state.posts.byId;
+const getFoundIds = (state: IAppState): number[] => state.search.foundIds;
 
 export const getPostById = createSelector(
   [getPosts, (_, props) => props],
@@ -128,4 +129,9 @@ export const getFilteredConsumablesByCategoryId = createSelector(
 export const getProductById = createSelector(
   [getProducts, (_, props) => props],
   (products: Dictionary<IProduct>, props) => products[props.id],
+);
+
+export const getSearchedProducts = createSelector(
+  [getProducts, getFoundIds],
+  (products: Dictionary<IProduct>, ids: number[]) => ids.map((id) => products[id]),
 );

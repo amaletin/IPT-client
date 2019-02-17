@@ -4,6 +4,7 @@ import categoriesReducer from './categoriesReducer';
 import filtersReducer from './filtersReducer';
 import postsReducer from './postsReducer';
 import productsReducer from './productsReducer';
+import searchReducer from './searchReducer';
 import sortingReducer from './sortingReducer';
 
 export const reducers: Reducer<IAppState> = combineReducers<IAppState>({
@@ -11,5 +12,6 @@ export const reducers: Reducer<IAppState> = combineReducers<IAppState>({
   filters: filtersReducer,
   posts: postsReducer,
   products: productsReducer,
+  search: searchReducer,
   sorting: sortingReducer,
 });

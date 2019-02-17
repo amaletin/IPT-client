@@ -4,6 +4,7 @@ import {
   GET_PRODUCTS_FAIL,
   GET_PRODUCTS_SUCCESS,
 } from '../actions/productsActions';
+import { SEARCH_PRODUCTS_SUCCESS } from '../actions/searchActions';
 import { EState } from '../lib/enums';
 import { IProductsState } from '../lib/models';
 
@@ -22,6 +23,11 @@ const productsReducer: Reducer<IProductsState> = (state = initialState, action) 
     case GET_PRODUCTS_FAIL:
       console.log(action.error); // tslint:disable-line no-console
       return { ...state, state: EState.FAIL };
+    case SEARCH_PRODUCTS_SUCCESS:
+      return {
+        allIds: uniq([ ...state.allIds, ...action.data.allIds ]),
+        byId: { ...state.byId,  ...action.data.byId },
+      };
     default: return state;
   }
 };

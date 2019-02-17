@@ -6,6 +6,7 @@ export interface IAppState {
   posts: IPostsState;
   products: IProductsState;
   categories: ICategoriesState;
+  search: ISearchState;
   sorting: ISortingState;
 }
 
@@ -36,6 +37,11 @@ export interface ISortingState {
   pens: string;
   scanners: string;
   consumables: string;
+}
+
+export interface ISearchState {
+  foundIds: number[];
+  searchString: string;
 }
 
 export interface ICommonFilter {

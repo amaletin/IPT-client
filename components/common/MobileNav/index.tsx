@@ -83,6 +83,11 @@ class MobileNav extends React.Component<IMobileNavProps> {
         <div className="mobile-nav">
           <ul className="mobile-nav--ul">
             {renderNav(routes)}
+            <li>
+              <Link href="/search">
+                <a>Поиск</a>
+              </Link>
+            </li>
           </ul>
         </div>
         <style jsx>{`
@@ -96,7 +101,7 @@ class MobileNav extends React.Component<IMobileNavProps> {
             width: 100vw;
             background: rgba(0, 0, 0, 0.8);
             transition: all ease-in-out 0.5s;
-            z-index: 10;
+            z-index: 300;
           }
 
           .close {
@@ -110,11 +115,25 @@ class MobileNav extends React.Component<IMobileNavProps> {
 
           .mobile-nav {
             box-sizing: border-box;
-            padding-bottom: 40px;
+            height: calc(100vh - 77px);
+            overflow-y: scroll;
+            padding-bottom: 80px;
           }
 
           .mobile-nav--ul {
             list-style: none;
+          }
+
+          li {
+          margin-bottom: 5px;
+          }
+
+          li a {
+            color: ${ colors.white };
+            font-size: 20px;
+            line-height: 42px;
+            text-decoration: none;
+            text-transform: uppercase;
           }
         `}</style>
       </div>

@@ -14,6 +14,10 @@ export const fetchProducts = (type: EProductType) => {
   );
 };
 
+export const fetchSearchProducts = (str: string) => {
+  return getFromAPI('products', {q: str});
+};
+
 export const fetchCategories = (type: EProductType) => {
   return getFromAPI('product_categories',
     {

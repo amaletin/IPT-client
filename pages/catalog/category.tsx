@@ -41,7 +41,6 @@ const Category: NextFunctionComponent<IProps> = ({ categories, consumables, curr
             type={EProductType.CONSUMABLE}
           />
           <ProductList
-            className="catalog--container--main"
             products={consumables}
             setSortOrder={setSortOrder}
             sortOrder={sortOrder}

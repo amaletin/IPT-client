@@ -5,6 +5,7 @@ import { breakpoints, colors } from '../../../lib/styleguide';
 
 export interface IProps {
   product: IProduct;
+  view?: string;
 }
 
 const pictureUrl = (product: IProduct) => {
@@ -14,14 +15,17 @@ const pictureUrl = (product: IProduct) => {
   return `https://3dapi.amaletin.ru/thumbnail/500/500/contain/best/${product.picture}`;
 };
 
-const ProductItem: React.FC<IProps> = ({ product }) => (
-  <div className="product-item--container">
+const ProductItem: React.FC<IProps> = ({ product, view = 'grid' }) => (
+  <div className={`product-item--container ${view}`}>
     <Link as={`/catalog/product/${product.id}`} href={`/catalog/product?id=${product.id}`}>
       <div className="product-item">
         <div className="product-item--picture" />
         <div className="product-item--description">
           <p className="product-item--description--name">{product.name}</p>
-          <p className="product-item--description--price">{product.price.toLocaleString('ru-RU')}<span> ₽</span></p>
+          <p className="product-item--description--brand">{product.brand}</p>
+        </div>
+        <div className="product-item--description--price">
+          <span>{product.price.toLocaleString('ru-RU')}<span> ₽</span></span>
         </div>
       </div>
     </Link>
@@ -51,6 +55,12 @@ const ProductItem: React.FC<IProps> = ({ product }) => (
         width: 100%;
       }
 
+      .list .product-item {
+        align-items: flex-start;
+        flex-direction: row;
+        padding: 5px;
+      }
+
       .product-item--picture {
         background-image: url(${pictureUrl(product)});
         background-position: center;
@@ -60,6 +70,12 @@ const ProductItem: React.FC<IProps> = ({ product }) => (
         width: 100%;
       }
 
+      .list .product-item--picture {
+        min-width: 100px;
+        width: 100px;
+        margin-right: 10px
+      }
+
       .product-item--picture:before{
         content: "";
         display: block;
@@ -67,8 +83,12 @@ const ProductItem: React.FC<IProps> = ({ product }) => (
       }
 
       .product-item--description {
-        height: 100%;
         width: 100%;
+        flex: 1;
+      }
+
+      .list .product-item--description {
+        overflow: hidden;
       }
 
       .product-item--description--name {
@@ -77,20 +97,35 @@ const ProductItem: React.FC<IProps> = ({ product }) => (
         text-transform: uppercase;
         font-weight: bold;
         color: ${ colors.pink };
-        height: 66px;
-        max-height: 66px;
         text-overflow: ellipsis;
         overflow: hidden;
         line-height: 22px;
-        -webkit-line-clamp: 3;
-        display: block;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
         -o-text-overflow: ellipsis;
       }
 
+      .list .product-item--description--name {
+        white-space: nowrap;
+      }
+
+      .product-item--description--brand {
+        color: ${ colors.greyDark };
+        margin: 0;
+      }
+
       .product-item--description--price {
-        font-size: 16px;
+        align-self: flex-end;
+        background: ${ colors.headerBlue };
+        color: ${ colors.white };
+        display: inline-block;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 10px;
+        text-align: right;
+      }
+
+      .list .product-item--description--price {
+        align-self: flex-start;
+        font-size: 14px;
       }
 
       @media screen and (min-width: ${ breakpoints.sm }px) {
@@ -98,12 +133,22 @@ const ProductItem: React.FC<IProps> = ({ product }) => (
           min-width: 50%;
           width: 50%;
         }
+
+        .list {
+          min-width: 100%;
+          width: 100%;
+        }
       }
 
       @media screen and (min-width: ${ breakpoints.lg }px) {
         .product-item--container {
           min-width: 33.33333%;
           width: 33.33333%;
+        }
+
+        .list {
+          min-width: 100%;
+          width: 100%;
         }
       }
     `}</style>

@@ -33,7 +33,6 @@ const Pens: NextFunctionComponent<IProps> = ({ filters, onSetFilter, onToggleFil
           type={EProductType.PEN}
         />
         <ProductList
-          className="catalog--container--main"
           products={pens}
           setSortOrder={setSortOrder}
           sortOrder={sortOrder}
