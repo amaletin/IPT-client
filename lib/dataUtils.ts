@@ -28,7 +28,7 @@ export const processProduct = (product: IProductRaw): IProduct => {
     chamberLength: product.chamber_height ? parseInt(product.chamber_length, 10) : null,
     chamberType: product.chamber_type,
     chamberWidth: product.chamber_height ? parseInt(product.chamber_width, 10) : null,
-    heatedBed: !!product.heated_bed,
+    heatedBed: product.heated_bed_enum ? product.heated_bed_enum : null,
     layerResolution: product.layer_resolution,
     picture: product.picture && product.picture.data.name,
     technology: product.technology ? product.technology.data.name : null,

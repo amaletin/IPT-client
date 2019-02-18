@@ -25,11 +25,6 @@ const initialArray = {
   isOpen: false,
 };
 
-const initialBoolean = {
-  filter: false,
-  isOpen: false,
-};
-
 const initialSize: IFilterBlock<IChamberSizeFilterBlock> = {
   filter: {
     height: initialRange,
@@ -53,7 +48,7 @@ const initialState: IFiltersState = {
     chamberSize: initialSize,
     chamberType: initialArray,
     extruders: initialArray,
-    heatedBed: initialBoolean,
+    heatedBed: initialArray,
     layerResolution: initialArray,
     price: initialPrice,
     technology: initialArray,

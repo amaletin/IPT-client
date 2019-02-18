@@ -63,7 +63,7 @@ export interface IPrintersFilters extends ICommonFilter {
   technology: IFilterBlock<IArrayFilterBlock>;
   chamberSize: IFilterBlock<IChamberSizeFilterBlock>;
   chamberType: IFilterBlock<IArrayFilterBlock>;
-  heatedBed: IFilterBlock<boolean>;
+  heatedBed: IFilterBlock<IArrayFilterBlock>;
   layerResolution: IFilterBlock<IArrayFilterBlock>;
   extruders: IFilterBlock<IArrayFilterBlock>;
 }
@@ -105,7 +105,7 @@ export interface IProduct {
   chamberLength?: number;
   chamberType?: string;
   chamberWidth?: number;
-  heatedBed?: boolean;
+  heatedBed?: string;
   layerResolution?: string;
   extruders?: number;
   description?: string;

@@ -71,15 +71,17 @@ const renderPrinterFilters = (filters: IPrintersFilters, setFilter, onToggleFilt
           type={EFilterBlockType.ARRAY}
         />
       )}
-      <FilterBlock
-        block={filters.heatedBed}
-        filterType={EFilterType.HEATED_BED}
-        key="heatedBed-filter"
-        onToggleFilterOpen={onToggleFilterOpen}
-        setFilter={setFilter}
-        title="Подогреваемый стол"
-        type={EFilterBlockType.BOOLEAN}
-      />
+      {!isEmpty(filters.layerResolution.filter) && (
+        <FilterBlock
+          block={filters.heatedBed}
+          filterType={EFilterType.HEATED_BED}
+          key="heatedBed-filter"
+          onToggleFilterOpen={onToggleFilterOpen}
+          setFilter={setFilter}
+          title="Подогреваемый стол"
+          type={EFilterBlockType.ARRAY}
+        />
+      )}
     </>
   );
 };

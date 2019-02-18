@@ -62,6 +62,7 @@ export interface IProductRaw {
   description?: string;
   extruders?: number;
   heated_bed?: boolean;
+  heated_bed_enum?: string;
   id: number;
   layer_resolution?: string;
   name: string;

@@ -34,7 +34,8 @@ export const filterPrinters = (filters: IPrintersFilters, printers: IProduct[]):
         || filters.extruders.filter.selected.includes(prod.extruders.toString()))
       && (isEmpty(filters.layerResolution.filter.selected)
         || filters.layerResolution.filter.selected.includes(prod.layerResolution.toString()))
-      && (!filters.heatedBed.filter || filters.heatedBed.filter === prod.heatedBed)
+        && (isEmpty(filters.heatedBed.filter.selected)
+        || filters.heatedBed.filter.selected.includes(prod.heatedBed.toString()))
       && filterBySize(prod.chamberHeight, filters.chamberSize.filter.height)
       && filterBySize(prod.chamberLength, filters.chamberSize.filter.length)
       && filterBySize(prod.chamberWidth, filters.chamberSize.filter.width)
@@ -89,6 +90,7 @@ const updatePrintersFilters = (state: IPrintersFilters, products: IProduct[]): I
     brands: { ...state.brands, filter: updateArrayFilter(state.brands.filter, products, 'brand') },
     chamberType: { ...state.chamberType, filter: updateArrayFilter(state.chamberType.filter, products, 'chamberType') },
     extruders: { ...state.extruders, filter: updateArrayFilter(state.extruders.filter, products, 'extruders') },
+    heatedBed: { ...state.heatedBed, filter: updateArrayFilter(state.extruders.filter, products, 'heatedBed') },
     layerResolution: {
       ...state.layerResolution,
       filter: updateArrayFilter(state.layerResolution.filter, products, 'layerResolution'),

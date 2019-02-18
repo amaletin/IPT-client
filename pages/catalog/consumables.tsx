@@ -1,4 +1,3 @@
-import isEmpty from 'lodash/isEmpty';
 import { NextFunctionComponent } from 'next';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';

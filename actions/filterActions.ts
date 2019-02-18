@@ -18,20 +18,15 @@ export const setFilter = (value, state, filterType: EFilterType, productType: EP
   switch (filterType) {
     case EFilterType.PRICE:
       return { ...action, data: setPriceFilter(state, value) };
-    case EFilterType.BRAND:
-      return { ...action, data: setArrayFilter(state, value) };
-    case EFilterType.TECHNNOLOGY:
-      return { ...action, data: setArrayFilter(state, value) };
     case EFilterType.CHAMBER_SIZE:
       return { ...action, data: setSizeFilter(state, value) };
+    case EFilterType.BRAND:
+    case EFilterType.TECHNNOLOGY:
     case EFilterType.CHAMBER_TYPE:
-      return { ...action, data: setArrayFilter(state, value) };
     case EFilterType.EXTRUDERS:
-      return { ...action, data: setArrayFilter(state, value) };
     case EFilterType.LAYER_RESOLUTION:
-      return { ...action, data: setArrayFilter(state, value) };
     case EFilterType.HEATED_BED:
-      return { ...action, data: { ...state, filter: value} };
+      return { ...action, data: setArrayFilter(state, value) };
     default:
       return { ...action, type: SET_FILTER_FAILURE};
   }
