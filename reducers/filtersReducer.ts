@@ -41,9 +41,11 @@ const initialSize: IFilterBlock<IChamberSizeFilterBlock> = {
 
 const initialState: IFiltersState = {
   consumables: {
+    brands: initialArray,
     price: initialPrice,
   },
   pens: {
+    brands: initialArray,
     price: initialPrice,
   },
   printers: {
@@ -57,6 +59,7 @@ const initialState: IFiltersState = {
     technology: initialArray,
   },
   scanners: {
+    brands: initialArray,
     price: initialPrice,
   },
 };

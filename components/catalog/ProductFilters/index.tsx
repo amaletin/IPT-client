@@ -18,17 +18,6 @@ const renderPrinterFilters = (filters: IPrintersFilters, setFilter, onToggleFilt
   const setFilterOpen = () => setFilterOpen();
   return (
     <>
-      {!isEmpty(filters.brands.filter) && (
-        <FilterBlock
-          block={filters.brands}
-          filterType={EFilterType.BRAND}
-          key="brand-filter"
-          onToggleFilterOpen={onToggleFilterOpen}
-          setFilter={setFilter}
-          title="Производители"
-          type={EFilterBlockType.ARRAY}
-        />
-      )}
       {!isEmpty(filters.technology.filter) && (
         <FilterBlock
           block={filters.technology}
@@ -121,6 +110,17 @@ const ProductFilters: React.FC<IProps> = ({
             setFilter={setFilter}
           />
         </FilterBlock>
+        {!isEmpty(filters.brands.filter) && (
+          <FilterBlock
+            block={filters.brands}
+            filterType={EFilterType.BRAND}
+            key="brand-filter"
+            onToggleFilterOpen={onToggleFilterOpen}
+            setFilter={setFilter}
+            title="Производители"
+            type={EFilterBlockType.ARRAY}
+          />
+        )}
         {type === EProductType.PRINTER && (
           renderPrinterFilters(filters as IPrintersFilters, setFilter, onToggleFilterOpen)
         )}

@@ -46,6 +46,7 @@ export interface ISearchState {
 
 export interface ICommonFilter {
   price: IFilterBlock<IPriceFilterBlock>;
+  brands: IFilterBlock<IArrayFilterBlock>;
 }
 
 export interface IFilterBlock<T> {
@@ -59,7 +60,6 @@ export interface IArrayFilterBlock {
 }
 
 export interface IPrintersFilters extends ICommonFilter {
-  brands: IFilterBlock<IArrayFilterBlock>;
   technology: IFilterBlock<IArrayFilterBlock>;
   chamberSize: IFilterBlock<IChamberSizeFilterBlock>;
   chamberType: IFilterBlock<IArrayFilterBlock>;

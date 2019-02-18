@@ -30,7 +30,6 @@ const Consumables: NextFunctionComponent<IProps> = ({ categories, consumables, f
   return (
     <Page title="Расходные материалы">
       <CategoryList categories={categories} />
-      {!isEmpty(consumables) && (
         <CatalogLayout>
           <ProductFilters
             filters={filters}
@@ -44,7 +43,6 @@ const Consumables: NextFunctionComponent<IProps> = ({ categories, consumables, f
             setSortOrder={setSortOrder}
           />
         </CatalogLayout>
-      )}
     </Page>
   );
 };

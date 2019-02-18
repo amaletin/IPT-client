@@ -53,7 +53,11 @@ const filterBySize = (size: number, value: IRange): boolean => {
 
 export const filterProducts = (filters: ICommonFilter, products: IProduct[]): IProduct[] => {
   const { max, min } = filters.price.filter.value;
-  return filter(products, (prod) => prod.price <= max && prod.price >= min);
+  const { brands } = filters;
+  return filter(products, (prod) => {
+    return prod.price <= max && prod.price >= min
+      && (isEmpty(brands.filter.selected) || brands.filter.selected.includes(prod.brand));
+  });
 };
 
 const updateArrayFilter = (oldItems: IArrayFilterBlock,
@@ -97,6 +101,7 @@ const updatePrintersFilters = (state: IPrintersFilters, products: IProduct[]): I
 const updateFilters = (state, products) => {
   return {
     ...state,
+    brands: { ...state.brands, filter: updateArrayFilter(state.brands.filter, products, 'brand') },
     price: { ...state.price, filter: updatePriceFilters(state.price.filter, products) },
   };
 };
