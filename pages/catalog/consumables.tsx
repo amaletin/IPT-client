@@ -1,4 +1,4 @@
-import { NextFunctionComponent } from 'next';
+import { NextFC } from 'next';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { loadCategories } from '../../actions/categoriesActions';
@@ -24,7 +24,7 @@ export interface IProps {
   sortOrder: string;
 }
 
-const Consumables: NextFunctionComponent<IProps> = ({ categories, consumables, filters,
+const Consumables: NextFC<IProps> = ({ categories, consumables, filters,
                                                       onSetFilter, onToggleFilterOpen, setSortOrder, sortOrder }) => {
   return (
     <Page title="Расходные материалы">

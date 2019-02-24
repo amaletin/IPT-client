@@ -3,7 +3,6 @@ import {
   GET_CATEGORIES_FAIL,
   GET_CATEGORIES_SUCCESS,
 } from '../actions/categoriesActions';
-import { EState } from '../lib/enums';
 import { ICategoriesState } from '../lib/models';
 
 const initialState: ICategoriesState = {
@@ -20,7 +19,7 @@ const categoriesReducer: Reducer<ICategoriesState> = (state = initialState, acti
       };
     case GET_CATEGORIES_FAIL:
       console.log(action.error); // tslint:disable-line no-console
-      return { ...state, state: EState.FAIL };
+      return { ...state };
     default: return state;
   }
 };

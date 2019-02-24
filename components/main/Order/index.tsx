@@ -1,3 +1,6 @@
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { openOrderModal } from '../../../actions/uiActions';
 import {
 breakpoints,
 colors,
@@ -13,7 +16,9 @@ const images = [
   { url: '/static/images/materials.jpg' },
 ];
 
-const Order = () => (
+interface IProps extends IDispatchProps {}
+
+const Order: React.FC<IProps> = ({ onOpen }) => (
   <div className="order">
     <div className="order--heading">
       <div className="container">
@@ -38,7 +43,7 @@ const Order = () => (
              Прототип может как повторять лишь общие очертания,
              так и детализированную сборную модель.
           </p>
-          <Button to="/">Заказать</Button>
+          <Button onClick={onOpen}>Заказать</Button>
         </div>
       </div>
     </div>
@@ -150,4 +155,11 @@ const Order = () => (
   </div>
 );
 
-export default Order;
+interface IDispatchProps {
+  onOpen: () => void;
+}
+const mapDispatchToProps = (dispatch: Dispatch): IDispatchProps => ({
+  onOpen: () => dispatch(openOrderModal()),
+});
+
+export default connect(null, mapDispatchToProps)(Order);

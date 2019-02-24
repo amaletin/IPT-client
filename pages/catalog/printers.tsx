@@ -1,4 +1,4 @@
-import { NextFunctionComponent } from 'next';
+import { NextFC } from 'next';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { setFilter, toggleFilterOpen } from '../../actions/filterActions';
@@ -21,7 +21,7 @@ interface IProps {
   sortOrder: string;
 }
 
-const Printers: NextFunctionComponent<IProps> = ({
+const Printers: NextFC<IProps> = ({
   filters, printers,  onSetFilter, onToggleFilterOpen, sortOrder, setSortOrder }) => {
   const handleSetSortOrder = () => setSortOrder();
   return (

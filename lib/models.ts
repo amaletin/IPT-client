@@ -1,5 +1,5 @@
 import { Dictionary } from 'lodash';
-import { EProductType } from './enums';
+import { EProductType, EStatus } from './enums';
 
 export interface IAppState {
   filters: IFiltersState;
@@ -8,6 +8,7 @@ export interface IAppState {
   categories: ICategoriesState;
   search: ISearchState;
   sorting: ISortingState;
+  ui: IUIState;
 }
 
 export interface IProductsState {
@@ -42,6 +43,13 @@ export interface ISortingState {
 export interface ISearchState {
   foundIds: number[];
   searchString: string;
+}
+
+export interface IUIState {
+  orderModal: {
+    open: boolean;
+    status: EStatus;
+  };
 }
 
 export interface ICommonFilter {

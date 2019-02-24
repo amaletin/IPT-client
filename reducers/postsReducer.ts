@@ -5,7 +5,6 @@ import {
   GET_POSTS_FAIL,
   GET_POSTS_SUCCESS,
 } from '../actions/postsActions';
-import { EState } from '../lib/enums';
 import { IPostsState } from '../lib/models';
 
 const initialState: IPostsState = {
@@ -24,7 +23,7 @@ const postsReducer: Reducer<IPostsState> = (state = initialState, action) => {
     case GET_POSTS_FAIL:
     case GET_POST_FAIL:
       console.log(action.error); // tslint:disable-line no-console
-      return { ...state, state: EState.FAIL };
+      return state;
     default: return state;
   }
 };

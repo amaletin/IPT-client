@@ -1,4 +1,4 @@
-import { NextFunctionComponent } from 'next';
+import { NextFC } from 'next';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { setFilter, toggleFilterOpen } from '../../actions/filterActions';
@@ -21,7 +21,7 @@ export interface IProps {
   sortOrder: string;
 }
 
-const Scanners: NextFunctionComponent<IProps> = ({ filters, onSetFilter, onToggleFilterOpen,
+const Scanners: NextFC<IProps> = ({ filters, onSetFilter, onToggleFilterOpen,
                                                    scanners, setSortOrder, sortOrder }) => {
   return (
     <Page title="3D Сканеры">

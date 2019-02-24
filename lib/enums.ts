@@ -1,7 +1,7 @@
 /**
  * Статус загрузки данных.
  */
-export enum EState {
+export enum EStatus {
   IDLE = 'IDLE',
   FETCHING = 'FETCHING',
   SUCCESS = 'SUCCESS',

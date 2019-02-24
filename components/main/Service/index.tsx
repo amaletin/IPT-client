@@ -1,3 +1,6 @@
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { openOrderModal } from '../../../actions/uiActions';
 import {
   breakpoints,
   colors,
@@ -13,7 +16,9 @@ const images = [
   { url: '/static/images/materials.jpg' },
 ];
 
-const Service = () => (
+interface IProps extends IDispatchProps {}
+
+const Service: React.FC<IProps> = ({ onOpen }) => (
   <div className="service">
     <div className="service--heading">
       <div className="container">
@@ -33,7 +38,7 @@ const Service = () => (
              Прототип может как повторять лишь общие очертания,
              так и детализированную сборную модель.
           </p>
-          <Button to="/">Мы поможем</Button>
+          <Button onClick={onOpen}>Мы поможем</Button>
         </div>
         <div className="service--content--slider">
           <Carousel
@@ -149,4 +154,11 @@ const Service = () => (
   </div>
 );
 
-export default Service;
+interface IDispatchProps {
+  onOpen: () => void;
+}
+const mapDispatchToProps = (dispatch: Dispatch): IDispatchProps => ({
+  onOpen: () => dispatch(openOrderModal()),
+});
+
+export default connect(null, mapDispatchToProps)(Service);

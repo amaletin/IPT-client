@@ -1,4 +1,4 @@
-import { NextFunctionComponent } from 'next';
+import { NextFC } from 'next';
 import React from 'react';
 import { connect } from 'react-redux';
 import { loadPost } from '../actions/postsActions';
@@ -12,7 +12,7 @@ export interface IProps {
   post: IPost;
 }
 
-const Post: NextFunctionComponent<IProps> = ({ post }) => (
+const Post: NextFC<IProps> = ({ post }) => (
   <Page header={false}>
     <PostDetails post={post} />
   </Page>

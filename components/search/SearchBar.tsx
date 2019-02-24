@@ -1,4 +1,3 @@
-import { NextFC } from 'next';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -13,7 +12,7 @@ interface IProps {
   onSetSearchString: (str: string) => void;
 }
 
-const SearchBar: NextFC<IProps> = ({ onResetSearch, onSearchProducts, onSetSearchString, searchString }) => {
+const SearchBar: React.FC<IProps> = ({ onResetSearch, onSearchProducts, onSetSearchString, searchString }) => {
   const handleChange = (e) => onSetSearchString(e.target.value);
   useEffect(() => {
     if (searchString.length > 0) {

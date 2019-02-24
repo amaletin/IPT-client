@@ -1,27 +1,25 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState } from 'react';
 import {
   breakpoints,
   colors,
   gradients,
 } from '../../../lib/styleguide';
 import MainNav from '../MainNav';
-// import Search from '../Search';
+import OrderModal from '../OrderModal';
 
 export interface IProps {
   onToggleMobileNav: () => void;
 }
 
 const Header: React.FC<IProps> = ({ onToggleMobileNav }) => {
-  const [showSearch, setToggleSearch] = useState(false);
-  const handleToggleSearch = () => setToggleSearch(!showSearch);
   return (
     <>
       <Head>
         <title>IPT Технологии печати</title>
         <meta name="description" content="Магазин 3D принтеров." />
       </Head>
+      <OrderModal />
       <header className="header">
         <div className="header--inner">
           <div className="header--logo">
@@ -35,7 +33,7 @@ const Header: React.FC<IProps> = ({ onToggleMobileNav }) => {
             <div className="header--nav">
               <MainNav />
             </div>
-            <div className="header--search" onClick={handleToggleSearch}>
+            <div className="header--search">
               <Link href="/search">
                 <a><img src="/static/images/icons/search.svg" alt="search" /></a>
               </Link>
