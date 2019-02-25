@@ -2,11 +2,12 @@ import { breakpoints, colors } from '../../../lib/styleguide';
 
 export interface IProps {
   onClick?: () => void;
+  size?: string;
 }
 
-const Button: React.FC<IProps> = ({ children, onClick }) => (
+const Button: React.FC<IProps> = ({ children, onClick, size }) => (
   <div
-    className="button"
+    className={`button ${size}`}
     role="button"
     onClick={onClick}
     tabIndex={0}
@@ -26,6 +27,11 @@ const Button: React.FC<IProps> = ({ children, onClick }) => (
         text-transform: uppercase;
         outline: none;
         margin-bottom: 20px;
+      }
+
+      .button.sm {
+        font-size: 16px;
+        padding: 12px 30px;
       }
 
       .button:hover, .button:focus {
