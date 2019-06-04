@@ -117,6 +117,7 @@ export interface IProduct {
   layerResolution?: string;
   extruders?: number;
   description?: string;
+  pictures?: string[];
 }
 
 export interface IPost {

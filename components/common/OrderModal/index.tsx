@@ -6,7 +6,7 @@ import { closeOrderModal } from '../../../actions/uiActions';
 import { IAppState } from '../../../lib/models';
 import { breakpoints, colors } from '../../../lib/styleguide';
 import CloseIcon from '../../icons/Close';
-import Button from '../Button';
+import OrderForm from '../OrderForm';
 
 interface IProps extends IStateProps, IDispatchProps {}
 
@@ -26,7 +26,7 @@ const OrderModal: React.FC<IProps> = ({ isOpen, onClose }) => {
   const handleClickAgreement = () => {
     onClose();
     Router.push('/agreement');
-  }
+  };
   return (
     <div className="modal--wrapper">
       {isOpen && (
@@ -42,44 +42,13 @@ const OrderModal: React.FC<IProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
             <div className="modal--body">
-              <div className="form-row">
-                <div className="order--inputs--block">
-                  <div className="form-block">
-                    <input
-                      placeholder="Ваше имя"
-                    />
-                  </div>
-                  <div className="form-block">
-                    <input
-                      placeholder="Эл. почта"
-                    />
-                  </div>
-                  <div className="form-block">
-                    <input
-                      placeholder="Телефон"
-                    />
-                  </div>
-                </div>
-                <div className="order--text--block">
-                  <div className="form-block">
-                    <textarea
-                      placeholder="Текст сообщения"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="order--file--block">
-                <input type="file" />
-              </div>
+              <OrderForm />
             </div>
             <div className="modal--footer">
-              <Button onClick={() => false} size="sm">Отправить</Button>
-              <div>
-                <small>
-                  Нажимая на кнопку вы соглашаетесь с нашими
-                  <span onClick={handleClickAgreement}> условиями обработки персональных данных</span>
-                </small>
-              </div>
+              <small>
+                Нажимая на кнопку вы соглашаетесь с нашими
+                <span onClick={handleClickAgreement}> условиями обработки персональных данных</span>
+              </small>
             </div>
           </div>
         </div>
@@ -131,40 +100,6 @@ const OrderModal: React.FC<IProps> = ({ isOpen, onClose }) => {
           padding: 15px;
         }
 
-        .form-row {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .order--inputs--block {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .order--text--block {
-          flex: 1;
-        }
-
-        .form-block {
-          padding: 5px 10px;
-        }
-
-        .form-block input, .form-block textarea {
-          font-size: 16px;
-          padding: 5px;
-          resize: none;
-        }
-
-        .form-block textarea {
-          box-sizing: border-box;
-          height: 116px;
-          width: 100%;
-        }
-
-        .order--file--block {
-          text-align: center;
-        }
-
         .modal--footer {
           text-align: center;
         }
@@ -181,10 +116,6 @@ const OrderModal: React.FC<IProps> = ({ isOpen, onClose }) => {
         @media screen and (min-width: ${ breakpoints.sm }px) {
           .modal {
             width: 600px;
-          }
-
-          .form-row {
-            flex-direction: row;
           }
         }
       `}</style>

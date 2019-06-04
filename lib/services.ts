@@ -1,5 +1,5 @@
 import { EProductType } from '../lib/enums';
-import { getFromAPI, getOneFromAPI } from './api';
+import { getFromAPI, getOneFromAPI, postToAPI } from './api';
 
 export const fetchProduct = (id: number) => {
   return getOneFromAPI('products', id);
@@ -8,8 +8,10 @@ export const fetchProduct = (id: number) => {
 export const fetchProducts = (type: EProductType) => {
   return getFromAPI('products',
     {
-      'depth': 1,
-      'filters%5Btype%5D%5B%3D%5D': type,
+      fields: '*.*,pictures.directus_files_id.filename',
+      filters: {
+        type,
+      },
     },
   );
 };
@@ -21,16 +23,25 @@ export const fetchSearchProducts = (str: string) => {
 export const fetchCategories = (type: EProductType) => {
   return getFromAPI('product_categories',
     {
-      'depth': 1,
+      'fields': '*.*',
       'filters%5Btype%5D%5B%3D%5D': type,
     },
   );
 };
 
 export const fetchPosts = () => {
-  return getFromAPI('posts');
+  return getFromAPI('posts', {fields: '*.*'});
 };
 
 export const fetchPost = (id) => {
-  return getFromAPI(`posts`, { id });
+  return getOneFromAPI(`posts`, id, {fields: '*.*'});
+};
+
+export const createFile = async (file) => {
+  return postToAPI('', file);
+}
+
+export const postOrder = async (data) => {
+  const file = await createFile(data.file);
+  return postToAPI('orders', {...data, file});
 };

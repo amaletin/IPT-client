@@ -1,5 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 import Link from 'next/link';
+import { API_HOST } from '../../../configuration/app.config';
 import { ICategory } from '../../../lib/models';
 import { breakpoints } from '../../../lib/styleguide';
 
@@ -11,7 +12,7 @@ const pictureUrl = (category: ICategory) => {
   if (isEmpty(category.picture)) {
     return '/static/images/image-placeholder.png';
   }
-  return `https://3dapi.amaletin.ru/thumbnail/300/300/crop/best/${category.picture}`;
+  return `${API_HOST}/thumbnail/_/300/300/crop/best/${category.picture}`;
 };
 
 const CategoryItem: React.FC<IProps> = ({ category }) => (

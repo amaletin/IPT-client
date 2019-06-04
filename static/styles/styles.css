@@ -44,3 +44,9 @@ body.locked {
   padding: 0 15px;
   margin: 0 auto;
 }
+
+.posts--content img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+}

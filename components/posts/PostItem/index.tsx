@@ -11,7 +11,7 @@ const PostItem: React.FC<IProps> = ({ post }) => {
   return (
     <div className="post-item--card">
       <Link as={`post/${post.id}`} href={`/post?id=${post.id}`}>
-        <img src={`${API_HOST}thumbnail/700/210/crop/best/${post.cover}`} />
+        <img src={`${API_HOST}/thumbnail/_/700/210/crop/best/${post.cover}`} />
       </Link>
       <Link as={`post/${post.id}`} href={`/post?id=${post.id}`}>
         <h2>{post.title}</h2>

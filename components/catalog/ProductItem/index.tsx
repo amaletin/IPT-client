@@ -1,5 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 import Link from 'next/link';
+import { API_HOST } from '../../../configuration/app.config';
 import { IProduct } from '../../../lib/models';
 import { breakpoints, colors } from '../../../lib/styleguide';
 
@@ -9,10 +10,10 @@ export interface IProps {
 }
 
 const pictureUrl = (product: IProduct) => {
-  if (isEmpty(product.picture)) {
+  if (isEmpty(product.pictures)) {
     return '/static/images/image-placeholder.png';
   }
-  return `https://3dapi.amaletin.ru/thumbnail/500/500/contain/best/${product.picture}`;
+  return `${API_HOST}/thumbnail/_/500/500/contain/best/${product.pictures[0]}`;
 };
 
 const ProductItem: React.FC<IProps> = ({ product, view = 'grid' }) => (

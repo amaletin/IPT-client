@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash';
 import { NextFC } from 'next';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -14,7 +15,7 @@ export interface IProps {
 
 const Post: NextFC<IProps> = ({ post }) => (
   <Page header={false}>
-    <PostDetails post={post} />
+    {!isEmpty(post) && <PostDetails post={post} />}
   </Page>
 );
 // @ts-ignore

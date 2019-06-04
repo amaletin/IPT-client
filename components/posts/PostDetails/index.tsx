@@ -7,9 +7,9 @@ export interface IProps {
 }
 
 const PostDetails: React.FC<IProps> = ({ post }) => (
-  <>
+  <div>
     <div className="posts--details-cover">
-      <img src={`${API_HOST}thumbnail/1600/480/crop/best/${post.cover}`} style={{ width: '100%' }} />
+      <img src={`${API_HOST}/thumbnail/_/1600/480/crop/best/${post.cover}`} style={{ width: '100%' }} />
       <div
         className="posts--details-cover--caption"
         dangerouslySetInnerHTML={{__html: post.coverCaption}}
@@ -62,16 +62,18 @@ const PostDetails: React.FC<IProps> = ({ post }) => (
           margin-top: 0;
         }
 
-        @media screen and (min-width: 768px) {
-          .posts--content img {
-            max-width: 100%;
-            height: auto;
-            margin: 20px 0;
-          }
+        .posts--content * {
+          max-width: 100%;
+        }
+
+        .posts--content img {
+          max-width: 100%;
+          height: auto;
+          margin: 20px 0;
         }
       `}</style>
     </div>
-  </>
+  </div>
 );
 
 export default PostDetails;

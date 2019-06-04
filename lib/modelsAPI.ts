@@ -11,34 +11,45 @@ export interface IServerResponse<T> {
   };
 }
 
+// export interface IFileRaw {
+//   id: number;
+//   status: number;
+//   name: string;
+//   title: string;
+//   location?: string;
+//   caption?: string;
+//   type: string;
+//   charset: string;
+//   tags?: string;
+//   width: number;
+//   height: number;
+//   size: number;
+//   embed_id?: any;
+//   user: number;
+//   date_uploaded: string;
+//   storage_adapter: string;
+//   url: string;
+//   thumbnail_url: string;
+//   old_thumbnail_url: string;
+//   html: string;
+//   data: {
+//     full_url: string;
+//   }
+// }
+
 export interface IFileRaw {
-  id: number;
-  status: number;
-  name: string;
-  title: string;
-  location?: string;
-  caption?: string;
-  type: string;
-  charset: string;
-  tags?: string;
-  width: number;
-  height: number;
-  size: number;
-  embed_id?: any;
-  user: number;
-  date_uploaded: string;
-  storage_adapter: string;
-  url: string;
-  thumbnail_url: string;
-  old_thumbnail_url: string;
-  html: string;
+  directus_files_id?: {
+    filename: string;
+  };
 }
 
 export interface ICategoryRaw {
   id: number;
   name: string;
   parent: any;
-  picture: IServerResponse<IFileRaw>;
+  picture: {
+    filename: string;
+  };
   type: any;
 }
 
@@ -54,7 +65,7 @@ export interface ITechnologyRaw {
 }
 
 export interface IProductRaw {
-  brand?: IServerResponse<IBrandRaw>;
+  brand?: IBrandRaw;
   chamber_height?: string;
   chamber_length?: string;
   chamber_type?: string;
@@ -67,15 +78,20 @@ export interface IProductRaw {
   layer_resolution?: string;
   name: string;
   category?: any;
-  picture?: IServerResponse<IFileRaw>;
+  pictures?: IFileRaw[];
   price?: number;
   type: any;
-  technology?: IServerResponse<ITechnologyRaw>;
+  technology?: ITechnologyRaw;
 }
 
 export interface IPostRaw {
   body: string;
-  cover: IServerResponse<IFileRaw>;
+  cover: {
+    filename: string;
+    data: {
+      full_url: string;
+    };
+  };
   cover_caption: string;
   excerpt: string;
   id: number;

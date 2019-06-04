@@ -1,4 +1,4 @@
-import { isEmpty, keyBy, replace } from 'lodash';
+import { isEmpty, keyBy, map, replace } from 'lodash';
 import { API_HOST } from '../configuration/app.config';
 import {
   ICategoriesState,
@@ -22,7 +22,7 @@ export const processProducts = (products: IProductRaw[]): IProductsState  => ({
 export const processProduct = (product: IProductRaw): IProduct => {
   return {
     ...product,
-    brand: product.brand ? product.brand.data.name : null,
+    brand: product.brand ? product.brand.name : null,
     category: product.category ? product.category.data.id : null,
     chamberHeight: product.chamber_height ? parseInt(product.chamber_height, 10) : null,
     chamberLength: product.chamber_height ? parseInt(product.chamber_length, 10) : null,
@@ -30,9 +30,9 @@ export const processProduct = (product: IProductRaw): IProduct => {
     chamberWidth: product.chamber_height ? parseInt(product.chamber_width, 10) : null,
     heatedBed: product.heated_bed_enum ? product.heated_bed_enum : null,
     layerResolution: product.layer_resolution,
-    picture: product.picture && product.picture.data.name,
-    technology: product.technology ? product.technology.data.name : null,
-    type: product.type.data.id,
+    pictures: map(product.pictures, (p) => p.directus_files_id.filename),
+    technology: product.technology ? product.technology.name : null,
+    type: product.type.id,
   };
 };
 
@@ -44,9 +44,9 @@ export const processCategories = (categories: ICategoryRaw[]): ICategoriesState 
 export const processCategory = (category: ICategoryRaw): ICategory => {
   return {
     ...category,
-    parent: !isEmpty(category.parent) ? category.parent.data.id : null,
-    picture: !isEmpty(category.picture) && category.picture.data.name,
-    type: category.type.data.id,
+    parent: !isEmpty(category.parent) ? category.parent.id : null,
+    picture: !isEmpty(category.picture) && category.picture.filename,
+    type: category.type.id,
   };
 };
 
@@ -59,7 +59,7 @@ export const processPost = (post: IPostRaw): IPost => {
   return {
     ...post,
     body: replace(post.body, 'src="/storage', `src="${API_HOST}storage`),
-    cover: !isEmpty(post.cover) && post.cover.data.name,
+    cover: !isEmpty(post.cover) && post.cover.filename,
     coverCaption: post.cover_caption,
   };
 };

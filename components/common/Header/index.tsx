@@ -67,21 +67,19 @@ const Header: React.FC<IProps> = ({ onToggleMobileNav }) => {
             box-sizing: border-box;
             display: flex;
             flex: 1;
-            margin-left: 21.5px;
-            min-width: 120px;
             padding-left: 21.5px;
             position: relative;
           }
 
-          .header--logo img {
+          {/* .header--logo img {
             max-height: 60px;
-          }
+          } */}
 
           .header--logo:after {
             border-bottom: solid 0px transparent;
             border-left: solid 0px #FFFFFF;
             border-right: solid 100px transparent;
-            border-top: solid 77px #FFFFFF;
+            border-top: solid 100px #FFFFFF;
             box-sizing: border-box;
             content: "";
             left: 100%;
@@ -106,8 +104,8 @@ const Header: React.FC<IProps> = ({ onToggleMobileNav }) => {
             top: -24px;
             border-left: 2px solid white;
             left: 125px;
-            height: 126px;
-            transform: rotate(52deg);
+            height: 166px;
+            transform: rotate(45deg);
             opacity: 0.3;
           }
 
@@ -117,7 +115,7 @@ const Header: React.FC<IProps> = ({ onToggleMobileNav }) => {
             top: -14px;
             border-left: 2px solid white;
             left: 118px;
-            height: 104px;
+            height: 122px;
             transform: rotate(-26deg);
             opacity: 0.3;
           }
@@ -133,8 +131,8 @@ const Header: React.FC<IProps> = ({ onToggleMobileNav }) => {
             cursor: pointer;
             display: none;
             justify-content: center;
-            height: 77px;
-            width: 77px;
+            height: 100px;
+            width: 100px;
           }
 
           .header--search img {
@@ -147,9 +145,9 @@ const Header: React.FC<IProps> = ({ onToggleMobileNav }) => {
             cursor: pointer;
             display: flex;
             justify-content: center;
-            height: 77px;
+            height: 100px;
             outline: none;
-            width: 77px;
+            width: 100px;
           }
 
           .header--burger img {
@@ -159,6 +157,7 @@ const Header: React.FC<IProps> = ({ onToggleMobileNav }) => {
           @media screen and (min-width: ${ breakpoints.lg }px) {
             .header--logo {
               margin-left: 0;
+              min-width: 120px
             }
 
             .header--nav {

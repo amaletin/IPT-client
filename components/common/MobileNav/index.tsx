@@ -106,7 +106,7 @@ class MobileNav extends React.Component<IMobileNavProps> {
 
           .close {
             box-sizing: border-box;
-            height: 77px;
+            height: 100px;
             outline: none;
             text-align: right;
             padding-right: 37px;
@@ -115,7 +115,7 @@ class MobileNav extends React.Component<IMobileNavProps> {
 
           .mobile-nav {
             box-sizing: border-box;
-            height: calc(100vh - 77px);
+            height: calc(100vh - 100px);
             overflow-y: scroll;
             padding-bottom: 80px;
           }
