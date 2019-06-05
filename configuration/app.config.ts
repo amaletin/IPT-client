@@ -1,1 +1,1 @@
-export const API_HOST = 'http://api.3dipt.ru';
+export const API_HOST = 'https://api.3dipt.ru';
