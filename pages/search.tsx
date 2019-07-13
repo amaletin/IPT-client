@@ -1,4 +1,4 @@
-import { NextFC } from 'next';
+import { NextPage } from 'next';
 import { connect } from 'react-redux';
 import ProductList from '../components/catalog/ProductList';
 import Page from '../components/common/Page';
@@ -12,7 +12,7 @@ interface IProps {
   setSortOrder: () => void;
 }
 
-const SearchPage: NextFC<IProps> = ({ products, sortOrder, setSortOrder }) => {
+const SearchPage: NextPage<IProps> = ({ products, sortOrder, setSortOrder }) => {
   const handleSetSortOrder = () => setSortOrder();
   return (
     <Page title="Поиск">

@@ -1,5 +1,5 @@
 import { values } from 'lodash';
-import { NextFC } from 'next';
+import { NextPage } from 'next';
 import { connect } from 'react-redux';
 import { loadPosts } from '../actions/postsActions';
 import Page from '../components/common/Page';
@@ -11,7 +11,7 @@ export interface IProps {
   posts: IPost[];
 }
 
-const Posts: NextFC<IProps> = ({ posts }) => {
+const Posts: NextPage<IProps> = ({ posts }) => {
   return (
     <Page title="Статьи">
       <PostList posts={posts} />

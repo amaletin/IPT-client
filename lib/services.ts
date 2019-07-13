@@ -1,8 +1,10 @@
 import { EProductType } from '../lib/enums';
-import { getFromAPI, getOneFromAPI, postToAPI } from './api';
+import { getFromAPI, getOneFromAPI, postToAPI, uploadToAPI } from './api';
 
 export const fetchProduct = (id: number) => {
-  return getOneFromAPI('products', id);
+  return getOneFromAPI('products', id, {
+    fields: '*.*,pictures.directus_files_id.filename',
+  });
 };
 
 export const fetchProducts = (type: EProductType) => {
@@ -37,11 +39,15 @@ export const fetchPost = (id) => {
   return getOneFromAPI(`posts`, id, {fields: '*.*'});
 };
 
-export const createFile = async (file) => {
-  return postToAPI('', file);
+export const uploadFile = async (fileData: FormData) => {
+  function onUploadProgress(progressEvent) {
+    const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+
+    console.log(percentCompleted + "% Done");
+  }
+  return uploadToAPI(fileData, onUploadProgress);
 }
 
-export const postOrder = async (data) => {
-  const file = await createFile(data.file);
-  return postToAPI('orders', {...data, file});
+export const postOrder = async (data: any) => {
+  return postToAPI('orders', {...data, status: 'published'});
 };

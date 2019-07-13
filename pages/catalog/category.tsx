@@ -1,5 +1,5 @@
 import isEmpty from 'lodash/isEmpty';
-import { NextFC } from 'next';
+import { NextPage } from 'next';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { loadCategories } from '../../actions/categoriesActions';
@@ -27,7 +27,7 @@ export interface IProps {
   sortOrder: string;
 }
 
-const Category: NextFC<IProps> = ({ categories, consumables, currentCategorie, filters,
+const Category: NextPage<IProps> = ({ categories, consumables, currentCategorie, filters,
                                                   onSetFilter, onToggleFilterOpen, setSortOrder, sortOrder }) => {
   return (
     <Page title={currentCategorie.name}>

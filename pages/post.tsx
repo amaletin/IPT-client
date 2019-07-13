@@ -1,5 +1,5 @@
 import { isEmpty } from 'lodash';
-import { NextFC } from 'next';
+import { NextPage } from 'next';
 import React from 'react';
 import { connect } from 'react-redux';
 import { loadPost } from '../actions/postsActions';
@@ -13,7 +13,7 @@ export interface IProps {
   post: IPost;
 }
 
-const Post: NextFC<IProps> = ({ post }) => (
+const Post: NextPage<IProps> = ({ post }) => (
   <Page header={false}>
     {!isEmpty(post) && <PostDetails post={post} />}
   </Page>

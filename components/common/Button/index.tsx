@@ -1,15 +1,16 @@
 import { breakpoints, colors } from '../../../lib/styleguide';
 
 export interface IProps {
+  disabled?: boolean;
   onClick?: () => void;
   size?: string;
 }
 
-const Button: React.FC<IProps> = ({ children, onClick, size }) => (
+const Button: React.FC<IProps> = ({ children, disabled, onClick, size }) => (
   <div
     className={`button ${size}`}
     role="button"
-    onClick={onClick}
+    onClick={disabled ? null : onClick}
     tabIndex={0}
   >
     {children}
@@ -25,6 +26,7 @@ const Button: React.FC<IProps> = ({ children, onClick, size }) => (
         line-height: 1;
         padding: 14px 30px;
         text-transform: uppercase;
+        opacity: ${ disabled ? 0.5 : 1 }
         outline: none;
         margin-bottom: 20px;
       }

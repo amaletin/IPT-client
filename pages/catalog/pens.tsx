@@ -1,4 +1,4 @@
-import { NextFC } from 'next';
+import { NextPage } from 'next';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { setFilter, toggleFilterOpen } from '../../actions/filterActions';
@@ -21,7 +21,7 @@ export interface IProps {
   sortOrder: string;
 }
 
-const Pens: NextFC<IProps> = ({ filters, onSetFilter, onToggleFilterOpen,
+const Pens: NextPage<IProps> = ({ filters, onSetFilter, onToggleFilterOpen,
                                                pens, setSortOrder, sortOrder }) => {
   return (
     <Page title="3D Ручки">

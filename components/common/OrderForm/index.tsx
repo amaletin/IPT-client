@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { postOrder } from '../../../lib/services';
+import { postOrder, uploadFile } from '../../../lib/services';
 import { breakpoints } from '../../../lib/styleguide';
 import Button from '../Button';
 
 const initialForm = {
   email: '',
-  file: '',
   name: '',
   phone: '',
   text: '',
@@ -13,6 +12,7 @@ const initialForm = {
 
 const ModalForm: React.FC = () => {
   const [form, setForm] = useState(initialForm);
+  const [isLoading, setIsLoading] = useState(false);
   const handleChangeField = (field: string) => (e) => {
     const val = e.target.value;
     setForm({
@@ -20,11 +20,19 @@ const ModalForm: React.FC = () => {
       [field]: val,
     });
   };
-  const handleSubmitForm = () => {
-    console.log(form);
-    postOrder(form);
+  const handleSubmitForm = async () => {
+    setIsLoading(true);
+    const data = new FormData();
+    const input: HTMLInputElement = document.querySelector('input[type="file"]');
+    const imagedata = input.files[0];
+    data.append('test', 'test');
+    data.append('data', imagedata);
+    const newFile = await uploadFile(data);
+    await postOrder({ ...form, file: newFile.data.id });
+    setIsLoading(false);
   };
   return (
+    <div>
     <form>
       <div className="form-row">
         <div className="order--inputs--block">
@@ -60,15 +68,20 @@ const ModalForm: React.FC = () => {
           </div>
         </div>
       </div>
+    </form>
+    <form id="formfile" encType="multipart/form-data">
       <div className="order--file--block">
-      <input
-        onChange={handleChangeField('file')}
-        value={form.file}
-        type="file"
-      />
+      <input type="file" />
       </div>
+    </form>
       <div className="order--submit--block">
-        <Button onClick={handleSubmitForm} size="sm">Отправить</Button>
+        <Button
+          onClick={handleSubmitForm}
+          size="sm"
+          disabled={isLoading}
+        >
+          {isLoading ? 'Загрузка' : 'Отправить'}
+        </Button>
       </div>
       <style jsx>{`
         .form-row {
@@ -116,7 +129,7 @@ const ModalForm: React.FC = () => {
           }
         }
       `}</style>
-    </form>
+    </div>
   );
 };
 

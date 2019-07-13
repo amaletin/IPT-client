@@ -1,18 +1,10 @@
 import { IProduct } from 'lib/models';
-import { isEmpty } from 'lodash';
-import { API_HOST } from '../../../configuration/app.config';
 import { breakpoints, colors } from '../../../lib/styleguide';
+import ProductPictures from '../ProductPictures';
 
 export interface IProps {
   product: IProduct;
 }
-
-const pictureUrl = (product: IProduct) => {
-  if (isEmpty(product.picture)) {
-    return '/static/images/image-placeholder.png';
-  }
-  return `${API_HOST}/thumbnail/_/500/500/contain/best/${product.picture}`;
-};
 
 const ProductDetails: React.FC<IProps> = ({ product }) => (
   <div className="container">
@@ -21,7 +13,7 @@ const ProductDetails: React.FC<IProps> = ({ product }) => (
     </h1>
     <div className="product-details--top">
       <div className="product-details--image">
-        <img src={pictureUrl(product)} />
+        <ProductPictures pictures={product.pictures} />
       </div>
       <div className="product-details--spec">
         <div className="product-details--price"><span>{product.price.toLocaleString('ru-RU')} ₽</span></div>
@@ -56,8 +48,9 @@ const ProductDetails: React.FC<IProps> = ({ product }) => (
         flex-direction: column;
       }
 
-      .product-details--image img {
-        width: 100%;
+      .product-details--image {
+        box-sizing: border-box;
+        padding-right: 20px;
       }
 
       .product-details--price {

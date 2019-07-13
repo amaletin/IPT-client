@@ -1,5 +1,5 @@
 import isEmpty from 'lodash/isEmpty';
-import { NextFC } from 'next';
+import { NextPage } from 'next';
 import { connect } from 'react-redux';
 import { loadProduct } from '../../actions/productsActions';
 import ProductDetails from '../../components/catalog/ProductDetails';
@@ -12,7 +12,7 @@ export interface IProps {
   product: IProduct;
 }
 
-const Product: NextFC<IProps> = ({ product }) => (
+const Product: NextPage<IProps> = ({ product }) => (
   <Page header={false}>
     {!isEmpty(product) && <ProductDetails product={product} />}
   </Page>
