@@ -15,6 +15,7 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content="#ffffff" />
           <link rel="stylesheet" type="text/css" href="/static/styles/styles.css" />
           <link rel="stylesheet" type="text/css" href="/static/vendor/input_range.css" />
+          <meta name="yandex-verification" content="e67652d512f0cfe1" />
         </Head>
         <body>
           <Main />
