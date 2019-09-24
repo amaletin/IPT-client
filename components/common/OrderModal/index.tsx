@@ -1,4 +1,3 @@
-import Router from 'next/router';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -23,10 +22,7 @@ const OrderModal: React.FC<IProps> = ({ isOpen, onClose }) => {
       onClose();
     }
   };
-  const handleClickAgreement = () => {
-    onClose();
-    Router.push('/agreement');
-  };
+
   return (
     <div className="modal--wrapper">
       {isOpen && (
@@ -47,7 +43,7 @@ const OrderModal: React.FC<IProps> = ({ isOpen, onClose }) => {
             <div className="modal--footer">
               <small>
                 Нажимая на кнопку вы соглашаетесь с нашими
-                <span onClick={handleClickAgreement}> условиями обработки персональных данных</span>
+                <a href="/agreement" target="_blank"> условиями обработки персональных данных</a>
               </small>
             </div>
           </div>
@@ -101,14 +97,16 @@ const OrderModal: React.FC<IProps> = ({ isOpen, onClose }) => {
         }
 
         .modal--footer {
+          padding: 15px;
           text-align: center;
         }
 
         .modal--footer small, .modal--footer span {
-          color: ${ colors.greyDark };
+          color: ${ colors.greyLight };
         }
 
-        .modal--footer span {
+        .modal--footer a {
+          color: ${ colors.greyLight };
           cursor: pointer;
           text-decoration: underline;
         }

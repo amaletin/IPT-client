@@ -2,6 +2,7 @@ export const colors = {
   blue: '#7ACEFA',
   grey: '#EEEFF0',
   greyDark: '#888888',
+  greyLight: '#d8d8d8',
   greyTransparent: 'rgba(238, 239, 240, 0.76)',
   headerBlue: '#0dc5db',
   pink: '#ff415c',
