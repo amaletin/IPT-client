@@ -67,19 +67,20 @@ const Header: React.FC<IProps> = ({ onToggleMobileNav }) => {
             box-sizing: border-box;
             display: flex;
             flex: 1;
+            padding: 9px 0px;
             padding-left: 21.5px;
             position: relative;
           }
 
-          {/* .header--logo img {
-            max-height: 60px;
-          } */}
+          .header--logo img {
+            width: 125px;
+          }
 
           .header--logo:after {
             border-bottom: solid 0px transparent;
             border-left: solid 0px #FFFFFF;
-            border-right: solid 100px transparent;
-            border-top: solid 100px #FFFFFF;
+            border-right: solid 115px transparent;
+            border-top: solid 115px #FFFFFF;
             box-sizing: border-box;
             content: "";
             left: 100%;
@@ -115,7 +116,7 @@ const Header: React.FC<IProps> = ({ onToggleMobileNav }) => {
             top: -14px;
             border-left: 2px solid white;
             left: 118px;
-            height: 122px;
+            height: 137px;
             transform: rotate(-26deg);
             opacity: 0.3;
           }
