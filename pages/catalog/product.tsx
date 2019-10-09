@@ -1,7 +1,8 @@
 import isEmpty from 'lodash/isEmpty';
-import { NextPage } from 'next';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import { loadProduct } from '../../actions/productsActions';
+import { openOrderModal } from '../../actions/uiActions';
 import ProductDetails from '../../components/catalog/ProductDetails';
 import Page from '../../components/common/Page';
 import { IAppState, IProduct } from '../../lib/models';
@@ -9,12 +10,13 @@ import { getProductById } from '../../selectors';
 
 export interface IProps {
   id: string | string[];
+  onOpen: () => void;
   product: IProduct;
 }
 
-const Product: NextPage<IProps> = ({ product }) => (
+const Product = ({ onOpen, product }: IProps) => (
   <Page header={false}>
-    {!isEmpty(product) && <ProductDetails product={product} />}
+    {!isEmpty(product) && <ProductDetails onOpen={onOpen} product={product} />}
   </Page>
 );
 // @ts-ignore
@@ -32,4 +34,11 @@ const mapStateToProps = (state: IAppState, ownProps: IProps) => ({
   product: getProductById(state, { id: ownProps.id }),
 });
 
-export default connect(mapStateToProps)(Product);
+interface IDispatchProps {
+  onOpen: () => void;
+}
+const mapDispatchToProps = (dispatch: Dispatch): IDispatchProps => ({
+  onOpen: () => dispatch(openOrderModal()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product);

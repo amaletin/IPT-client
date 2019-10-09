@@ -28,7 +28,7 @@ const ModalForm: React.FC = () => {
     data.append('test', 'test');
     data.append('data', imagedata);
     const newFile = await uploadFile(data);
-    await postOrder({ ...form, file: newFile.data.id });
+    await postOrder({ ...form, file: newFile.data.id.toString() });
     setIsLoading(false);
   };
   return (

@@ -21,4 +21,5 @@ export const getOneFromAPI = async (collection: string, id: number, options?: an
   return await client.getItem(collection, id, options);
 };
 export const postToAPI = async (collection: string, data: any) => await client.createItem(collection, data);
-export const uploadToAPI = async (fileData: FormData, onProgress: any) => await uploadClient.uploadFiles(fileData, onProgress);
+export const uploadToAPI = async (fileData: FormData, onProgress: any) =>
+  await uploadClient.uploadFiles(fileData, onProgress);

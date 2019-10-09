@@ -1,12 +1,14 @@
 import { IProduct } from 'lib/models';
 import { breakpoints, colors } from '../../../lib/styleguide';
+import Button from '../../common/Button';
 import ProductPictures from '../ProductPictures';
 
 export interface IProps {
+  onOpen: () => void;
   product: IProduct;
 }
 
-const ProductDetails: React.FC<IProps> = ({ product }) => (
+const ProductDetails: React.FC<IProps> = ({ onOpen, product }) => (
   <div className="container">
     <h1 className="product-details--title">
       {product.name}
@@ -36,6 +38,9 @@ const ProductDetails: React.FC<IProps> = ({ product }) => (
           {product.layerResolution && <li><span>Толщина слоя печати</span><span>{product.layerResolution}</span></li>}
           {product.heatedBed && <li><span>Подогреваемый стол</span><span>{product.heatedBed}</span></li>}
         </ul>
+        <div className="order-button--container">
+          <Button onClick={onOpen}>Заказать</Button>
+        </div>
       </div>
     </div>
     <h2>Описание</h2>
@@ -81,6 +86,10 @@ const ProductDetails: React.FC<IProps> = ({ product }) => (
 
       .product-details--spec--list li span:first-of-type {
         font-weight: bold;
+      }
+
+      .order-button--container {
+        text-align: right;
       }
 
       .product-details--description {
