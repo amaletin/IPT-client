@@ -24,7 +24,7 @@ const OrderModal: React.FC<IProps> = ({ isOpen, onClose }) => {
   };
 
   const renderTitle = () => {
-    if (window.location.href.indexOf('/service') !== -1) {
+    if (typeof window !== 'undefined' && window.location.href.indexOf('/service') !== -1) {
       return 'Мы поможем';
     } else {
       return 'Сделать заказ';
