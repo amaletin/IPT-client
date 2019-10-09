@@ -23,13 +23,22 @@ const OrderModal: React.FC<IProps> = ({ isOpen, onClose }) => {
     }
   };
 
+  const renderTitle = () => {
+    if (window.location.href.indexOf('/service') !== -1) {
+      return 'Мы поможем';
+    } else {
+      return 'Сделать заказ';
+    }
+  };
+
+  renderTitle();
   return (
     <div className="modal--wrapper">
       {isOpen && (
         <div className="modal--container" onClick={handleClickOutside}>
           <div className="modal">
             <div className="modal--header">
-              <span>Сделать заказ</span>
+              <span>{renderTitle()}</span>
               <div
                 className="modal--close"
                 onClick={onClose}

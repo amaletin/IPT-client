@@ -1,9 +1,23 @@
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { openOrderModal } from '../actions/uiActions';
+import Button from '../components/common/Button';
 import Page from '../components/common/Page';
 
-export default () => (
+const ServicePage = ({ onOpen }: IDispatchProps) => (
   <Page title="СЕРВИС">
     <div className="container">
-      THIS IS SERVICE PAGE
+      <p>THIS IS SERVICE PAGE</p>
+      <Button onClick={onOpen}>Мы поможем</Button>
     </div>
   </Page>
 );
+
+interface IDispatchProps {
+  onOpen: () => void;
+}
+const mapDispatchToProps = (dispatch: Dispatch): IDispatchProps => ({
+  onOpen: () => dispatch(openOrderModal()),
+});
+
+export default connect(null, mapDispatchToProps)(ServicePage);
