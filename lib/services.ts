@@ -43,7 +43,7 @@ export const uploadFile = async (fileData: FormData) => {
   function onUploadProgress(progressEvent) {
     const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
 
-    console.log(percentCompleted + "% Done");
+    console.log(percentCompleted + '% Done'); // tslint:disable-line no-console
   }
   return uploadToAPI(fileData, onUploadProgress);
 };
@@ -52,6 +52,6 @@ export const postOrder = async (data: any) => {
   try {
     return postToAPI('orders', {...data, status: 'published'});
   } catch (error) {
-    console.log(error);
+    console.log(error); // tslint:disable-line no-console
   }
 };

@@ -3,19 +3,30 @@ import { postOrder, uploadFile } from '../../../lib/services';
 import { breakpoints, colors } from '../../../lib/styleguide';
 import Button from '../Button';
 
-const initialForm = {
+interface IForm {
+  email: string;
+  name: string;
+  phone: string;
+  text: string;
+}
+
+interface IStyle {
+  borderColor?: string;
+}
+
+const initialForm: IForm = {
   email: '',
   name: '',
   phone: '',
   text: '',
 };
 
-function validateEmail(email) {
-  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+function validateEmail(email: string): boolean {
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; // tslint:disable-line max-line-length
   return re.test(String(email).toLowerCase());
 }
 
-const validateForm = (form) => {
+const validateForm = (form: IForm): string[] => {
   const errors = [];
 
   if (form.email === '' || !validateEmail(form.email)) {
@@ -75,13 +86,13 @@ const ModalForm = ({ onClose }: IProps) => {
         await postOrder({ ...form });
       }
     } catch (error) {
-      console.log(error);
+      console.log(error); // tslint:disable-line no-console
     }
     setIsLoading(false);
 
     onClose();
   };
-  const hasError = (field) => errors.includes(field) ? { borderColor: colors.pink } : {};
+  const hasError = (field: string): IStyle => errors.includes(field) ? { borderColor: colors.pink } : {};
   return (
     <div>
     <form>
