@@ -15,7 +15,7 @@
     "url": "https://bitbucket.org/amaletin/3d"
   },
   "dependencies": {
-    "@directus/sdk-js": "^5.3.1",
+    "@directus/sdk-js": "^5.3.4",
     "directus-sdk-javascript": "^2.15.0",
     "express": "^4.17.1",
     "lodash": "^4.17.14",

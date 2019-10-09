@@ -46,8 +46,12 @@ export const uploadFile = async (fileData: FormData) => {
     console.log(percentCompleted + "% Done");
   }
   return uploadToAPI(fileData, onUploadProgress);
-}
+};
 
 export const postOrder = async (data: any) => {
-  return postToAPI('orders', {...data, status: 'published'});
+  try {
+    return postToAPI('orders', {...data, status: 'published'});
+  } catch (error) {
+    console.log(error);
+  }
 };

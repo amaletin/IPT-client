@@ -47,7 +47,7 @@ const OrderModal: React.FC<IProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
             <div className="modal--body">
-              <OrderForm />
+              <OrderForm onClose={onClose} />
             </div>
             <div className="modal--footer">
               <small>
