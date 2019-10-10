@@ -1,38 +1,44 @@
+import { connect } from 'react-redux';
+import { IAppState, IConfiguration } from '../../../lib/models';
 import { breakpoints, colors, gradients } from '../../../lib/styleguide';
+import { getConfiguration } from '../../../selectors';
 
-const Footer = () => (
+interface IProps {
+  configuration: IConfiguration;
+}
+
+const Footer = ({ configuration }: IProps) => (
   <footer className="footer">
     <div className="container footer--container">
       <div className="socials">
         <a href="https://vk.com">
-          <img src="/static/images/icons/social-vk.png" alt="https://vk.com" />
+          <img src="/static/images/icons/social-vk.png" alt={configuration.vk_link} />
         </a>
         <a href="https://instagram.com">
-          <img src="/static/images/icons/social-insta.png" alt="https://instagram.com" />
+          <img src="/static/images/icons/social-insta.png" alt={configuration.instagram_link} />
         </a>
         <a href="https://facebook.com">
-          <img src="/static/images/icons/social-fb.png" alt="https://facebook.com" />
+          <img src="/static/images/icons/social-fb.png" alt={configuration.facebook_link} />
         </a>
       </div>
       <div className="contacts">
         <div className="address">
           <img src="/static/images/icons/contacts-address.png" alt="Адрес" />
           <div>
-            <p>ул. Уральская</p>
-            <p>д.3 корпус 1</p>
+            <p>{configuration.address}</p>
           </div>
         </div>
         <div className="phone">
           <img src="/static/images/icons/contacts-phone.png" alt="Адрес" />
           <div>
-            <p>(812)-02-05</p>
-            <p>(812)-02-06</p>
+            <p>{configuration.phone}</p>
+            <p>{configuration.phone2}</p>
           </div>
         </div>
         <div className="email">
           <img src="/static/images/icons/contacts-email.png" alt="Адрес" />
           <div>
-            <a href="mailto:nerudmhdf@mail.ru">nerudmhdf@mail.ru</a>
+            <a href="mailto:nerudmhdf@mail.ru">{configuration.email}</a>
           </div>
         </div>
       </div>
@@ -137,4 +143,8 @@ const Footer = () => (
   </footer>
 );
 
-export default Footer;
+const mapStateToProps = (state: IAppState) => ({
+  configuration: getConfiguration(state),
+});
+
+export default connect(mapStateToProps)(Footer);

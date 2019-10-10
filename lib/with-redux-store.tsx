@@ -1,4 +1,5 @@
 import React from 'react';
+import { loadConfiguration } from '../actions/uiActions';
 import initializeStore from './configureStore';
 
 const isServer = typeof window === 'undefined';
@@ -32,6 +33,8 @@ export default (App) => {
       if (typeof App.getInitialProps === 'function') {
         appProps = await App.getInitialProps(appContext);
       }
+
+      await reduxStore.dispatch(loadConfiguration());
 
       return {
         ...appProps,

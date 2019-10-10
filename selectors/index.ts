@@ -9,11 +9,13 @@ import {
   IAppState,
   ICategory,
   ICommonFilter,
+  IConfiguration,
   IPost,
   IPrintersFilters,
   IProduct,
 } from '../lib/models';
 
+export const getConfiguration = (state: IAppState): IConfiguration => state.ui.configuration;
 const getProducts = (state: IAppState): Dictionary<IProduct> => state.products.byId;
 const getCategories = (state: IAppState): Dictionary<ICategory> => state.categories.byId;
 const getPrinterFilters = (state: IAppState): IPrintersFilters => state.filters.printers;

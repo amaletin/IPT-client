@@ -39,6 +39,10 @@ export const fetchPost = (id) => {
   return getOneFromAPI(`posts`, id, {fields: '*.*'});
 };
 
+export const fetchConfiguration = () => {
+  return getFromAPI(`configuration`, {single: true});
+};
+
 export const uploadFile = async (fileData: FormData) => {
   function onUploadProgress(progressEvent) {
     const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);

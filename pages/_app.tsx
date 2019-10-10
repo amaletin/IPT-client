@@ -14,7 +14,7 @@ class MyApp extends App<IProps> {
     return (
       <Container>
         <Provider store={reduxStore}>
-          <Component {...pageProps} />
+            <Component {...pageProps} />
         </Provider>
       </Container>
     );

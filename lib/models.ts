@@ -46,6 +46,7 @@ export interface ISearchState {
 }
 
 export interface IUIState {
+  configuration: IConfiguration;
   orderModal: {
     open: boolean;
     status: EStatus;
@@ -130,4 +131,14 @@ export interface IPost {
   status: number;
   subtitle: string;
   title: string;
+}
+
+export interface IConfiguration {
+  address: string;
+  phone: string;
+  phone2: string;
+  email: string;
+  vk_link: string;
+  facebook_link: string;
+  instagram_link: string;
 }
