@@ -17,7 +17,7 @@ const Header: React.FC<IProps> = ({ onToggleMobileNav }) => {
     <>
       <Head>
         <title>IPT Технологии печати</title>
-        <meta name="description" content="Магазин 3D принтеров." />
+        <meta name="description" key="description" content="Магазин 3D принтеров." />
       </Head>
       <OrderModal />
       <header className="header">

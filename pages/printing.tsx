@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { loadPage, openOrderModal } from '../actions/uiActions';
@@ -12,6 +13,13 @@ interface IProps extends IStateProps, IDispatchProps {}
 
 const PrintingPage = ({ onOpen, page }: IProps) => (
   <Page title="3D печать">
+    {page && (
+      <Head>
+        <title>{page.title}</title>
+        <meta name="description" key="description" content={page.description} />
+        <meta name="keywords" key="keywords" content={page.keywords} />
+      </Head>
+    )}
     <div className="container">
       {page && <div dangerouslySetInnerHTML={{ __html: page.content }} />}
       <Button onClick={onOpen}>Сделать заказ</Button>

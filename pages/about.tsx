@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { connect } from 'react-redux';
 import { loadPage } from '../actions/uiActions';
 import Page from '../components/common/Page';
@@ -8,6 +9,13 @@ const PAGE_ID = 4;
 
 const AboutPage = ({ page }: IStateProps) => (
   <Page title="О НАС">
+    {page && (
+      <Head>
+        <title>{page.title}</title>
+        <meta name="description" key="description" content={page.description} />
+        <meta name="keywords" key="keywords" content={page.keywords} />
+      </Head>
+    )}
     <div className="container">
       {page && <div dangerouslySetInnerHTML={{ __html: page.content }} />}
     </div>
