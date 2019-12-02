@@ -10,6 +10,7 @@ import {
   ICategory,
   ICommonFilter,
   IConfiguration,
+  IPage,
   IPost,
   IPrintersFilters,
   IProduct,
@@ -22,12 +23,18 @@ const getPrinterFilters = (state: IAppState): IPrintersFilters => state.filters.
 const getPenFilters = (state: IAppState): ICommonFilter => state.filters.pens;
 const getScannerFilters = (state: IAppState): ICommonFilter => state.filters.scanners;
 const getConsumableFilters = (state: IAppState): ICommonFilter => state.filters.consumables;
+const getPages = (state: IAppState): Dictionary<IPage> => state.ui.pages.byId;
 export const getPosts = (state: IAppState): Dictionary<IPost> => state.posts.byId;
 const getFoundIds = (state: IAppState): number[] => state.search.foundIds;
 
 export const getPostById = createSelector(
   [getPosts, (_, props) => props],
   (posts: IPost[], props) => posts[props.id],
+);
+
+export const getPageById = createSelector(
+  [getPages, (_, props) => props],
+  (pages: IPage[], props) => pages[props.id],
 );
 
 export const getPrinters = createSelector(

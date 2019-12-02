@@ -59,3 +59,7 @@ export const postOrder = async (data: any) => {
     console.log(error); // tslint:disable-line no-console
   }
 };
+
+export const fetchPage = (id) => {
+  return getOneFromAPI(`pages`, id, {fields: '*.*'});
+};

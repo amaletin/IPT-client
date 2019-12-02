@@ -100,3 +100,13 @@ export interface IPostRaw {
   subtitle: string;
   title: string;
 }
+
+export interface IPageRaw {
+  content: string;
+  description: string;
+  id: number;
+  keywords: string;
+  sort: number;
+  status: number;
+  title: string;
+}

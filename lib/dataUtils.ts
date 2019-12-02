@@ -3,6 +3,8 @@ import { API_HOST } from '../configuration/app.config';
 import {
   ICategoriesState,
   ICategory,
+  IPage,
+  IPagesState,
   IPost,
   IPostsState,
   IProduct,
@@ -10,6 +12,7 @@ import {
 } from '../lib/models';
 import {
   ICategoryRaw,
+  IPageRaw,
   IPostRaw,
   IProductRaw,
 } from '../lib/modelsAPI';
@@ -63,3 +66,10 @@ export const processPost = (post: IPostRaw): IPost => {
     coverCaption: post.cover_caption,
   };
 };
+
+export const processPages = (pages: IPageRaw[]): IPagesState  => ({
+  allIds: pages.map((p) => p.id),
+  byId: keyBy(pages.map((page: IPageRaw) => processPage(page)), 'id'),
+});
+
+export const processPage = (page: IPageRaw): IPage => page;

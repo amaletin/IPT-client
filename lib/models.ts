@@ -51,6 +51,12 @@ export interface IUIState {
     open: boolean;
     status: EStatus;
   };
+  pages: IPagesState;
+}
+
+export interface IPagesState {
+  allIds: number[];
+  byId: Dictionary<IPage>;
 }
 
 export interface ICommonFilter {
@@ -141,4 +147,14 @@ export interface IConfiguration {
   vk_link: string;
   facebook_link: string;
   instagram_link: string;
+}
+
+export interface IPage {
+  content: string;
+  description: string;
+  id: number;
+  keywords: string;
+  sort: number;
+  status: number;
+  title: string;
 }

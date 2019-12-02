@@ -3,6 +3,8 @@ import {
   CLOSE_ORDER_MODAL,
   GET_CONFIGURATION_FAIL,
   GET_CONFIGURATION_SUCCESS,
+  GET_PAGE_FAIL,
+  GET_PAGE_SUCCESS,
   OPEN_ORDER_MODAL,
 } from '../actions/uiActions';
 import { EStatus } from '../lib/enums';
@@ -22,6 +24,10 @@ const initialState: IUIState = {
     open: false,
     status: EStatus.IDLE,
   },
+  pages: {
+    allIds: [],
+    byId: {},
+  },
 };
 
 const uiReducer: Reducer<IUIState> = (state = initialState, action) => {
@@ -37,6 +43,18 @@ const uiReducer: Reducer<IUIState> = (state = initialState, action) => {
         configuration: action.data,
       };
     case GET_CONFIGURATION_FAIL:
+      console.log(action.error); // tslint:disable-line no-console
+      return state;
+
+    case GET_PAGE_SUCCESS:
+      return {
+        ...state,
+        pages: {
+          allIds: [ ...state.pages.allIds, ...action.data.allIds ],
+          byId: { ...state.pages.byId, ...action.data.byId },
+        },
+      };
+    case GET_PAGE_FAIL:
       console.log(action.error); // tslint:disable-line no-console
       return state;
 
