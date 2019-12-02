@@ -25,7 +25,7 @@ const Header: React.FC<IProps> = ({ onToggleMobileNav }) => {
           <div className="header--logo">
             <Link href="/">
               <a>
-                <img src="/static/images/logo_.png" alt="logo" />
+                <img src="/static/images/logo.svg" alt="logo" />
               </a>
             </Link>
           </div>
@@ -67,13 +67,8 @@ const Header: React.FC<IProps> = ({ onToggleMobileNav }) => {
             box-sizing: border-box;
             display: flex;
             flex: 1;
-            padding: 9px 0px;
             padding-left: 21.5px;
             position: relative;
-          }
-
-          .header--logo img {
-            width: 125px;
           }
 
           .header--logo:after {

@@ -23,14 +23,10 @@ export const getConfigurationFail = (error) => {
 };
 
 export const loadConfiguration = () => (dispatch: Dispatch) => {
-  console.log('action');
   dispatch(getConfigurationStart());
   return fetchConfiguration().then(
     (response) => {
-      console.log('response');
       const data: IConfiguration = response.data;
-      console.log('data');
-      console.log(data);
       dispatch(getConfigurationSuccess(data));
     },
     (error) => dispatch(getConfigurationFail(error)),
