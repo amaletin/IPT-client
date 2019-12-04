@@ -23,10 +23,11 @@ export const processProducts = (products: IProductRaw[]): IProductsState  => ({
 });
 
 export const processProduct = (product: IProductRaw): IProduct => {
+  console.log(product);
   return {
     ...product,
     brand: product.brand ? product.brand.name : null,
-    category: product.category ? product.category.data.id : null,
+    category: product.product_category ? product.product_category.id : null,
     chamberHeight: product.chamber_height ? parseInt(product.chamber_height, 10) : null,
     chamberLength: product.chamber_height ? parseInt(product.chamber_length, 10) : null,
     chamberType: product.chamber_type,

@@ -80,6 +80,7 @@ export interface IProductRaw {
   category?: any;
   pictures?: IFileRaw[];
   price?: number;
+  product_category?: ICategoryRaw;
   type: any;
   technology?: ITechnologyRaw;
 }
