@@ -23,7 +23,6 @@ export const processProducts = (products: IProductRaw[]): IProductsState  => ({
 });
 
 export const processProduct = (product: IProductRaw): IProduct => {
-  console.log(product);
   return {
     ...product,
     brand: product.brand ? product.brand.name : null,
