@@ -18,7 +18,7 @@
     "@directus/sdk-js": "^5.3.4",
     "directus-sdk-javascript": "^2.15.0",
     "express": "^4.17.1",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.19",
     "next": "^9.0.1",
     "next-redux-wrapper": "^2.0.0",
     "react": "^16.8.6",
